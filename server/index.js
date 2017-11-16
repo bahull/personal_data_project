@@ -23,7 +23,8 @@ app.use(
   session({
     secret,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: { maxAge: 100000 }
   })
 );
 
@@ -80,9 +81,16 @@ app.get(
   })
 );
 
-app.get("/api/me", function(req, res) {
+app.get("/api/me", (req, res, next) => {
   if (!req.user) res.json("");
   res.status(200).json(req.user);
+  console.log("req.user: ", req.user);
+});
+
+app.post("/api/retrieveFile", (req, res, next) => {
+  console.log("The User: ", req.user, req.session.user);
+  req.session.user.newFile = req.body.file;
+  res.status(200).json(file);
 });
 
 app.listen(port, () => {

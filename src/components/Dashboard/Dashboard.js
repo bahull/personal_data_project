@@ -11,23 +11,80 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
 
-    this.handleDrop = this.handleDrop.bind(this);
-    this.onDrop = this.onDrop.bind(this);
+    this.state = {
+      file: null
+    };
+
+    this.uploader = this.uploader.bind(this);
+    // this.sendToNode = this.sendToNode.bind(this);
   }
-  componentWillMount() {
-    axios.get("/api/me").then(response => {
-      if (!response.data) this.props.history.push("/");
-    });
+  // componentWillMount() {
+  //   axios.get("/api/me").then(response => {
+  //     if (!response.data) this.props.history.push("/");
+  //   });
+  // }
+
+  sendToNode() {
+    axios
+      .post("/api/retrieveFile", {
+        file: this.state.file
+      })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(console.log);
+  }
+
+  uploader(event) {
+    event.preventDefault();
+    console.log("original upload:", event);
+
+    let reader = new FileReader();
+    let file = event.target.files[0];
+
+    reader.onload = () => {
+      csv.parse(reader.result, (err, data) => {
+        console.log("parsed data:", data);
+        this.setState({
+          file: data
+        });
+        this.sendToNode();
+      });
+    };
+
+    // reader.readAsDataURL(file);
+    reader.readAsBinaryString(file);
   }
 
   render() {
+    console.log(this.state.file);
     return (
       <div>
         <Header />
-        <Link to="/data">
-          <button>Hello</button>
-        </Link>
-        <hr />
+        <div className="dashboardContainer">
+          <div className="dashboardLeft">
+            <Link to="/data">
+              <button> Hello </button>
+            </Link>
+          </div>
+          <div className="dashboardRight">
+            <input
+              className="fileInput"
+              type="file"
+              onChange={event => this.uploader(event)}
+            />
+            <ul>
+              {this.state.file &&
+                this.state.file.map((x, i) => {
+                  return x.map((cur, i) => {
+                    if (i <= 3) {
+                      return <li key={i}> {cur} </li>;
+                    }
+                  });
+                })}
+            </ul>
+          </div>
+        </div>
       </div>
     );
   }

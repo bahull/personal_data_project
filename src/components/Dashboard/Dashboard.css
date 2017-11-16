@@ -1,9 +1,22 @@
-#dash-heading {
-  text-align: center;
+.dashboardContainer {
+  display: flex;
 }
 
-hr {
-  margin: auto;
-  height: 600px;
-  width: 4px;
+.dashboardLeft {
+  background: lightblue;
+  width: 50%;
+  height: 642px;
+  display: flex;
+  justify-content: center;
+}
+.dashboardRight {
+  background: lightcoral;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.fileInput {
+  border: 1px dashed black;
+  height: 10%;
 }
