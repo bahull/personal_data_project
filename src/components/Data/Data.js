@@ -4,8 +4,10 @@ import axios from "axios";
 
 class Data extends Component {
   componentWillMount() {
-    axios.get("http://localhost:3001/api/me").then(response => {
+    console.log("Front hit", this.props);
+    axios.get("/api/me").then(response => {
       console.log(response);
+      if (!response.data) this.props.history.push("/");
     });
   }
   render() {
