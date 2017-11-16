@@ -82,6 +82,12 @@ app.get(
   })
 );
 
+app.get("/api/me", function(req, res) {
+  console.log("Back REQ", req.session);
+  if (!req.user) return res.status(500);
+  res.status(200).send(req.user);
+});
+
 app.listen(port, () => {
   console.log(`listening at port: ${port}`);
 });
