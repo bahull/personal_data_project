@@ -29,22 +29,18 @@ class Dashboard extends Component {
       .post("/api/retrieveFile", {
         file: this.state.file
       })
-      .then(response => {
-        console.log(response.data);
-      })
+      .then(response => {})
       .catch(console.log);
   }
 
   uploader(event) {
     event.preventDefault();
-    console.log("original upload:", event);
 
     let reader = new FileReader();
     let file = event.target.files[0];
 
     reader.onload = () => {
       csv.parse(reader.result, (err, data) => {
-        console.log("parsed data:", data);
         this.setState({
           file: data
         });
@@ -57,7 +53,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.state.file);
     return (
       <div>
         <Header />

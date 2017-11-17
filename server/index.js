@@ -6,7 +6,7 @@ const massive = require("massive");
 const passport = require("passport");
 const Auth0Strategy = require("passport-auth0");
 
-const users = require("./controllers/users");
+// const users = require("./controllers/users");
 
 const { secret } = require("./../config");
 const { domain, clientID, clientSecret } = require("./../config").auth0;
@@ -61,7 +61,8 @@ passport.use(
               .createUserByAuth([profile.id, profile.displayName])
               .then(created => {
                 return done(null, created[0]);
-              });
+              })
+              .catch(console.log);
           } else {
             return done(null, response[0]);
           }
@@ -90,13 +91,15 @@ app.get(
 app.get("/api/me", (req, res, next) => {
   if (!req.user) res.json("");
   res.status(200).json(req.user);
-  console.log("req.user: ", req.user);
 });
 
 //Retrieves blob and stores it on the user object on session to save
 app.post("/api/retrieveFile", (req, res, next) => {
-  console.log("The User: ", req.body.file, req.user);
   req.user.newFile = req.body.file;
+  res.status(200).json(req.user.newFile);
+});
+
+app.get("/api/get", (req, res, next) => {
   res.status(200).json(req.user.newFile);
 });
 
