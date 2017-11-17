@@ -19,25 +19,29 @@ const app = express();
 
 // app.use(express.static(`${__dirname}/build`));
 
+//Initialize session for use
 app.use(
   session({
     secret,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 100000 }
+    resave: true,
+    saveUninitialized: true
   })
 );
 
+//Initialize massive and gain access to db
 massive(process.env.CONNECTION_STRING)
   .then(db => app.set("db", db))
   .catch(console.log);
 
+//Body parser and Cors initialization
 app.use(json());
 app.use(cors());
 
+//Initializes passport for use
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Checks if user is in the database and if not, adds an entry with their auth.id and profile.id
 passport.use(
   new Auth0Strategy(
     {
@@ -74,6 +78,7 @@ passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
+//On successful login redirects to the dashboard
 app.get(
   "/login",
   passport.authenticate("auth0", {
@@ -81,16 +86,18 @@ app.get(
   })
 );
 
+//On component render checks if their is a user object on session, otherwise redirects them to login
 app.get("/api/me", (req, res, next) => {
   if (!req.user) res.json("");
   res.status(200).json(req.user);
   console.log("req.user: ", req.user);
 });
 
+//Retrieves blob and stores it on the user object on session to save
 app.post("/api/retrieveFile", (req, res, next) => {
-  console.log("The User: ", req.user, req.session.user);
-  req.session.user.newFile = req.body.file;
-  res.status(200).json(file);
+  console.log("The User: ", req.body.file, req.user);
+  req.user.newFile = req.body.file;
+  res.status(200).json(req.user.newFile);
 });
 
 app.listen(port, () => {
