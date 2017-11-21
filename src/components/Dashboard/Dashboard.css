@@ -5,18 +5,38 @@
 .dashboardLeft {
   background: lightblue;
   width: 50%;
-  height: 642px;
+  height: 100vh;
   display: flex;
   justify-content: center;
 }
 .dashboardRight {
-  background: lightcoral;
+  /* background: lightcoral; */
   width: 50%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .fileInput {
   border: 1px dashed black;
   height: 10%;
+  width: 30%;
+  margin-top: 40px;
+}
+
+.text-fields {
+  width: 30%;
+  margin: 10px;
+}
+
+.text-headers {
+  margin: 5px;
+  text-align: left;
+}
+
+.input-dashboard {
+  background-color: black;
+}
+#dash-row {
+  margin: 20px;
 }

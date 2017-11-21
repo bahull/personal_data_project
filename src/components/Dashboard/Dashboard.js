@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import csv from "csv";
+import { Row, Input, Button } from "react-materialize";
 
 import Header from "./../Header/Header";
 
@@ -44,6 +45,7 @@ class Dashboard extends Component {
         this.setState({
           file: data
         });
+        console.log(this.state.file);
         this.sendToNode();
       });
     };
@@ -68,7 +70,27 @@ class Dashboard extends Component {
               type="file"
               onChange={event => this.uploader(event)}
             />
-            <ul>
+
+            <Row id="dash-row">
+              <Input
+                className="input-dashboard"
+                s={6}
+                label="Project Location"
+              />
+              <Input className="input-dashboard" s={6} label="Street Address" />
+              <Input
+                className="input-dashboard"
+                s={12}
+                label="Type of Facility"
+              />
+              <Input
+                className="input-dashboard"
+                label="Square Footage"
+                s={12}
+              />
+            </Row>
+            <Button className="input-dashboard">Submit</Button>
+            {/* <ul>
               {this.state.file &&
                 this.state.file.map((x, i) => {
                   return x.map((cur, i) => {
@@ -77,7 +99,7 @@ class Dashboard extends Component {
                     }
                   });
                 })}
-            </ul>
+            </ul> */}
           </div>
         </div>
       </div>

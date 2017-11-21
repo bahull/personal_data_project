@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Header from "./../Header/Header";
 import axios from "axios";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line, Pie } from "react-chartjs-2";
 
 class Data extends Component {
   constructor(props) {
@@ -16,11 +16,16 @@ class Data extends Component {
           "April",
           "May",
           "June",
-          "July"
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December"
         ],
         datasets: [
           {
-            label: "My First dataset",
+            label: "Energy Use",
             backgroundColor: "rgba(255,99,132,0.2)",
             borderColor: "rgba(255,99,132,1)",
             borderWidth: 1,
@@ -33,20 +38,17 @@ class Data extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     console.log("Front hit", this.props);
     axios.get("/api/me").then(response => {
-      console.log(response.data);
       if (!response.data) this.props.history.push("/");
       let newArray = [];
       let newData = response.data.newFile;
-      console.log("get to the chopper bastard:", newData);
+      console.log("response.data.newFile: ", response.data.newFile);
       let changedArray = function() {
-        console.log("newData in function: ", newData);
         newData.splice(0, 1);
         return newData.map(function(current) {
           newArray.push(parseFloat(current[2].replace(",", "")));
-          console.log(current[2]);
         });
         // => newArray.push(current[2])));
       };
@@ -59,6 +61,7 @@ class Data extends Component {
       this.setState(newState);
     });
   }
+
   render() {
     return (
       <div>

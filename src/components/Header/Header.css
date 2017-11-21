@@ -9,12 +9,17 @@ body {
 
 .App-header {
   background-color: #222;
-  height: 40px;
+  height: 80px;
   padding: 20px;
   color: white;
   display: flex;
   justify-content: space-around;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+.navbar {
+  background: rgb(56, 67, 90);
+  padding: 0 10px;
+  height: 70px;
 }
 
 .App-title {

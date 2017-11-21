@@ -1,9 +1,38 @@
 .app-intro {
+  color: white;
+  position: absolute;
+  height: 50vh;
+  width: 50%;
+  margin: auto;
+  right: 25%;
+  top: 25%;
+  border-radius: 4px;
+  padding: 5px;
   text-align: center;
 }
-
-.image1 {
-  background: url("http://findicons.com/files/icons/897/nova/512/bar_graph.png");
-  height: 100px;
-  width: 100px;
+.landing-title {
+  background-color: #272d4e;
+  background-image: radial-gradient(
+    circle farthest-side at right bottom,
+    #414b82 34%,
+    #272d4e 100%
+  );
+  height: 600px;
+}
+#free-trial-button {
+  color: black;
+  margin-top: 20px;
+}
+.features {
+  height: 700px;
+  width: 80%;
+  margin: auto;
+}
+.clear-float {
+  clear: both;
+}
+.rows {
+  display: flex;
+  justify-content: space-around;
+  margin: 30px 0;
 }
