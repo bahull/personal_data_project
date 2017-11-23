@@ -4,7 +4,7 @@
 /node_modules
 .env
 config.js
-./src/constants/stripe.js
+/constants
 
 
 # testing
