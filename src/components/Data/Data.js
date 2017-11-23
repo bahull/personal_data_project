@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Header from "./../Header/Header";
 import axios from "axios";
 import { connect } from "react-redux";
-import { Bar, Line, Pie } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
 class Data extends Component {
   constructor(props) {

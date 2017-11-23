@@ -1,0 +1,21 @@
+.checkout-cart {
+  margin: auto;
+}
+#box {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  position: absolute;
+  top: 150px;
+  left: 25%;
+  color: white;
+}
+#donate-background {
+  background-color: #272d4e;
+  background-image: radial-gradient(
+    circle farthest-side at right bottom,
+    #414b82 34%,
+    #272d4e 100%
+  );
+  height: 725px;
+}

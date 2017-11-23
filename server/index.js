@@ -127,7 +127,7 @@ app.get("/api/logout", (req, res, next) => {
 });
 
 // Donate
-app.post("/api/charge", function(req, res) {
+app.post("/api/donate", function(req, res) {
   var token = req.body.source;
   var amount = req.body.amount;
   var currency = req.body.currency;

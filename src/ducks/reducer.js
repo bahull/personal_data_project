@@ -4,6 +4,7 @@ const UPDATE_PROJECT_LOCATION = "UPDATE_PROJECT_LOCATION";
 const UPDATE_ADDRESS = "UPDATE_ADDRESS";
 const UPDATE_TYPE_OF_FACILITY = "UPDATE_TYPE_OF_FACILITY";
 const UPDATE_SQUARE_FOOTAGE = "UPDATE_SQUARE_FOOTAGE";
+const UPDATE_AMOUNT = "UPDATE_AMOUNT";
 
 // ACTION BUILDERS
 export function updateUserPermission(permission) {
@@ -36,13 +37,21 @@ export function updateSquareFootage(squareFootage) {
     payload: squareFootage
   };
 }
+export function updateAmount(amount) {
+  amount = amount.replace("$", "");
+  return {
+    type: UPDATE_AMOUNT,
+    payload: amount
+  };
+}
 
 let initialState = {
   access: undefined,
   projectLocation: "",
   address: "",
   facility: "",
-  squareFootage: ""
+  squareFootage: "",
+  amount: ""
 };
 //REDUCER
 export default function(state = initialState, action) {
@@ -57,9 +66,9 @@ export default function(state = initialState, action) {
       return Object.assign({}, state, { facility: action.payload });
     case UPDATE_SQUARE_FOOTAGE:
       return Object.assign({}, state, { squareFootage: action.payload });
+    case UPDATE_AMOUNT:
+      return Object.assign({}, state, { amount: action.payload });
     default:
       return state;
   }
-
-  return state;
 }

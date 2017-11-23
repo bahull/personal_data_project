@@ -26,7 +26,7 @@ class Checkout extends Component {
   onToken(amount, description) {
     return token =>
       axios
-        .post("/api/charge", {
+        .post("/api/donate", {
           source: token.id,
           currency: CURRENCY,
           amount: fromDollarToCent(amount)

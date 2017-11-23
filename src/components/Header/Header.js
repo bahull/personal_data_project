@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
-import { Button, Icon, Navbar, NavItem } from "react-materialize";
+import { Navbar, NavItem } from "react-materialize";
 
 import { connect } from "react-redux";
-
-import logo from "./../../logo.svg";
 
 import "./Header.css";
 
