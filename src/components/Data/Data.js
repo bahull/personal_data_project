@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "./../Header/Header";
 import axios from "axios";
+import { connect } from "react-redux";
 import { Bar, Line, Pie } from "react-chartjs-2";
 
 class Data extends Component {
@@ -42,23 +43,26 @@ class Data extends Component {
     console.log("Front hit", this.props);
     axios.get("/api/me").then(response => {
       if (!response.data) this.props.history.push("/");
-      let newArray = [];
-      let newData = response.data.newFile;
-      console.log("response.data.newFile: ", response.data.newFile);
-      let changedArray = function() {
-        newData.splice(0, 1);
-        return newData.map(function(current) {
-          newArray.push(parseFloat(current[2].replace(",", "")));
-        });
-        // => newArray.push(current[2])));
-      };
-      changedArray(newData);
-      // .map(x => newArray.push(x[2])).pop()
-      console.log("get to the chopper:", newArray);
-      let newState = Object.assign({}, this.state);
-      newState.chartData.datasets[0].data = newArray;
-      console.log(newState);
-      this.setState(newState);
+      if (!response.data.newFile) {
+      } else {
+        let newArray = [];
+        let newData = response.data.newFile;
+        console.log("response.data.newFile: ", response.data.newFile);
+        let changedArray = function() {
+          newData.splice(0, 1);
+          return newData.map(function(current) {
+            newArray.push(parseFloat(current[2].replace(",", "")));
+          });
+          // => newArray.push(current[2])));
+        };
+        changedArray(newData);
+        // .map(x => newArray.push(x[2])).pop()
+        console.log("get to the chopper:", newArray);
+        let newState = Object.assign({}, this.state);
+        newState.chartData.datasets[0].data = newArray;
+        console.log(newState);
+        this.setState(newState);
+      }
     });
   }
 
@@ -66,6 +70,17 @@ class Data extends Component {
     return (
       <div>
         <Header />
+        <h3>
+          {this.props.projectLocation}
+          <br />
+          {this.props.address}
+          <br />
+          {this.props.facility}
+          <br />
+          {this.props.squareFootage}
+          <br />
+        </h3>
+
         <Bar
           data={this.state.chartData}
           options={{
@@ -76,5 +91,8 @@ class Data extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return state;
+};
 
-export default Data;
+export default connect(mapStateToProps)(Data);

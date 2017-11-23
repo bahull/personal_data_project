@@ -1,0 +1,15 @@
+#contact-background {
+  padding: 20px;
+  background-color: #272d4e;
+  background-image: radial-gradient(
+    circle farthest-side at right bottom,
+    #414b82 34%,
+    #272d4e 100%
+  );
+  height: 600px;
+  color: white;
+  text-align: center;
+}
+.spaced-rows {
+  margin-top: 125px;
+}

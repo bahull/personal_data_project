@@ -1,27 +1,46 @@
 .dashboardContainer {
-  display: flex;
+  /* display: flex; */
+  width: 75%;
+  margin: auto;
 }
 
-.dashboardLeft {
+/* .dashboardLeft {
   background: lightblue;
   width: 50%;
   height: 100vh;
   display: flex;
   justify-content: center;
-}
-.dashboardRight {
-  /* background: lightcoral; */
+} */
+/* .dashboardRight {
+  background: lightcoral;
   width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
+} */
+
+.dashboard-headers {
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .fileInput {
-  border: 1px dashed black;
-  height: 10%;
-  width: 30%;
-  margin-top: 40px;
+  /* border: 1px dashed black;
+  margin: 20px 40px; */
+  cursor: inherit;
+  display: block;
+  font-size: 999px;
+  filter: alpha(opacity=0);
+  min-height: 100%;
+  min-width: 100%;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  top: 0;
+}
+#file-upload {
+  margin: 20px 30% 40px;
 }
 
 .text-fields {
@@ -34,9 +53,10 @@
   text-align: left;
 }
 
-.input-dashboard {
-  background-color: black;
-}
 #dash-row {
-  margin: 20px;
+  margin: 50px 20px 20px;
+}
+
+#final-submit {
+  margin: 20px 45% 40px;
 }

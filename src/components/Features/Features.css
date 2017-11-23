@@ -1,0 +1,10 @@
+.features {
+  height: 700px;
+  width: 75%;
+  margin: auto;
+}
+.rows {
+  display: flex;
+  justify-content: space-around;
+  margin: 30px 0;
+}

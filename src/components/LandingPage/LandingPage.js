@@ -2,16 +2,17 @@ import React, { Component } from "react";
 
 import Particles from "react-particles-js";
 
-import Footers from "./../Footer/Footer";
-
 import Header from "./../Header/Header";
+import Features from "./../Features/Features";
+import Contact from "./../Contact/Contact";
+import Footers from "./../Footer/Footer";
 
 import "./LandingPage.css";
 
 class LandingPage extends Component {
   render() {
     return (
-      <div>
+      <div id="landing">
         <Header />
         <div className="landing-body">
           <div className="landing-title">
@@ -79,45 +80,12 @@ class LandingPage extends Component {
                 id="free-trial-button"
                 className="btn yellow"
               >
-                Start your free trial
+                Sign up for a demo
               </a>
             </div>
           </div>
-          <div className="features">
-            <h2 className="center-align">Features</h2>
-            <div className="rows">
-              <i className="large material-icons">pie_chart</i>
-              <h5 className="">
-                Quick and easy access to high-end charting capabilities
-              </h5>
-            </div>
-            <div className="rows">
-              <h5 className="">
-                Ability to print custom charts with only information you want to
-                show your client
-              </h5>
-              <i className="large material-icons">local_printshop</i>
-            </div>
-            <div className="rows">
-              <i className="fa fa-thermometer-empty fa-5x" aria-hidden="true" />
-              <h5 className="">
-                High Level analysis of clients temperature dependent energy use
-              </h5>
-            </div>
-            <div className="rows">
-              <h5 className="">
-                Readily access information to determine if an energy project is
-                a viable and cost-effective measure to lower operation expenses
-              </h5>
-              <i className="fa fa-money fa-5x" aria-hidden="true" />
-            </div>
-          </div>
-          <div className="about">
-            <h2>About</h2>
-          </div>
-          <div className="contact center-align">
-            <h2>Contact Us</h2>
-          </div>
+          <Features />
+          <Contact />
         </div>
         <Footers />
       </div>

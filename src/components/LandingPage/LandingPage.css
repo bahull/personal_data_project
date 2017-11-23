@@ -23,16 +23,9 @@
   color: black;
   margin-top: 20px;
 }
-.features {
-  height: 700px;
-  width: 80%;
-  margin: auto;
-}
-.clear-float {
-  clear: both;
-}
-.rows {
-  display: flex;
-  justify-content: space-around;
-  margin: 30px 0;
+
+@media only screen and (max-width: 375px) {
+  #free-trial-button {
+    font-size: 0.6rem;
+  }
 }
