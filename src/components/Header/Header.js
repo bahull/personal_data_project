@@ -5,6 +5,8 @@ import { Navbar, NavItem } from "react-materialize";
 
 import { connect } from "react-redux";
 
+import razeLogo from "./../../images/razeLogo.png";
+
 import "./Header.css";
 
 class Header extends Component {
@@ -51,13 +53,14 @@ class Header extends Component {
             <NavItem href="http://localhost:3001/login">Login/Register</NavItem>
           </Navbar>
         )}
-        {this.props.access === true ||
-          (this.props.access === false && (
-            <Navbar className="navbar" brand="Raze" right>
-              <NavItem href="/donate">Donate</NavItem>
-              <NavItem href="/">Logout</NavItem>
-            </Navbar>
-          ))}
+        {this.props.access === true || this.props.access === false ? (
+          <Navbar className="navbar" brand="Raze" right>
+            <NavItem href="/donate">Donate</NavItem>
+            <NavItem href="/">Logout</NavItem>
+          </Navbar>
+        ) : (
+          ""
+        )}
       </div>
     );
   }

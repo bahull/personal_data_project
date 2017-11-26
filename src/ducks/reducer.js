@@ -5,6 +5,8 @@ const UPDATE_ADDRESS = "UPDATE_ADDRESS";
 const UPDATE_TYPE_OF_FACILITY = "UPDATE_TYPE_OF_FACILITY";
 const UPDATE_SQUARE_FOOTAGE = "UPDATE_SQUARE_FOOTAGE";
 const UPDATE_AMOUNT = "UPDATE_AMOUNT";
+const UPDATE_TYPE_OF_INDUSTRY = "UPDATE_TYPE_OF_INDUSTRY";
+const UPDATE_ANNUAL_COST = "UPDATE_ANNUAL_COST";
 
 // ACTION BUILDERS
 export function updateUserPermission(permission) {
@@ -31,6 +33,12 @@ export function updateFacility(facility) {
     payload: facility
   };
 }
+export function updateIndustryType(industry) {
+  return {
+    type: UPDATE_TYPE_OF_INDUSTRY,
+    payload: industry
+  };
+}
 export function updateSquareFootage(squareFootage) {
   return {
     type: UPDATE_SQUARE_FOOTAGE,
@@ -44,14 +52,72 @@ export function updateAmount(amount) {
     payload: amount
   };
 }
+export function updateAnnualCost(total) {
+  console.log("Hit reducer", total);
+  return {
+    type: UPDATE_ANNUAL_COST,
+    payload: total
+  };
+}
 
 let initialState = {
   access: undefined,
+  annualCost: "",
   projectLocation: "",
   address: "",
   facility: "",
   squareFootage: "",
-  amount: ""
+  amount: "",
+  industry: "",
+  commercialHeaders: [
+    "Other uses",
+    "Appliances and Electronics",
+    "HVAC",
+    "Lighting",
+    "Water Heating"
+  ],
+  petroleumHeaders: [
+    "Process Heating",
+    "Drivepower",
+    "CHP/ Cogeneration Proceess",
+    "Boiler use",
+    "Other",
+    "Facility HVAC"
+  ],
+  chemicalHeaders: [
+    "Process Heating",
+    "Drivepower",
+    "CHP/ Cogeneration Proceess",
+    "Boiler use",
+    "Other",
+    "Facility HVAC"
+  ],
+  paperHeaders: [
+    "Process Heating",
+    "Drivepower",
+    "CHP/ Cogeneration Proceess",
+    "Boiler use",
+    "Other",
+    "Facility HVAC"
+  ],
+  foodHeaders: [
+    "Process Heating",
+    "Drivepower",
+    "CHP/ Cogeneration Proceess",
+    "Boiler use",
+    "Other",
+    "Facility HVAC",
+    "Cooling and Refrigeration"
+  ],
+  metalsHeader: [
+    "Process Heating",
+    "Drivepower",
+    "CHP/ Cogeneration Proceess",
+    "Boiler use",
+    "Other",
+    "Facility HVAC",
+    "Electro-chemical Processes"
+  ]
 };
 //REDUCER
 export default function(state = initialState, action) {
@@ -68,6 +134,10 @@ export default function(state = initialState, action) {
       return Object.assign({}, state, { squareFootage: action.payload });
     case UPDATE_AMOUNT:
       return Object.assign({}, state, { amount: action.payload });
+    case UPDATE_TYPE_OF_INDUSTRY:
+      return Object.assign({}, state, { industry: action.payload });
+    case UPDATE_ANNUAL_COST:
+      return Object.assign({}, state, { annualCost: action.payload });
     default:
       return state;
   }

@@ -117,7 +117,7 @@ app.post("/api/retrieveFile", (req, res, next) => {
 
 //Retrieves the uploaded file
 app.get("/api/get", (req, res, next) => {
-  res.status(200).json(req.user.newFile);
+  res.status(200).json(req.user);
 });
 
 //Destroys current session on logout
@@ -141,19 +141,19 @@ app.post("/api/donate", function(req, res) {
       res.redirect(200, "/");
     }
   });
+});
 
-  // const charge = stripe.charges.create(
-  //   {
-  //     source: token,
-  //     currency: currency,
-  //     amount: amount,
-  //     description: "Charge for tests"
-  //   },
-  //   function(err, charge) {
-  //     if (err) return res.sendStatus(500);
-  //     return res.sendStatus(200);
-  //   }
-  // );
+app.get("/api/getPeople", (req, res, next) => {
+  const dbInstance = app.get("db");
+
+  dbInstance
+    .getUsers()
+    .then(response => {
+      res.status(200).json(response);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
 });
 
 app.listen(port, () => {

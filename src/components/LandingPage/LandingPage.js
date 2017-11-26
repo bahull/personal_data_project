@@ -12,15 +12,15 @@ import "./LandingPage.css";
 class LandingPage extends Component {
   render() {
     return (
-      <div id="landing">
+      <div id="top">
         <Header />
         <div className="landing-body">
           <div className="landing-title">
-            <Particles
+            {/* <Particles
               params={{
                 particles: {
                   number: {
-                    value: 80,
+                    value: 180,
                     density: {
                       enable: true,
                       value_area: 1800
@@ -31,7 +31,7 @@ class LandingPage extends Component {
                     random: true,
                     anim: {
                       enable: false,
-                      speed: 40,
+                      speed: 50,
                       size_min: 0.1,
                       sync: false
                     }
@@ -68,9 +68,9 @@ class LandingPage extends Component {
                     resize: true
                   }
                 },
-                retina_detect: true
+                retina_detect: false
               }}
-            />
+            /> */}
 
             <div className="app-intro">
               <h3>Raze Energy Sales Solutions</h3>

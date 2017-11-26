@@ -60,3 +60,6 @@
 #final-submit {
   margin: 20px 45% 40px;
 }
+#splitCharts {
+  display: flex;
+}

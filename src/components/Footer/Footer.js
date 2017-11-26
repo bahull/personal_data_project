@@ -10,25 +10,25 @@ class Footers extends Component {
           id="myfooter"
           copyrights="Coded by Bryce Hull"
           moreLinks={
-            <a className="grey-text text-lighten-4 right" href="#landing">
+            <a className="grey-text text-lighten-4 right" href="#top">
               Back to Top
             </a>
           }
           links={
             <ul>
-              <li>
+              <li className="social-links">
                 <a
                   className="grey-text text-lighten-3 fa fa-linkedin fa-2x"
                   href="https://www.linkedin.com/in/bryce-hull-9a9429123/"
                 />
               </li>
-              <li>
+              <li className="social-links">
                 <a
                   className="grey-text text-lighten-3 fa fa-twitter fa-2x"
                   href="https://twitter.com/BryceHull1"
                 />
               </li>
-              <li>
+              <li className="social-links">
                 <a
                   className="grey-text text-lighten-3 fa fa-github fa-2x"
                   href="https://github.com/bahull"

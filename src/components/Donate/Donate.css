@@ -1,5 +1,5 @@
 .checkout-cart {
-  margin: auto;
+  margin: 20px auto;
 }
 #box {
   width: 50%;
@@ -10,6 +10,10 @@
   left: 25%;
   color: white;
 }
+#inner-box-donate {
+  width: 80%;
+  margin: auto;
+}
 #donate-background {
   background-color: #272d4e;
   background-image: radial-gradient(
@@ -17,5 +21,8 @@
     #414b82 34%,
     #272d4e 100%
   );
-  height: 725px;
+  height: 800px;
+}
+#small-text-donate {
+  margin: 25px 50px;
 }

@@ -8,7 +8,8 @@ import {
   updateProjectLocation,
   updateAddress,
   updateFacility,
-  updateSquareFootage
+  updateSquareFootage,
+  updateIndustryType
 } from "./../../ducks/reducer";
 
 import { Row, Input, Button, Col, Icon } from "react-materialize";
@@ -78,7 +79,6 @@ class Dashboard extends Component {
       <div>
         <Header />
         <div className="dashboardContainer">
-          {/* <div className="dashboardLeft"> */}
           <h3 className="dashboard-headers">
             Welcome to Raze Energy Sales Solutions Energy User Profile Creator
           </h3>
@@ -87,8 +87,6 @@ class Dashboard extends Component {
             form below and upload your .csv provided to you by your Raze
             Ambassador
           </h5>
-          {/* </div> */}
-          {/* <div className="dashboardRight"> */}
 
           <Row id="dash-row">
             <Input
@@ -107,14 +105,29 @@ class Dashboard extends Component {
               s={12}
               type="select"
               label="Type of Facility"
-              defaultValue="1"
+              defaultValue="Commercial"
               onChange={e => this.props.updateFacility(e.target.value)}
             >
-              <option value="1">Commercial</option>
-              <option value="2">Industrial</option>
-              <option value="3">School</option>
-              <option value="4">Church</option>
+              <option value="Commercial">Select One</option>
+              <option value="Commercial">Commercial</option>
+              <option value="Industrial">Industrial</option>
             </Input>
+            {this.props.facility === "Industrial" && (
+              <Input
+                s={12}
+                type="select"
+                label="Type of Industrial Facility"
+                defaultValue="1"
+                onChange={e => this.props.updateIndustryType(e.target.value)}
+              >
+                <option value="Petroleum">Select One</option>
+                <option value="Petroleum">Petroleum</option>
+                <option value="Chemical">Chemical</option>
+                <option value="Paper">Paper</option>
+                <option value="Primary Metals">Primary Metals</option>
+                <option value="Food">Food</option>
+              </Input>
+            )}
             <Input
               className="input-dashboard"
               label="Square Footage"
@@ -175,7 +188,6 @@ class Dashboard extends Component {
                 })}
             </ul> */}
         </div>
-        {/* </div> */}
         <Footer />
       </div>
     );
@@ -190,5 +202,6 @@ export default connect(mapStateToProps, {
   updateProjectLocation,
   updateAddress,
   updateFacility,
-  updateSquareFootage
+  updateSquareFootage,
+  updateIndustryType
 })(Dashboard);
