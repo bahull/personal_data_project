@@ -18,25 +18,19 @@ class DataTable extends Component {
           </thead>
 
           <tbody>
-            {this.props.metalsHeader.map(curr => {
+            {this.props.commercialHeaders.map((curr, ind) => {
               return (
                 <tr>
                   <td>{curr}</td>
-                  <td>{this.props.annualCost}</td>
+                  <td>${this.props.annualCostBreakdownCommercial[ind]}</td>
                 </tr>
               );
             })}
+
+            <hr />
             <tr>
-              <td>Alvin</td>
-              <td />
-            </tr>
-            <tr>
-              <td>Alan</td>
-              <td>$3.76</td>
-            </tr>
-            <tr>
-              <td>Jonathan</td>
-              <td>$7.00</td>
+              <th>Utilities Total</th>
+              <th>${this.props.annualCost}</th>
             </tr>
           </tbody>
         </Table>

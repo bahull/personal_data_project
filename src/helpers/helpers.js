@@ -1,4 +1,5 @@
 import axios from "axios";
+import { updateAnnualBreakdownCommercial } from "../ducks/reducer";
 
 export const changedArray = function(newData, newArray) {
   console.log(newData, newArray);
@@ -96,7 +97,12 @@ export const industryFoodPercentage = (newArray, typeHolder) => {
   );
 };
 
-export const totalAnnualCost = (newData, totalCost, updateAnnualCost) => {
+export const totalAnnualCost = (
+  newData,
+  totalCost,
+  updateAnnualCost,
+  updateAnnualBreakdownCommercial
+) => {
   let holder = newData.splice(0, 1);
   newData.map(current => {
     return totalCost.push(parseFloat(current[2].replace(",", "")));
@@ -105,6 +111,14 @@ export const totalAnnualCost = (newData, totalCost, updateAnnualCost) => {
   totalCost = totalCost.reduce((curr, accu) => curr + accu);
   console.log("total: ", totalCost);
   updateAnnualCost(totalCost);
+  let newArray = [];
+  let otherUses = Math.floor(totalCost * 0.36);
+  let appliances = Math.floor(totalCost * 0.16);
+  let hvac = Math.floor(totalCost * 0.26);
+  let lighting = Math.floor(totalCost * 0.2);
+  let waterHeating = Math.floor(totalCost * 0.02);
+  newArray.push(otherUses, appliances, hvac, lighting, waterHeating);
+  updateAnnualBreakdownCommercial(newArray);
 };
 
 export const fileSaver = () => {

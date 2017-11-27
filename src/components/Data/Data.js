@@ -4,9 +4,14 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { Bar, Pie } from "react-chartjs-2";
 
+import { Row, Col } from "react-materialize";
+
 import DataTable from "./DataTable/DataTable";
 
-import { updateAnnualCost } from "./../../ducks/reducer";
+import {
+  updateAnnualCost,
+  updateAnnualBreakdownCommercial
+} from "./../../ducks/reducer";
 
 import {
   changedArray,
@@ -86,7 +91,12 @@ class Data extends Component {
             let typeHolder = [];
             changedArray(newData, newArray, this.state);
             commercialPercentage(newArray, typeHolder);
-            totalAnnualCost(newData, totalCost, this.props.updateAnnualCost);
+            totalAnnualCost(
+              newData,
+              totalCost,
+              this.props.updateAnnualCost,
+              this.props.updateAnnualBreakdownCommercial
+            );
             console.log(totalCost);
 
             let newState = Object.assign({}, this.state);
@@ -228,32 +238,34 @@ class Data extends Component {
     return (
       <div>
         <Header />
-
-        <div className="container">
+        <Row>
           <div id="data-headers">
             <div id="splitCharts">
               <h4> {this.props.projectLocation} </h4>
               <h4> {this.props.address} </h4>
-
-              <DataTable />
-              <Pie
-                data={this.state.chartData}
-                options={{
-                  title: {
-                    display: this.props.displayTitle,
-                    text: "Energy Usage",
-                    fontSize: 25
-                  },
-                  legend: {
-                    display: this.props.displayLegend,
-                    position: this.props.legendPosition
-                  },
-                  maintainAspectRatio: false
-                }}
-              />
+              <Col s={6}>
+                <DataTable />
+              </Col>
+              <Col s={6}>
+                <Pie
+                  data={this.state.chartData}
+                  options={{
+                    title: {
+                      display: this.props.displayTitle,
+                      text: "Energy Usage",
+                      fontSize: 25
+                    },
+                    legend: {
+                      display: this.props.displayLegend,
+                      position: this.props.legendPosition
+                    },
+                    maintainAspectRatio: false
+                  }}
+                />
+              </Col>
             </div>
           </div>
-        </div>
+        </Row>
       </div>
     );
   }
@@ -262,4 +274,7 @@ const mapStateToProps = state => {
   return state;
 };
 
-export default connect(mapStateToProps, { updateAnnualCost })(Data);
+export default connect(mapStateToProps, {
+  updateAnnualCost,
+  updateAnnualBreakdownCommercial
+})(Data);
