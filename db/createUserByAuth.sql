@@ -1,4 +1,5 @@
 INSERT INTO users
     (authid, email, access)
 VALUES
-    ($1, $2, 'false');
+    ($1, $2, 'false')
+RETURNING authId, name;

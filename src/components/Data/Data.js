@@ -8,10 +8,7 @@ import { Row, Col } from "react-materialize";
 
 import DataTable from "./DataTable/DataTable";
 
-import {
-  updateAnnualCost,
-  updateAnnualBreakdownCommercial
-} from "./../../ducks/reducer";
+import { updateAnnualCost, updateAnnualBreakdown } from "./../../ducks/reducer";
 
 import {
   changedArray,
@@ -22,7 +19,11 @@ import {
   industryMetalsPercentage,
   industryFoodPercentage,
   totalAnnualCostCommercial,
-  totalAnnualCostPetroleum
+  totalAnnualCostPetroleum,
+  totalAnnualCostChemical,
+  totalAnnualCostPaper,
+  totalAnnualCostFood,
+  totalAnnualCostMetals
 } from "./../../helpers/helpers";
 
 import "./Data.css";
@@ -77,7 +78,7 @@ class Data extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     axios.get("/api/me").then(response => {
       if (!response.data) {
         this.props.history.push("/");
@@ -96,9 +97,8 @@ class Data extends Component {
               newData,
               totalCost,
               this.props.updateAnnualCost,
-              this.props.updateAnnualBreakdownCommercial
+              this.props.updateAnnualBreakdown
             );
-            console.log(totalCost);
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
@@ -112,13 +112,14 @@ class Data extends Component {
             let newArray = [];
             let newData = response.data.newFile;
             let typeHolder = [];
+            let totalCost = [];
             changedArray(newData, newArray, this.state);
             industryPetroleumPercentage(newArray, typeHolder);
             totalAnnualCostPetroleum(
               newData,
               totalCost,
               this.props.updateAnnualCost,
-              this.props.updateAnnualBreakdownPetroleum
+              this.props.updateAnnualBreakdown
             );
 
             let newState = Object.assign({}, this.state);
@@ -133,8 +134,15 @@ class Data extends Component {
             let newArray = [];
             let newData = response.data.newFile;
             let typeHolder = [];
+            let totalCost = [];
             changedArray(newData, newArray, this.state);
             industryChemicalPercentage(newArray, typeHolder);
+            totalAnnualCostChemical(
+              newData,
+              totalCost,
+              this.props.updateAnnualCost,
+              this.props.updateAnnualBreakdown
+            );
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
@@ -148,8 +156,15 @@ class Data extends Component {
             let newArray = [];
             let newData = response.data.newFile;
             let typeHolder = [];
+            let totalCost = [];
             changedArray(newData, newArray, this.state);
             industryPaperPercentage(newArray, typeHolder);
+            totalAnnualCostPaper(
+              newData,
+              totalCost,
+              this.props.updateAnnualCost,
+              this.props.updateAnnualBreakdown
+            );
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
@@ -163,8 +178,15 @@ class Data extends Component {
             let newArray = [];
             let newData = response.data.newFile;
             let typeHolder = [];
+            let totalCost = [];
             changedArray(newData, newArray, this.state);
             industryFoodPercentage(newArray, typeHolder);
+            totalAnnualCostFood(
+              newData,
+              totalCost,
+              this.props.updateAnnualCost,
+              this.props.updateAnnualBreakdown
+            );
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
@@ -178,8 +200,15 @@ class Data extends Component {
             let newArray = [];
             let newData = response.data.newFile;
             let typeHolder = [];
+            let totalCost = [];
             changedArray(newData, newArray, this.state);
             industryMetalsPercentage(newArray, typeHolder);
+            totalAnnualCostMetals(
+              newData,
+              totalCost,
+              this.props.updateAnnualCost,
+              this.props.updateAnnualBreakdown
+            );
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
@@ -256,5 +285,5 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   updateAnnualCost,
-  updateAnnualBreakdownCommercial
+  updateAnnualBreakdown
 })(Data);

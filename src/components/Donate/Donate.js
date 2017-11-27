@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Particles from "react-particles-js";
+import axios from "axios";
 
 import { Input, Row, Col } from "react-materialize";
 import { updateAmount } from "./../../ducks/reducer";
@@ -11,6 +12,14 @@ import Footer from "./../Footer/Footer";
 import "./Donate.css";
 
 class Donate extends Component {
+  componentDidMount() {
+    axios.get("/api/me").then(response => {
+      if (!response.data) {
+        this.props.history.push("/");
+      }
+    });
+  }
+
   render() {
     return (
       <div>

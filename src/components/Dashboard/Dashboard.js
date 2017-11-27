@@ -65,7 +65,7 @@ class Dashboard extends Component {
         this.setState({
           file: data
         });
-        console.log(this.state.file);
+
         this.sendToNode();
       });
     };

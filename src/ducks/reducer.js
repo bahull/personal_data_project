@@ -7,7 +7,7 @@ const UPDATE_SQUARE_FOOTAGE = "UPDATE_SQUARE_FOOTAGE";
 const UPDATE_AMOUNT = "UPDATE_AMOUNT";
 const UPDATE_TYPE_OF_INDUSTRY = "UPDATE_TYPE_OF_INDUSTRY";
 const UPDATE_ANNUAL_COST = "UPDATE_ANNUAL_COST";
-const UPDATE_ANNUAL_BREAKDOWN_COMMERCIAL = "UPDATE_ANNUAL_BREAKDOWN_COMMERCIAL";
+const UPDATE_ANNUAL_BREAKDOWN = "UPDATE_ANNUAL_BREAKDOWN";
 
 // ACTION BUILDERS
 export function updateUserPermission(permission) {
@@ -54,15 +54,14 @@ export function updateAmount(amount) {
   };
 }
 export function updateAnnualCost(total) {
-  console.log("Hit action creator", total);
   return {
     type: UPDATE_ANNUAL_COST,
     payload: total
   };
 }
-export function updateAnnualBreakdownCommercial(totalArray) {
+export function updateAnnualBreakdown(totalArray) {
   return {
-    type: UPDATE_ANNUAL_BREAKDOWN_COMMERCIAL,
+    type: UPDATE_ANNUAL_BREAKDOWN,
     payload: totalArray
   };
 }
@@ -70,7 +69,7 @@ export function updateAnnualBreakdownCommercial(totalArray) {
 let initialState = {
   access: undefined,
   annualCost: "",
-  annualCostBreakdownCommercial: "",
+  annualCostBreakdown: "",
   projectLocation: "",
   address: "",
   facility: "",
@@ -78,11 +77,11 @@ let initialState = {
   amount: "",
   industry: "",
   commercialHeaders: [
-    "Other uses",
     "Appliances and Electronics",
     "HVAC",
     "Lighting",
-    "Water Heating"
+    "Water Heating",
+    "Other uses"
   ],
   petroleumHeaders: [
     "Process Heating",
@@ -146,9 +145,9 @@ export default function(state = initialState, action) {
       return Object.assign({}, state, { industry: action.payload });
     case UPDATE_ANNUAL_COST:
       return Object.assign({}, state, { annualCost: action.payload });
-    case UPDATE_ANNUAL_BREAKDOWN_COMMERCIAL:
+    case UPDATE_ANNUAL_BREAKDOWN:
       return Object.assign({}, state, {
-        annualCostBreakdownCommercial: action.payload
+        annualCostBreakdown: action.payload
       });
     default:
       return state;
