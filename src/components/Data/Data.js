@@ -21,7 +21,8 @@ import {
   industryPaperPercentage,
   industryMetalsPercentage,
   industryFoodPercentage,
-  totalAnnualCost
+  totalAnnualCostCommercial,
+  totalAnnualCostPetroleum
 } from "./../../helpers/helpers";
 
 import "./Data.css";
@@ -91,7 +92,7 @@ class Data extends Component {
             let typeHolder = [];
             changedArray(newData, newArray, this.state);
             commercialPercentage(newArray, typeHolder);
-            totalAnnualCost(
+            totalAnnualCostCommercial(
               newData,
               totalCost,
               this.props.updateAnnualCost,
@@ -101,13 +102,7 @@ class Data extends Component {
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
-            newState.chartData.labels = [
-              "Other uses",
-              "Appliances and Electronics",
-              "HVAC",
-              "Lighting",
-              "Water Heating"
-            ];
+            newState.chartData.labels = this.props.commercialHeaders;
 
             this.setState(newState);
           } else if (
@@ -119,17 +114,16 @@ class Data extends Component {
             let typeHolder = [];
             changedArray(newData, newArray, this.state);
             industryPetroleumPercentage(newArray, typeHolder);
+            totalAnnualCostPetroleum(
+              newData,
+              totalCost,
+              this.props.updateAnnualCost,
+              this.props.updateAnnualBreakdownPetroleum
+            );
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
-            newState.chartData.labels = [
-              "Process Heating",
-              "Drivepower",
-              "CHP/ Cogeneration Proceess",
-              "Boiler use",
-              "Other",
-              "Facility HVAC"
-            ];
+            newState.chartData.labels = this.props.petroleumHeaders;
 
             this.setState(newState);
           } else if (
@@ -144,14 +138,7 @@ class Data extends Component {
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
-            newState.chartData.labels = [
-              "Process Heating",
-              "Drivepower",
-              "CHP/ Cogeneration Proceess",
-              "Boiler use",
-              "Other",
-              "Facility HVAC"
-            ];
+            newState.chartData.labels = this.props.chemicalHeaders;
 
             this.setState(newState);
           } else if (
@@ -166,14 +153,7 @@ class Data extends Component {
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
-            newState.chartData.labels = [
-              "Process Heating",
-              "Drivepower",
-              "CHP/ Cogeneration Proceess",
-              "Boiler use",
-              "Other",
-              "Facility HVAC"
-            ];
+            newState.chartData.labels = this.props.paperHeaders;
 
             this.setState(newState);
           } else if (
@@ -188,15 +168,7 @@ class Data extends Component {
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
-            newState.chartData.labels = [
-              "Process Heating",
-              "Drivepower",
-              "CHP/ Cogeneration Proceess",
-              "Boiler use",
-              "Other",
-              "Facility HVAC",
-              "Cooling and Refrigeration"
-            ];
+            newState.chartData.labels = this.props.foodHeaders;
 
             this.setState(newState);
           } else if (
@@ -211,15 +183,7 @@ class Data extends Component {
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
-            newState.chartData.labels = [
-              "Process Heating",
-              "Drivepower",
-              "CHP/ Cogeneration Proceess",
-              "Boiler use",
-              "Other",
-              "Facility HVAC",
-              "Electro-chemical Processes"
-            ];
+            newState.chartData.labels = this.props.metalsHeaders;
 
             this.setState(newState);
           }
@@ -244,9 +208,25 @@ class Data extends Component {
               <h4> {this.props.projectLocation} </h4>
               <h4> {this.props.address} </h4>
               <Col s={6}>
-                <DataTable />
+                <DataTable
+                  headers={
+                    (this.props.facility === "" &&
+                      this.props.commercialHeaders) ||
+                    (this.props.facility === "Commercial" &&
+                      this.props.commercialHeaders) ||
+                    (this.props.industry === "Petroleum" &&
+                      this.props.petroleumHeaders) ||
+                    (this.props.industry === "Chemical" &&
+                      this.props.chemicalHeaders) ||
+                    (this.props.industry === "Paper" &&
+                      this.props.paperHeaders) ||
+                    (this.props.industry === "Primary Metals" &&
+                      this.props.metalsHeaders) ||
+                    (this.props.industry === "Food" && this.props.foodHeaders)
+                  }
+                />
               </Col>
-              <Col s={6}>
+              <Col id="pieChart" s={6}>
                 <Pie
                   data={this.state.chartData}
                   options={{
@@ -258,8 +238,8 @@ class Data extends Component {
                     legend: {
                       display: this.props.displayLegend,
                       position: this.props.legendPosition
-                    },
-                    maintainAspectRatio: false
+                    }
+                    // maintainAspectRatio: false
                   }}
                 />
               </Col>

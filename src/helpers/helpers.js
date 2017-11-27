@@ -1,5 +1,4 @@
 import axios from "axios";
-import { updateAnnualBreakdownCommercial } from "../ducks/reducer";
 
 export const changedArray = function(newData, newArray) {
   console.log(newData, newArray);
@@ -17,7 +16,7 @@ export const commercialPercentage = (newArray, typeHolder) => {
   let hvac = Math.floor(newArray * 0.26);
   let lighting = Math.floor(newArray * 0.2);
   let waterHeating = Math.floor(newArray * 0.02);
-  typeHolder.push(otherUses, appliances, hvac, lighting, waterHeating);
+  typeHolder.push(appliances, hvac, lighting, waterHeating, otherUses);
 };
 
 export const industryPetroleumPercentage = (newArray, typeHolder) => {
@@ -97,7 +96,7 @@ export const industryFoodPercentage = (newArray, typeHolder) => {
   );
 };
 
-export const totalAnnualCost = (
+export const totalAnnualCostCommercial = (
   newData,
   totalCost,
   updateAnnualCost,
@@ -117,20 +116,44 @@ export const totalAnnualCost = (
   let hvac = Math.floor(totalCost * 0.26);
   let lighting = Math.floor(totalCost * 0.2);
   let waterHeating = Math.floor(totalCost * 0.02);
-  newArray.push(otherUses, appliances, hvac, lighting, waterHeating);
+  newArray.push(appliances, hvac, lighting, waterHeating, otherUses);
+  updateAnnualBreakdownCommercial(newArray);
+};
+export const totalAnnualCostPetroleum = (
+  newData,
+  totalCost,
+  updateAnnualCost,
+  updateAnnualBreakdownCommercial
+) => {
+  let holder = newData.splice(0, 1);
+  newData.map(current => {
+    return totalCost.push(parseFloat(current[2].replace(",", "")));
+  });
+
+  totalCost = totalCost.reduce((curr, accu) => curr + accu);
+  console.log("total: ", totalCost);
+  updateAnnualCost(totalCost);
+  let newArray = [];
+  let processHeating = Math.floor(newArray * 0.48);
+  let drivePower = Math.floor(newArray * 0.21);
+  let chp = Math.floor(newArray * 0.14);
+  let boilerUse = Math.floor(newArray * 0.11);
+  let other = Math.floor(newArray * 0.04);
+  let hvac = Math.floor(newArray * 0.02);
+  newArray.push(processHeating, drivePower, chp, boilerUse, other, hvac);
   updateAnnualBreakdownCommercial(newArray);
 };
 
-export const fileSaver = () => {
-  axios.get("/api/get").then(response => {
-    if (!response.data.newFile) {
-    } else {
-      let newArray = [];
-      let newData = response.data.newFile;
-      changedArray(newData, newArray);
-      let newState = Object.assign({}, this.state);
-      newState.chartData.datasets[0].data = newArray;
-      this.setState(newState);
-    }
-  });
-};
+// export const fileSaver = () => {
+//   axios.get("/api/get").then(response => {
+//     if (!response.data.newFile) {
+//     } else {
+//       let newArray = [];
+//       let newData = response.data.newFile;
+//       changedArray(newData, newArray);
+//       let newState = Object.assign({}, this.state);
+//       newState.chartData.datasets[0].data = newArray;
+//       this.setState(newState);
+//     }
+//   });
+// };

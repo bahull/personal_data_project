@@ -7,6 +7,7 @@ import "./DataTable.css";
 
 class DataTable extends Component {
   render() {
+    console.log(this.props.headers);
     return (
       <div id="dataTable">
         <Table>
@@ -18,16 +19,14 @@ class DataTable extends Component {
           </thead>
 
           <tbody>
-            {this.props.commercialHeaders.map((curr, ind) => {
+            {this.props.headers.map((curr, ind) => {
               return (
-                <tr>
-                  <td>{curr}</td>
+                <tr key={curr}>
+                  <td key={curr}>{curr}</td>
                   <td>${this.props.annualCostBreakdownCommercial[ind]}</td>
                 </tr>
               );
             })}
-
-            <hr />
             <tr>
               <th>Utilities Total</th>
               <th>${this.props.annualCost}</th>

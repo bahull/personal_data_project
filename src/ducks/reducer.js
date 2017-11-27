@@ -117,10 +117,10 @@ let initialState = {
     "Facility HVAC",
     "Cooling and Refrigeration"
   ],
-  metalsHeader: [
+  metalsHeaders: [
     "Process Heating",
     "Drivepower",
-    "CHP/ Cogeneration Proceess",
+    "CHP/ Cogeneration Process",
     "Boiler use",
     "Other",
     "Facility HVAC",
