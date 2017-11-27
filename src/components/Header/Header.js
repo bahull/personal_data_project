@@ -3,7 +3,10 @@ import axios from "axios";
 
 import { Navbar, NavItem } from "react-materialize";
 
+
+
 import { connect } from "react-redux";
+import { withRouter, Link } from 'react-router-dom'
 
 import razeLogo from "./../../images/razeLogo.png";
 
@@ -54,10 +57,54 @@ class Header extends Component {
           </Navbar>
         )}
         {this.props.access === true || this.props.access === false ? (
+          // <nav>
+          //   <div class="nav-wrapper">
+          //     <a href="#!" class="brand-logo">Logo</a>
+          //     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          //     <ul class="right hide-on-med-and-down">
+          //       <li><a href="sass.html">Sass</a></li>
+          //       <li><a href="badges.html">Components</a></li>
+          //       <li><a href="collapsible.html">Javascript</a></li>
+          //       <li><a href="mobile.html">Mobile</a></li>
+          //     </ul>
+          //     <ul class="side-nav" id="mobile-demo">
+          //       <li><a href="sass.html">Sass</a></li>
+          //       <li><a href="badges.html">Components</a></li>
+          //       <li><a href="collapsible.html">Javascript</a></li>
+          //       <li><a href="mobile.html">Mobile</a></li>
+          //     </ul>
+          //   </div>
+          // </nav>
+
+          // <nav>
+          //   <div class="nav-wrapper">
+          //     <a href="#" class="brand-logo">Logo</a>
+          //     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          //     <ul id="nav-mobile" class="right hide-on-med-and-down">
+          //       <li><Link to="/dashboard">Dashboard</Link></li>
+          //       <li><Link to="/donate">Donate</Link></li>
+          //       <li><Link to="/">Logout</Link></li>
+          //     </ul>
+          //     <ul class="side-nav" id="mobile-demo">
+          //       <li><Link to="/dashboard">Dashboard</Link></li>
+          //       <li><Link to="/donate">Donate</Link></li>
+          //       <li><Link to="/">Logout</Link></li>
+          //     </ul>
+          //   </div>
+          // </nav>
+
           <Navbar className="navbar" brand="Raze" right>
-            <NavItem href="/dashboard">Dashboard</NavItem>
-            <NavItem href="/donate">Donate</NavItem>
-            <NavItem href="/">Logout</NavItem>
+
+            <ul className="nav-list">
+              <Link to="/dashboard"><li>Dashboard</li></Link>
+              <Link to="/donate"><li>Donate</li></Link>
+              <Link to="/"><li>Logout</li></Link>
+
+            </ul>
+            {/* <NavItem href="/dashboard">Dashboard</NavItem>
+
+
+            <NavItem href="/">Logout</NavItem> */}
           </Navbar>
         ) : (
             ""
@@ -70,4 +117,4 @@ const mapStateToProps = state => {
   return state;
 };
 
-export default connect(mapStateToProps)(Header);
+export default withRouter(connect(mapStateToProps)(Header));

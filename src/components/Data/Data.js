@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "./../Header/Header";
 import axios from "axios";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom'
 import { Bar, Pie } from "react-chartjs-2";
 
 import { Row, Col } from "react-materialize";
@@ -283,7 +284,7 @@ const mapStateToProps = state => {
   return state;
 };
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   updateAnnualCost,
   updateAnnualBreakdown
-})(Data);
+})(Data));

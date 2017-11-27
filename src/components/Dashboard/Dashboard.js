@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import csv from "csv";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom'
 import {
   updateUserPermission,
   updateProjectLocation,
@@ -49,7 +50,7 @@ class Dashboard extends Component {
       .post("/api/retrieveFile", {
         file: this.state.file
       })
-      .then(response => {})
+      .then(response => { })
       .catch(console.log);
   }
 
@@ -197,11 +198,11 @@ const mapStateToProps = state => {
   return state;
 };
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   updateUserPermission,
   updateProjectLocation,
   updateAddress,
   updateFacility,
   updateSquareFootage,
   updateIndustryType
-})(Dashboard);
+})(Dashboard));

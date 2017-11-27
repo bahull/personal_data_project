@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import Particles from "react-particles-js";
 import axios from "axios";
 
+import { withRouter } from 'react-router-dom'
+
 import { Input, Row, Col } from "react-materialize";
 import { updateAmount } from "./../../ducks/reducer";
 
@@ -114,4 +116,4 @@ const mapStateToProps = state => {
   return state;
 };
 
-export default connect(mapStateToProps, { updateAmount })(Donate);
+export default withRouter(connect(mapStateToProps, { updateAmount })(Donate));

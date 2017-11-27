@@ -42,3 +42,13 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.nav-list{
+  display: flex
+}
+
+@media only screen and (max-width: 993px){
+  .nav-list{
+    display: block
+  }
+}
