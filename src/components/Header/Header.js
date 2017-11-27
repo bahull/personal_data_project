@@ -38,15 +38,6 @@ class Header extends Component {
   render() {
     return (
       <div className="head-app">
-        {/* <header className="App-header">
-          <Link to="/">
-            <img src={logo} className="App-logo" alt="logo" />
-          </Link>
-          <h1 className="App-title">Raze Energy Solutions</h1>
-          <Button waves="light" className="login" onClick={this.goLogin}>
-            Login
-          </Button>
-        </header> */}
         {this.props.access === undefined && (
           <Navbar className="navbar" brand="Raze" right>
             <NavItem className="" href="#features">
@@ -57,54 +48,12 @@ class Header extends Component {
           </Navbar>
         )}
         {this.props.access === true || this.props.access === false ? (
-          // <nav>
-          //   <div class="nav-wrapper">
-          //     <a href="#!" class="brand-logo">Logo</a>
-          //     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-          //     <ul class="right hide-on-med-and-down">
-          //       <li><a href="sass.html">Sass</a></li>
-          //       <li><a href="badges.html">Components</a></li>
-          //       <li><a href="collapsible.html">Javascript</a></li>
-          //       <li><a href="mobile.html">Mobile</a></li>
-          //     </ul>
-          //     <ul class="side-nav" id="mobile-demo">
-          //       <li><a href="sass.html">Sass</a></li>
-          //       <li><a href="badges.html">Components</a></li>
-          //       <li><a href="collapsible.html">Javascript</a></li>
-          //       <li><a href="mobile.html">Mobile</a></li>
-          //     </ul>
-          //   </div>
-          // </nav>
-
-          // <nav>
-          //   <div class="nav-wrapper">
-          //     <a href="#" class="brand-logo">Logo</a>
-          //     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-          //     <ul id="nav-mobile" class="right hide-on-med-and-down">
-          //       <li><Link to="/dashboard">Dashboard</Link></li>
-          //       <li><Link to="/donate">Donate</Link></li>
-          //       <li><Link to="/">Logout</Link></li>
-          //     </ul>
-          //     <ul class="side-nav" id="mobile-demo">
-          //       <li><Link to="/dashboard">Dashboard</Link></li>
-          //       <li><Link to="/donate">Donate</Link></li>
-          //       <li><Link to="/">Logout</Link></li>
-          //     </ul>
-          //   </div>
-          // </nav>
-
           <Navbar className="navbar" brand="Raze" right>
-
             <ul className="nav-list">
               <Link to="/dashboard"><li>Dashboard</li></Link>
               <Link to="/donate"><li>Donate</li></Link>
               <Link to="/"><li>Logout</li></Link>
-
             </ul>
-            {/* <NavItem href="/dashboard">Dashboard</NavItem>
-
-
-            <NavItem href="/">Logout</NavItem> */}
           </Navbar>
         ) : (
             ""
