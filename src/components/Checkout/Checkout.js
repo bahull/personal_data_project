@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
 
+import { withRouter } from 'react-router-dom'
+
 import STRIPE_PUBLISHABLE from "./../../constants/stripe";
 
 const CURRENCY = "USD";
@@ -17,6 +19,7 @@ class Checkout extends Component {
 
   successPayment(data) {
     console.log("Successful");
+    this.props.history.push('/dashboard')
   }
 
   errorPayment(data) {
@@ -40,7 +43,7 @@ class Checkout extends Component {
     return (
       <StripeCheckout
         name="Raze"
-        description={description}
+        description="Donation for Raze Energy Sales Solutions"
         amount={fromDollarToCent(amount)}
         token={this.onToken(amount, description)}
         currency={CURRENCY}
@@ -51,4 +54,4 @@ class Checkout extends Component {
   }
 }
 
-export default Checkout;
+export default withRouter(Checkout);
