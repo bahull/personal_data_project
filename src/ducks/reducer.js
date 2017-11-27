@@ -124,10 +124,24 @@ let initialState = {
     "Other",
     "Facility HVAC",
     "Electro-chemical Processes"
+  ],
+  months: [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
   ]
 };
 //REDUCER
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case UPDATE_USER_ACCESS:
       return Object.assign({}, state, { access: action.payload });

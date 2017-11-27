@@ -27,6 +27,8 @@ import {
   totalAnnualCostMetals
 } from "./../../helpers/helpers";
 
+import { addMonths } from './../../helpers/comboChartHelpers'
+
 import "./Data.css";
 
 class Data extends Component {
@@ -77,20 +79,7 @@ class Data extends Component {
         ]
       },
       chartData2: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December"
-        ],
+        labels: this.props.months,
         datasets: [
           {
             label: "Not Energy Use",
@@ -131,6 +120,7 @@ class Data extends Component {
           } else if (this.props.facility === "Commercial") {
             let newArray = [];
             let newData = response.data.newFile;
+            console.log(newData);
             let totalCost = [];
             let totalAnnualBreakdown = [];
             let typeHolder = [];
@@ -142,6 +132,8 @@ class Data extends Component {
               this.props.updateAnnualCost,
               this.props.updateAnnualBreakdown
             );
+            console.log(newData)
+            addMonths(this.props.months, newData)
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;

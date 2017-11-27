@@ -132,6 +132,7 @@ app.post("/api/donate", function (req, res) {
   var token = req.body.source;
   var amount = req.body.amount;
   var currency = req.body.currency;
+
   stripe.charges.create(req.body, (stripeErr, stripeRes) => {
     if (stripeErr) {
       res.status(500).send({ error: stripeErr });
@@ -155,5 +156,5 @@ app.get("/api/getPeople", (req, res, next) => {
 });
 
 app.listen(port, () => {
-
+  console.log(`listening at port: ${port}`);
 });
