@@ -22,13 +22,13 @@ class DataTable extends Component {
               return (
                 <tr>
                   <td>{curr}</td>
-                  <td />
+                  <td>{this.props.annualCost}</td>
                 </tr>
               );
             })}
             <tr>
               <td>Alvin</td>
-              <td>{this.props.annualCost}</td>
+              <td />
             </tr>
             <tr>
               <td>Alan</td>

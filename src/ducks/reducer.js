@@ -6,7 +6,7 @@ const UPDATE_TYPE_OF_FACILITY = "UPDATE_TYPE_OF_FACILITY";
 const UPDATE_SQUARE_FOOTAGE = "UPDATE_SQUARE_FOOTAGE";
 const UPDATE_AMOUNT = "UPDATE_AMOUNT";
 const UPDATE_TYPE_OF_INDUSTRY = "UPDATE_TYPE_OF_INDUSTRY";
-const UPDATE_ANNUAL_COST = "UPDATE_ANNUAL_COST";
+const UPDATE_ANNUAL = "UPDATE_ANNUAL";
 
 // ACTION BUILDERS
 export function updateUserPermission(permission) {
@@ -53,9 +53,9 @@ export function updateAmount(amount) {
   };
 }
 export function updateAnnualCost(total) {
-  console.log("Hit reducer", total);
+  console.log("Hit action creator", total);
   return {
-    type: UPDATE_ANNUAL_COST,
+    type: UPDATE_ANNUAL,
     payload: total
   };
 }
@@ -135,8 +135,10 @@ export default function(state = initialState, action) {
     case UPDATE_AMOUNT:
       return Object.assign({}, state, { amount: action.payload });
     case UPDATE_TYPE_OF_INDUSTRY:
+      console.log("hit industry");
       return Object.assign({}, state, { industry: action.payload });
-    case UPDATE_ANNUAL_COST:
+    case UPDATE_ANNUAL:
+      console.log("Hit type in reducer function");
       return Object.assign({}, state, { annualCost: action.payload });
     default:
       return state;

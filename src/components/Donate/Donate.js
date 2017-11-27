@@ -13,10 +13,11 @@ import "./Donate.css";
 class Donate extends Component {
   render() {
     return (
-      <div id="donate-background">
-        <div id="top">
-          <Header />
-          <Particles
+      <div>
+        <div id="donate-background">
+          <div id="top">
+            <Header />
+            {/* <Particles
             params={{
               particles: {
                 number: {
@@ -70,30 +71,31 @@ class Donate extends Component {
               },
               retina_detect: false
             }}
-          />
-          <div id="box">
-            <div id="inner-box-donate">
-              <h4>
-                Raze Energy Sales Solutions is able to operate because of
-                donations by generous users such as yourself.
-              </h4>
-              <h5 id="small-text-donate">
-                If you have enjoyed our software and would like to enable us to
-                provide continued maintenance and support, please consider
-                donating. Thank you from the Raze team!
-              </h5>
-              <Input
-                className="donate-amount center-align"
-                label="Donation Amount"
-                onChange={e => this.props.updateAmount(e.target.value)}
-              />
-              <div className="checkout-cart center-align">
-                <Checkout amount={this.props.amount} />
+          /> */}
+            <div id="box">
+              <div id="inner-box-donate">
+                <h4>
+                  Raze Energy Sales Solutions is able to operate because of
+                  donations by generous users such as yourself.
+                </h4>
+                <h5 id="small-text-donate">
+                  If you have enjoyed our software and would like to enable us
+                  to provide continued maintenance and support, please consider
+                  donating. Thank you from the Raze team!
+                </h5>
+                <Input
+                  className="donate-amount center-align"
+                  label="Donation Amount"
+                  onChange={e => this.props.updateAmount(e.target.value)}
+                />
+                <div className="checkout-cart center-align">
+                  <Checkout amount={this.props.amount} />
+                </div>
               </div>
             </div>
           </div>
-          <Footer />
         </div>
+        <Footer />
       </div>
     );
   }

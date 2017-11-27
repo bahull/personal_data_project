@@ -86,7 +86,8 @@ class Data extends Component {
             let typeHolder = [];
             changedArray(newData, newArray, this.state);
             commercialPercentage(newArray, typeHolder);
-            totalAnnualCost(newData, totalCost, updateAnnualCost);
+            totalAnnualCost(newData, totalCost, this.props.updateAnnualCost);
+            console.log(totalCost);
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;

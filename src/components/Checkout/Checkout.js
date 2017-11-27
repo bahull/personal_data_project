@@ -39,7 +39,7 @@ class Checkout extends Component {
     const { amount, description } = this.props;
     return (
       <StripeCheckout
-        name="Bryce"
+        name="Raze"
         description={description}
         amount={fromDollarToCent(amount)}
         token={this.onToken(amount, description)}
