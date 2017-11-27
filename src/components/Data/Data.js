@@ -120,11 +120,12 @@ class Data extends Component {
           } else if (this.props.facility === "Commercial") {
             let newArray = [];
             let newData = response.data.newFile;
-            console.log(newData);
+            console.log("initial upload: ", newData);
             let totalCost = [];
             let totalAnnualBreakdown = [];
             let typeHolder = [];
             changedArray(newData, newArray, this.state);
+            console.log('newData from helper: ', newData);
             commercialPercentage(newArray, typeHolder);
             totalAnnualCostCommercial(
               newData,
@@ -132,7 +133,6 @@ class Data extends Component {
               this.props.updateAnnualCost,
               this.props.updateAnnualBreakdown
             );
-            console.log(newData)
             addMonths(this.props.months, newData)
 
             let newState = Object.assign({}, this.state);

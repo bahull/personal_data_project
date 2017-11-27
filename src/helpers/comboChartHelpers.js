@@ -43,7 +43,7 @@ export const addMonths = (months, newData) => {
                     return 1;
 
             }
-        })(newData[0][0][0][1])
+        })(newData[0][0].substr(0, 2))
     console.log(firstMonth);
     // for (let i = k = 0; k <= newData.length; i++ , k++) {
     //     if (months[i] === undefined) {

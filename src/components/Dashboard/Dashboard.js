@@ -76,7 +76,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.state.file)
     return (
       <div>
         <Header />

@@ -1,6 +1,8 @@
-export const changedArray = function(newData, newArray) {
-  let holder = newData.splice(0, 1);
-  return newData.map(function(current) {
+export const changedArray = function (newData, newArray) {
+  console.log("Inital Helper:", newData)
+  // let holder = newData.splice(0, 1);
+  // console.log("Helper spliced:", newData, holder)
+  return newData.map(function (current) {
     return newArray.push(parseFloat(current[1].replace(",", "")));
   });
 };
@@ -99,7 +101,8 @@ export const totalAnnualCostCommercial = (
   updateAnnualCost,
   updateAnnualBreakdown
 ) => {
-  let holder = newData.splice(0, 1);
+  // let holder = newData.splice(0, 1);
+  // console.log(holder)
   newData.map(current => {
     return totalCost.push(parseFloat(current[2].replace(",", "")));
   });
