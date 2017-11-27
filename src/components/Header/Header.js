@@ -55,12 +55,13 @@ class Header extends Component {
         )}
         {this.props.access === true || this.props.access === false ? (
           <Navbar className="navbar" brand="Raze" right>
+            <NavItem href="/dashboard">Dashboard</NavItem>
             <NavItem href="/donate">Donate</NavItem>
             <NavItem href="/">Logout</NavItem>
           </Navbar>
         ) : (
-          ""
-        )}
+            ""
+          )}
       </div>
     );
   }

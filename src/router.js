@@ -9,9 +9,6 @@ import Donate from "./components/Donate/Donate";
 export default (
   <Switch>
     <Route exact path="/" component={LandingPage} />
-    {/* <Route path="/about" component={About} /> */}
-    {/* <Route path="/contact" component={Contact} /> */}
-    {/* <Route path="/features" component={Features} /> */}
     <Route path="/dashboard" component={Dashboard} />
     <Route path="/data" component={Data} />
     <Route path="/donate" component={Donate} />

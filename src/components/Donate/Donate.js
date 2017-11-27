@@ -17,7 +17,7 @@ class Donate extends Component {
       if (!response.data) {
         this.props.history.push("/");
       }
-    });
+    })
   }
 
   render() {
