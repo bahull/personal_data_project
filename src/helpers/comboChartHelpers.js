@@ -61,3 +61,13 @@ export const monthlyCost = (newData, updateMonthlyCost) => {
   });
   updateMonthlyCost(holder);
 };
+
+export const degreeDaysFinder = (newData, updateMonthlyDegreeDays) => {
+  let startMonth = [];
+  startMonth = newData[0][0].split(/[/-]/g);
+  let month = parseInt(startMonth[0]);
+  let year = parseInt(startMonth[2].substr(2, 2));
+  let total = newData.length;
+  console.log("Check here!", month, year, total);
+  updateMonthlyDegreeDays(month, 15, total);
+};

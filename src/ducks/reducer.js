@@ -1,3 +1,5 @@
+import axios from "axios";
+
 //CONSTANTS
 const UPDATE_USER_ACCESS = "UPDATE_USER_ACCESS";
 const UPDATE_PROJECT_LOCATION = "UPDATE_PROJECT_LOCATION";
@@ -8,9 +10,9 @@ const UPDATE_AMOUNT = "UPDATE_AMOUNT";
 const UPDATE_TYPE_OF_INDUSTRY = "UPDATE_TYPE_OF_INDUSTRY";
 const UPDATE_ANNUAL_COST = "UPDATE_ANNUAL_COST";
 const UPDATE_ANNUAL_BREAKDOWN = "UPDATE_ANNUAL_BREAKDOWN";
-const UPDATE_ANNUAL_MONTHS = "UPDATE_ANNUAL_MONTHS"
+const UPDATE_ANNUAL_MONTHS = "UPDATE_ANNUAL_MONTHS";
 const UPDATE_MONTHLY_COST = "UPDATE_MONTHLY_COST";
-
+const UPDATE_MONTHLY_DEGREE_DAYS = "UPDATE_MONTHLY_DEGREE_DAYS";
 // ACTION BUILDERS
 export function updateUserPermission(permission) {
   return {
@@ -79,6 +81,16 @@ export function updateMonthlyCost(months) {
   return {
     type: UPDATE_MONTHLY_COST,
     payload: months
+  };
+}
+
+export function updateMonthlyDegreeDays(month, year, total) {
+  return {
+    type: UPDATE_MONTHLY_DEGREE_DAYS,
+    payload: axios
+      .post("/api/getDegreeDays", { month, year, total })
+      .then(response => response.data)
+      .catch(error => console.log(error))
   };
 }
 
@@ -156,10 +168,11 @@ let initialState = {
     "December"
   ],
   monthsFromBill: "",
-  monthlyCost: ""
+  monthlyCost: "",
+  monthlyDegreeDays: ""
 };
 //REDUCER
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case UPDATE_USER_ACCESS:
       return Object.assign({}, state, { access: action.payload });
@@ -187,6 +200,12 @@ export default function (state = initialState, action) {
       });
     case UPDATE_MONTHLY_COST:
       return Object.assign({}, state, { monthlyCost: action.payload });
+    case UPDATE_MONTHLY_DEGREE_DAYS + "_PENDING":
+      return Object.assign({}, state, { isLoading: true });
+    case UPDATE_MONTHLY_DEGREE_DAYS + "_FULFILLED":
+      return Object.assign({}, state, {
+        monthlyDegreeDays: action.payload
+      });
     default:
       return state;
   }

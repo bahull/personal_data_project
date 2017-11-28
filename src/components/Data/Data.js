@@ -15,7 +15,8 @@ import {
   updateAnnualCost,
   updateAnnualBreakdown,
   updateAnnualMonths,
-  updateMonthlyCost
+  updateMonthlyCost,
+  updateMonthlyDegreeDays
 } from "./../../ducks/reducer";
 
 import {
@@ -34,7 +35,11 @@ import {
   totalAnnualCostMetals
 } from "./../../helpers/helpers";
 
-import { addMonths, monthlyCost } from "./../../helpers/comboChartHelpers";
+import {
+  addMonths,
+  monthlyCost,
+  degreeDaysFinder
+} from "./../../helpers/comboChartHelpers";
 
 import "./Data.css";
 
@@ -144,6 +149,7 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
+            degreeDaysFinder(newData, this.props.updateMonthlyDegreeDays);
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
@@ -414,6 +420,7 @@ export default withRouter(
     updateAnnualCost,
     updateAnnualBreakdown,
     updateAnnualMonths,
-    updateMonthlyCost
+    updateMonthlyCost,
+    updateMonthlyDegreeDays
   })(Data)
 );

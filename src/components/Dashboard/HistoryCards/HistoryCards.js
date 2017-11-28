@@ -9,7 +9,7 @@ class HistoryCards extends Component {
   constructor() {
     super();
     this.state = {
-      history: ""
+      history: []
     };
   }
 
@@ -27,7 +27,6 @@ class HistoryCards extends Component {
     return (
       <div id="modal-backdrop">
         <Modal header="Modal Header" trigger={<Button>MODAL</Button>}>
-          Hello
           {this.state.history &&
             this.state.history.map(curr => {
               <div>

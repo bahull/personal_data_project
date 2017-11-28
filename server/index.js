@@ -191,6 +191,20 @@ app.get("/api/getPeople", (req, res, next) => {
     });
 });
 
+app.post("/api/getDegreeDays", (req, res, next) => {
+  const { month, year, total } = req.body;
+  const dbInstance = app.get("db");
+
+  dbInstance
+    .getDegreeDays([month, year, total])
+    .then(response => {
+      res.status(200).json(response);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
 app.listen(port, () => {
   console.log(`listening at port: ${port}`);
 });
