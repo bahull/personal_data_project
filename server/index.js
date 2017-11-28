@@ -52,7 +52,7 @@ passport.use(
       clientSecret,
       callbackURL: "/login"
     },
-    function (accessToken, refreshToken, extraParams, profile, done) {
+    function(accessToken, refreshToken, extraParams, profile, done) {
       app
         .get("db")
         .getUserByAuthId(profile.id)
@@ -73,11 +73,11 @@ passport.use(
   )
 );
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function (user, done) {
+passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
@@ -92,7 +92,6 @@ app.get(
 
 //On component render checks if their is a user object on session, otherwise redirects them to login
 app.get("/api/me", (req, res, next) => {
-
   if (!req.user) {
     res.json("");
   } else {
@@ -104,8 +103,7 @@ app.get("/api/me", (req, res, next) => {
         res.status(200).json(response);
       })
       .catch(error => {
-        res.status(500).json(
-        )
+        res.status(500).json();
       });
   }
 });
@@ -114,6 +112,29 @@ app.get("/api/me", (req, res, next) => {
 app.post("/api/retrieveFile", (req, res, next) => {
   req.user.newFile = req.body.file;
   res.status(200).json(req.user.newFile);
+  const dbInstance = app.get("db");
+
+  dbInstance
+    .postSpreadsheet([req.user.authid, JSON.stringify(req.user.newFile)])
+    .then(response => {
+      res.status(200).json(response);
+    })
+    .catch(error => {
+      res.status(500).json();
+    });
+});
+
+app.get("/api/getFile", (req, res, next) => {
+  const dbInstance = app.get("db");
+
+  dbInstance
+    .getSpreadsheet([req.user.authid])
+    .then(response => {
+      res.status(200).json(response);
+    })
+    .catch(error => {
+      res.status(500).json();
+    });
 });
 
 //Retrieves the uploaded file
@@ -128,7 +149,7 @@ app.get("/api/logout", (req, res, next) => {
 });
 
 // Donate
-app.post("/api/donate", function (req, res) {
+app.post("/api/donate", function(req, res) {
   var token = req.body.source;
   var amount = req.body.amount;
   var currency = req.body.currency;

@@ -216,6 +216,7 @@ class Data extends Component {
           ) {
             let newArray = [];
             let newData = response.data.newFile;
+            console.log("newData: ", newData);
             let typeHolder = [];
             let totalCost = [];
             changedArray(newData, newArray, this.state);
@@ -317,7 +318,7 @@ class Data extends Component {
       <div>
         <Header />
         <Row>
-          <div id="data-headers">
+          <div className="data-headers">
             <div id="splitCharts">
               <h4> {this.props.projectLocation} </h4>
               <h4> {this.props.address} </h4>
@@ -360,35 +361,42 @@ class Data extends Component {
             </div>
           </div>
         </Row>
-        <Bar
-          data={this.state.chartData2}
-          options={{
-            title: {
-              display: this.props.displayTitle,
-              text: "Energy Usage",
-              fontSize: 25
-            },
-            legend: {
-              display: this.props.displayLegend,
-              position: this.props.legendPosition
-            },
-            scales: {
-              yAxes: [
-                {
-                  id: "left-y-axis",
-                  type: "linear",
-                  position: "left"
+        <div className="data-headers">
+          <Bar
+            data={this.state.chartData2}
+            options={{
+              title: {
+                display: this.props.displayTitle,
+                text: "Energy Usage",
+                fontSize: 25
+              },
+              legend: {
+                display: this.props.displayLegend,
+                position: this.props.legendPosition
+              },
+              scales: {
+                xAxes: {
+                  gridLines: false
                 },
-                {
-                  id: "right-y-axis",
-                  type: "linear",
-                  position: "right"
-                }
-              ]
-            }
-            // maintainAspectRatio: false
-          }}
-        />
+                yAxes: [
+                  {
+                    id: "left-y-axis",
+                    type: "linear",
+                    position: "left",
+                    gridLines: false
+                  },
+                  {
+                    id: "right-y-axis",
+                    type: "linear",
+                    position: "right",
+                    gridLines: false
+                  }
+                ]
+              }
+              // maintainAspectRatio: false
+            }}
+          />
+        </div>
       </div>
     );
   }

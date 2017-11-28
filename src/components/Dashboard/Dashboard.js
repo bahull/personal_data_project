@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import csv from "csv";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router-dom'
+import { withRouter } from "react-router-dom";
 import {
   updateUserPermission,
   updateProjectLocation,
@@ -50,7 +50,9 @@ class Dashboard extends Component {
       .post("/api/retrieveFile", {
         file: this.state.file
       })
-      .then(response => { })
+      .then(response => {
+        console.log(response);
+      })
       .catch(console.log);
   }
 
@@ -59,6 +61,7 @@ class Dashboard extends Component {
 
     let reader = new FileReader();
     let file = event.target.files[0];
+    console.log("file: ", file);
     this.setState({ fileName: file.name });
 
     reader.onload = () => {
@@ -76,6 +79,7 @@ class Dashboard extends Component {
   }
 
   render() {
+    console.log(typeof this.state.file);
     return (
       <div>
         <Header />
@@ -198,11 +202,13 @@ const mapStateToProps = state => {
   return state;
 };
 
-export default withRouter(connect(mapStateToProps, {
-  updateUserPermission,
-  updateProjectLocation,
-  updateAddress,
-  updateFacility,
-  updateSquareFootage,
-  updateIndustryType
-})(Dashboard));
+export default withRouter(
+  connect(mapStateToProps, {
+    updateUserPermission,
+    updateProjectLocation,
+    updateAddress,
+    updateFacility,
+    updateSquareFootage,
+    updateIndustryType
+  })(Dashboard)
+);
