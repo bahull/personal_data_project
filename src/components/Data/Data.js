@@ -2,14 +2,19 @@ import React, { Component } from "react";
 import Header from "./../Header/Header";
 import axios from "axios";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router-dom'
+import { withRouter } from "react-router-dom";
 import { Bar, Pie } from "react-chartjs-2";
 
 import { Row, Col } from "react-materialize";
 
 import DataTable from "./DataTable/DataTable";
 
-import { updateAnnualCost, updateAnnualBreakdown } from "./../../ducks/reducer";
+import {
+  updateAnnualCost,
+  updateAnnualBreakdown,
+  updateAnnualMonths,
+  updateMonthlyCost
+} from "./../../ducks/reducer";
 
 import {
   changedArray,
@@ -27,7 +32,7 @@ import {
   totalAnnualCostMetals
 } from "./../../helpers/helpers";
 
-import { addMonths } from './../../helpers/comboChartHelpers'
+import { addMonths, monthlyCost } from "./../../helpers/comboChartHelpers";
 
 import "./Data.css";
 
@@ -37,20 +42,7 @@ class Data extends Component {
 
     this.state = {
       chartData: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December"
-        ],
+        labels: this.props.months,
         datasets: [
           {
             label: "Energy Use",
@@ -79,7 +71,7 @@ class Data extends Component {
         ]
       },
       chartData2: {
-        labels: this.props.months,
+        labels: this.props.monthsFromBill,
         datasets: [
           {
             label: "Not Energy Use",
@@ -103,7 +95,18 @@ class Data extends Component {
             borderWidth: 1,
             hoverBackgroundColor: "rgba(255,99,132,0.4)",
             hoverBorderColor: "rgba(255,99,132,1)",
-            data: [65, 59, 80, 81, 56, 55, 40, 83, 37, 65, 55, 80]
+            data: [65, 59, 80, 81, 56, 55, 40, 83, 37, 65, 55, 80],
+            yAxisID: "left-y-axis"
+          },
+          {
+            data: [20, 50, 100, 75, 25, 0, 150, 49, 200, 299, 149, 100],
+            label: "Left dataset",
+            type: "line",
+            backgroundColor: ["rgba(0, 0, 0, .01)"],
+            borderColor: ["rgba(0, 0, 0, 1)"],
+
+            // This binds the dataset to the left y axis
+            yAxisID: "right-y-axis"
           }
         ]
       }
@@ -120,12 +123,12 @@ class Data extends Component {
           } else if (this.props.facility === "Commercial") {
             let newArray = [];
             let newData = response.data.newFile;
-            console.log("initial upload: ", newData);
+
             let totalCost = [];
             let totalAnnualBreakdown = [];
             let typeHolder = [];
             changedArray(newData, newArray, this.state);
-            console.log('newData from helper: ', newData);
+
             commercialPercentage(newArray, typeHolder);
             totalAnnualCostCommercial(
               newData,
@@ -133,11 +136,18 @@ class Data extends Component {
               this.props.updateAnnualCost,
               this.props.updateAnnualBreakdown
             );
-            addMonths(this.props.months, newData)
+            addMonths(
+              this.props.months,
+              newData,
+              this.props.updateAnnualMonths
+            );
+            monthlyCost(newData, this.props.updateMonthlyCost);
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.commercialHeaders;
+            newState.chartData2.labels = this.props.monthsFromBill;
+            newState.chartData2.datasets[0].data = this.props.monthlyCost;
 
             this.setState(newState);
           } else if (
@@ -156,10 +166,18 @@ class Data extends Component {
               this.props.updateAnnualCost,
               this.props.updateAnnualBreakdown
             );
+            addMonths(
+              this.props.months,
+              newData,
+              this.props.updateAnnualMonths
+            );
+            monthlyCost(newData, this.props.updateMonthlyCost);
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.petroleumHeaders;
+            newState.chartData2.labels = this.props.monthsFromBill;
+            newState.chartData2.datasets[0].data = this.props.monthlyCost;
 
             this.setState(newState);
           } else if (
@@ -178,10 +196,18 @@ class Data extends Component {
               this.props.updateAnnualCost,
               this.props.updateAnnualBreakdown
             );
+            addMonths(
+              this.props.months,
+              newData,
+              this.props.updateAnnualMonths
+            );
+            monthlyCost(newData, this.props.updateMonthlyCost);
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.chemicalHeaders;
+            newState.chartData2.labels = this.props.monthsFromBill;
+            newState.chartData2.datasets[0].data = this.props.monthlyCost;
 
             this.setState(newState);
           } else if (
@@ -200,10 +226,18 @@ class Data extends Component {
               this.props.updateAnnualCost,
               this.props.updateAnnualBreakdown
             );
+            addMonths(
+              this.props.months,
+              newData,
+              this.props.updateAnnualMonths
+            );
+            monthlyCost(newData, this.props.updateMonthlyCost);
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.paperHeaders;
+            newState.chartData2.labels = this.props.monthsFromBill;
+            newState.chartData2.datasets[0].data = this.props.monthlyCost;
 
             this.setState(newState);
           } else if (
@@ -222,10 +256,18 @@ class Data extends Component {
               this.props.updateAnnualCost,
               this.props.updateAnnualBreakdown
             );
+            addMonths(
+              this.props.months,
+              newData,
+              this.props.updateAnnualMonths
+            );
+            monthlyCost(newData, this.props.updateMonthlyCost);
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.foodHeaders;
+            newState.chartData2.labels = this.props.monthsFromBill;
+            newState.chartData2.datasets[0].data = this.props.monthlyCost;
 
             this.setState(newState);
           } else if (
@@ -244,10 +286,18 @@ class Data extends Component {
               this.props.updateAnnualCost,
               this.props.updateAnnualBreakdown
             );
+            addMonths(
+              this.props.months,
+              newData,
+              this.props.updateAnnualMonths
+            );
+            monthlyCost(newData, this.props.updateMonthlyCost);
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.metalsHeaders;
+            newState.chartData2.labels = this.props.monthsFromBill;
+            newState.chartData2.datasets[0].data = this.props.monthlyCost;
 
             this.setState(newState);
           }
@@ -310,7 +360,8 @@ class Data extends Component {
             </div>
           </div>
         </Row>
-        <Bar data={this.state.chartData2}
+        <Bar
+          data={this.state.chartData2}
           options={{
             title: {
               display: this.props.displayTitle,
@@ -320,6 +371,20 @@ class Data extends Component {
             legend: {
               display: this.props.displayLegend,
               position: this.props.legendPosition
+            },
+            scales: {
+              yAxes: [
+                {
+                  id: "left-y-axis",
+                  type: "linear",
+                  position: "left"
+                },
+                {
+                  id: "right-y-axis",
+                  type: "linear",
+                  position: "right"
+                }
+              ]
             }
             // maintainAspectRatio: false
           }}
@@ -332,7 +397,11 @@ const mapStateToProps = state => {
   return state;
 };
 
-export default withRouter(connect(mapStateToProps, {
-  updateAnnualCost,
-  updateAnnualBreakdown
-})(Data));
+export default withRouter(
+  connect(mapStateToProps, {
+    updateAnnualCost,
+    updateAnnualBreakdown,
+    updateAnnualMonths,
+    updateMonthlyCost
+  })(Data)
+);

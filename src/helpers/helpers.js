@@ -1,8 +1,6 @@
-export const changedArray = function (newData, newArray) {
-  console.log("Inital Helper:", newData)
-  // let holder = newData.splice(0, 1);
-  // console.log("Helper spliced:", newData, holder)
-  return newData.map(function (current) {
+export const changedArray = function(newData, newArray) {
+  let holder = newData.splice(0, 1);
+  return newData.map(function(current) {
     return newArray.push(parseFloat(current[1].replace(",", "")));
   });
 };
@@ -126,7 +124,7 @@ export const totalAnnualCostPetroleum = (
   updateAnnualCost,
   updateAnnualBreakdown
 ) => {
-  let holder = newData.splice(0, 1);
+  // let holder = newData.splice(0, 1);
   newData.map(current => {
     return totalCost.push(parseFloat(current[2].replace(",", "")));
   });
@@ -151,7 +149,7 @@ export const totalAnnualCostChemical = (
   updateAnnualCost,
   updateAnnualBreakdown
 ) => {
-  let holder = newData.splice(0, 1);
+  // let holder = newData.splice(0, 1);
   newData.map(current => {
     return totalCost.push(parseFloat(current[2].replace(",", "")));
   });
@@ -176,7 +174,7 @@ export const totalAnnualCostPaper = (
   updateAnnualCost,
   updateAnnualBreakdown
 ) => {
-  let holder = newData.splice(0, 1);
+  // let holder = newData.splice(0, 1);
   newData.map(current => {
     return totalCost.push(parseFloat(current[2].replace(",", "")));
   });
@@ -201,7 +199,7 @@ export const totalAnnualCostFood = (
   updateAnnualCost,
   updateAnnualBreakdown
 ) => {
-  let holder = newData.splice(0, 1);
+  // let holder = newData.splice(0, 1);
   newData.map(current => {
     return totalCost.push(parseFloat(current[2].replace(",", "")));
   });
@@ -235,7 +233,7 @@ export const totalAnnualCostMetals = (
   updateAnnualCost,
   updateAnnualBreakdown
 ) => {
-  let holder = newData.splice(0, 1);
+  // let holder = newData.splice(0, 1);
   newData.map(current => {
     return totalCost.push(parseFloat(current[2].replace(",", "")));
   });

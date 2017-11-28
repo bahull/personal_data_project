@@ -8,6 +8,8 @@ const UPDATE_AMOUNT = "UPDATE_AMOUNT";
 const UPDATE_TYPE_OF_INDUSTRY = "UPDATE_TYPE_OF_INDUSTRY";
 const UPDATE_ANNUAL_COST = "UPDATE_ANNUAL_COST";
 const UPDATE_ANNUAL_BREAKDOWN = "UPDATE_ANNUAL_BREAKDOWN";
+const UPDATE_ANNUAL_MONTHS = "UPDATE_ANNUAL_MONTHS"
+const UPDATE_MONTHLY_COST = "UPDATE_MONTHLY_COST";
 
 // ACTION BUILDERS
 export function updateUserPermission(permission) {
@@ -63,6 +65,20 @@ export function updateAnnualBreakdown(totalArray) {
   return {
     type: UPDATE_ANNUAL_BREAKDOWN,
     payload: totalArray
+  };
+}
+
+export function updateAnnualMonths(months) {
+  return {
+    type: UPDATE_ANNUAL_MONTHS,
+    payload: months
+  };
+}
+
+export function updateMonthlyCost(months) {
+  return {
+    type: UPDATE_MONTHLY_COST,
+    payload: months
   };
 }
 
@@ -138,7 +154,9 @@ let initialState = {
     "October",
     "November",
     "December"
-  ]
+  ],
+  monthsFromBill: "",
+  monthlyCost: ""
 };
 //REDUCER
 export default function (state = initialState, action) {
@@ -163,6 +181,12 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {
         annualCostBreakdown: action.payload
       });
+    case UPDATE_ANNUAL_MONTHS:
+      return Object.assign({}, state, {
+        monthsFromBill: action.payload
+      });
+    case UPDATE_MONTHLY_COST:
+      return Object.assign({}, state, { monthlyCost: action.payload });
     default:
       return state;
   }

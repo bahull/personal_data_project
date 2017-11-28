@@ -1,5 +1,6 @@
-export const addMonths = (months, newData) => {
-    console.log(newData[0][0].substr(0, 2));
+import { updateMonthlyCost } from "../ducks/reducer";
+
+export const addMonths = (months, newData, updateAnnualMonths) => {
     let firstMonth =
         (function (newData) {
             switch (newData) {
@@ -44,13 +45,26 @@ export const addMonths = (months, newData) => {
 
             }
         })(newData[0][0].substr(0, 2))
+    let k = 0
+    let newHolder = []
     console.log(firstMonth);
-    // for (let i = k = 0; k <= newData.length; i++ , k++) {
-    //     if (months[i] === undefined) {
-    //         i = -1
-    //     } else {
-    //         console.log(months[i])
-    //     }
-    // }
+    console.log(newData.length)
+    for (let i = firstMonth; k <= newData.length; i++) {
+        if (months[i] === undefined) {
+            i = -1
+        } else {
+            newHolder.push(months[i])
+            k++
+        }
+    }
+    updateAnnualMonths(newHolder);
 }
 
+export const monthlyCost = (newData, updateMonthlyCost) => {
+    let holder = []
+    newData.map(curr => {
+        return holder.push(parseFloat(curr[2].replace(",", "")))
+    })
+    console.log(holder)
+    updateMonthlyCost(holder);
+}

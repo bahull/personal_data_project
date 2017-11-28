@@ -9,9 +9,9 @@ const configureStripe = require("stripe");
 
 // const users = require("./controllers/users");
 
-const { secret } = require("./../config");
-const { domain, clientID, clientSecret } = require("./../config").auth0;
-const { STRIPE_SECRET_KEY } = require("./../config");
+const { secret } = require("./config");
+const { domain, clientID, clientSecret } = require("./config").auth0;
+const { STRIPE_SECRET_KEY, CONNECTION_STRING } = require("./config");
 
 require("dotenv").config();
 
@@ -31,7 +31,7 @@ app.use(
 );
 
 //Initialize massive and gain access to db
-massive(process.env.CONNECTION_STRING)
+massive(CONNECTION_STRING)
   .then(db => app.set("db", db))
   .catch(console.log);
 
