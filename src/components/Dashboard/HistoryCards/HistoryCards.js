@@ -23,7 +23,6 @@ class HistoryCards extends Component {
       .catch(console.log());
   }
   render() {
-    console.log(this.state.history);
     return (
       <div id="modal-backdrop">
         <Modal header="Modal Header" trigger={<Button>MODAL</Button>}>

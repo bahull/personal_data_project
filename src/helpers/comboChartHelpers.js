@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const addMonths = (months, newData, updateAnnualMonths) => {
   let firstMonth = (function(newData) {
     switch (newData) {
@@ -62,22 +64,10 @@ export const monthlyCost = (newData, updateMonthlyCost) => {
   updateMonthlyCost(holder);
 };
 
-export const degreeDaysFinder = (newData, updateMonthlyDegreeDays) => {
-  let startMonth = [];
-  startMonth = newData[0][0].split(/[/-]/g);
-  let month = parseInt(startMonth[0]);
-  let year = parseInt(startMonth[2].substr(2, 2));
-  let total = newData.length;
-  console.log("Check here!", month, year, total);
-  updateMonthlyDegreeDays(month, 15, total);
-};
+export const degreeDaysUpdater = (hdd, degreeDays) => {
+  hdd.map(curr => {
+    return degreeDays.push(curr.hdd);
+  });
 
-export const degreeDaysUpdater = degreeDays => {
-  let holder = [];
-  if (degreeDays) {
-    degreeDays.map(curr => {
-      return holder.push(curr.hdd);
-    });
-  }
-  console.log(holder);
+  return degreeDays;
 };

@@ -134,6 +134,7 @@ class Data extends Component {
             let totalCost = [];
             let totalAnnualBreakdown = [];
             let typeHolder = [];
+            let degreeDays = [];
             changedArray(newData, newArray, this.state);
             commercialPercentage(newArray, typeHolder);
             totalAnnualCostCommercial(
@@ -148,14 +149,15 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
-            degreeDaysFinder(newData, this.props.updateMonthlyDegreeDays);
-            degreeDaysUpdater(this.props.monthlyDegreeDays);
+
+            degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.commercialHeaders;
             newState.chartData2.labels = this.props.monthsFromBill;
             newState.chartData2.datasets[0].data = this.props.monthlyCost;
+            newState.chartData2.datasets[1].data = degreeDays;
             this.setState(newState);
           } else if (
             this.props.facility === "Industrial" &&
@@ -165,6 +167,7 @@ class Data extends Component {
             let newData = response.data.newFile;
             let typeHolder = [];
             let totalCost = [];
+            let degreeDays = [];
             changedArray(newData, newArray, this.state);
             industryPetroleumPercentage(newArray, typeHolder);
             totalAnnualCostPetroleum(
@@ -179,6 +182,8 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
+            degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
+
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.petroleumHeaders;
@@ -193,6 +198,7 @@ class Data extends Component {
             let newData = response.data.newFile;
             let typeHolder = [];
             let totalCost = [];
+            let degreeDays = [];
             changedArray(newData, newArray, this.state);
             industryChemicalPercentage(newArray, typeHolder);
             totalAnnualCostChemical(
@@ -207,6 +213,8 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
+            degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
+
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.chemicalHeaders;
@@ -222,6 +230,7 @@ class Data extends Component {
             console.log("newData: ", newData);
             let typeHolder = [];
             let totalCost = [];
+            let degreeDays = [];
             changedArray(newData, newArray, this.state);
             industryPaperPercentage(newArray, typeHolder);
             totalAnnualCostPaper(
@@ -236,6 +245,8 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
+            degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
+
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.paperHeaders;
@@ -250,6 +261,7 @@ class Data extends Component {
             let newData = response.data.newFile;
             let typeHolder = [];
             let totalCost = [];
+            let degreeDays = [];
             changedArray(newData, newArray, this.state);
             industryFoodPercentage(newArray, typeHolder);
             totalAnnualCostFood(
@@ -264,6 +276,8 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
+            degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
+
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.foodHeaders;
@@ -278,6 +292,7 @@ class Data extends Component {
             let newData = response.data.newFile;
             let typeHolder = [];
             let totalCost = [];
+            let degreeDays = [];
             changedArray(newData, newArray, this.state);
             industryMetalsPercentage(newArray, typeHolder);
             totalAnnualCostMetals(
@@ -292,6 +307,8 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
+            degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
+
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.metalsHeaders;
@@ -302,6 +319,10 @@ class Data extends Component {
         });
       }
     });
+  }
+
+  componentShouldUpdate() {
+    this.state.degreeDays;
   }
 
   static defaultProps = {

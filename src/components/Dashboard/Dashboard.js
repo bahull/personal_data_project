@@ -13,7 +13,8 @@ import {
   updateAddress,
   updateFacility,
   updateSquareFootage,
-  updateIndustryType
+  updateIndustryType,
+  updateMonthlyDegreeDays
 } from "./../../ducks/reducer";
 
 import { Row, Input, Button, Col, Icon } from "react-materialize";
@@ -29,11 +30,13 @@ class Dashboard extends Component {
 
     this.state = {
       file: null,
-      fileName: null
+      fileName: null,
+      degreeDays: []
     };
 
     this.uploader = this.uploader.bind(this);
     this.sendToNode = this.sendToNode.bind(this);
+    this.degreeDaysFinder = this.degreeDaysFinder.bind(this);
   }
 
   componentWillMount() {
@@ -64,12 +67,26 @@ class Dashboard extends Component {
       .catch(console.log);
   }
 
+  degreeDaysFinder() {
+    let copyOfFile = this.state.file;
+    let trashHolder = copyOfFile.splice(0, 1);
+    copyOfFile;
+    let startMonth = [];
+    startMonth = copyOfFile[0][0].split(/[/-]/g);
+
+    let month = parseInt(startMonth[0]);
+    let year = parseInt(startMonth[2].substr(2, 2));
+    let total = copyOfFile.length;
+
+    this.props.updateMonthlyDegreeDays(month, 15, total);
+  }
+
   uploader(event) {
     event.preventDefault();
 
     let reader = new FileReader();
     let file = event.target.files[0];
-    console.log("file: ", file);
+
     this.setState({ fileName: file.name });
 
     reader.onload = () => {
@@ -77,7 +94,7 @@ class Dashboard extends Component {
         this.setState({
           file: data
         });
-
+        this.degreeDaysFinder();
         // this.sendToNode();
       });
     };
@@ -87,7 +104,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.state.file);
+    this.props.monthlyDegreeDays;
     return (
       <div>
         <Header />
@@ -220,6 +237,7 @@ export default withRouter(
     updateAddress,
     updateFacility,
     updateSquareFootage,
-    updateIndustryType
+    updateIndustryType,
+    updateMonthlyDegreeDays
   })(Dashboard)
 );

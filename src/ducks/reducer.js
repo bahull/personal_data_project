@@ -85,6 +85,7 @@ export function updateMonthlyCost(months) {
 }
 
 export function updateMonthlyDegreeDays(month, year, total) {
+  console.log("HIt");
   return {
     type: UPDATE_MONTHLY_DEGREE_DAYS,
     payload: axios
@@ -169,7 +170,7 @@ let initialState = {
   ],
   monthsFromBill: "",
   monthlyCost: "",
-  monthlyDegreeDays: ""
+  monthlyDegreeDays: []
 };
 //REDUCER
 export default function(state = initialState, action) {
