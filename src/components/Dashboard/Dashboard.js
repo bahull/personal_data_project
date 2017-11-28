@@ -4,6 +4,9 @@ import axios from "axios";
 import csv from "csv";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+
+import HistoryCards from "./HistoryCards/HistoryCards";
+
 import {
   updateUserPermission,
   updateProjectLocation,
@@ -30,7 +33,7 @@ class Dashboard extends Component {
     };
 
     this.uploader = this.uploader.bind(this);
-    // this.sendToNode = this.sendToNode.bind(this);
+    this.sendToNode = this.sendToNode.bind(this);
   }
 
   componentWillMount() {
@@ -48,7 +51,12 @@ class Dashboard extends Component {
   sendToNode() {
     axios
       .post("/api/retrieveFile", {
-        file: this.state.file
+        file: this.state.file,
+        projectLocation: this.props.projectLocation,
+        address: this.props.address,
+        facility: this.props.facility,
+        industry: this.props.industry,
+        squareFootage: this.props.squareFootage
       })
       .then(response => {
         console.log(response);
@@ -70,7 +78,7 @@ class Dashboard extends Component {
           file: data
         });
 
-        this.sendToNode();
+        // this.sendToNode();
       });
     };
 
@@ -79,7 +87,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log(typeof this.state.file);
+    console.log(this.state.file);
     return (
       <div>
         <Header />
@@ -160,6 +168,7 @@ class Dashboard extends Component {
                     className="input-dashboard blue"
                     waves="light"
                     id="final-submit"
+                    onClick={this.sendToNode}
                   >
                     Submit
                   </Button>
@@ -182,6 +191,8 @@ class Dashboard extends Component {
               </Col>
             </Row>
           )}
+
+          <HistoryCards />
           {/* <ul>
               {this.state.file &&
                 this.state.file.map((x, i) => {

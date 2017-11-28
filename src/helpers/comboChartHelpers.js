@@ -43,8 +43,6 @@ export const addMonths = (months, newData, updateAnnualMonths) => {
   })(newData[0][0].substr(0, 2));
   let k = 0;
   let newHolder = [];
-  console.log(firstMonth);
-  console.log(newData.length);
   for (let i = firstMonth; k <= newData.length - 1; i++) {
     if (months[i] === undefined) {
       i = -1;
@@ -61,6 +59,5 @@ export const monthlyCost = (newData, updateMonthlyCost) => {
   newData.map(curr => {
     return holder.push(parseFloat(curr[2].replace(",", "")));
   });
-  console.log(holder);
   updateMonthlyCost(holder);
 };

@@ -9,6 +9,8 @@ import { Row, Col } from "react-materialize";
 
 import DataTable from "./DataTable/DataTable";
 
+import Tryitout from "./tryitout";
+
 import {
   updateAnnualCost,
   updateAnnualBreakdown,
@@ -397,6 +399,8 @@ class Data extends Component {
             }}
           />
         </div>
+
+        <Tryitout />
       </div>
     );
   }

@@ -113,14 +113,29 @@ app.post("/api/retrieveFile", (req, res, next) => {
   req.user.newFile = req.body.file;
   res.status(200).json(req.user.newFile);
   const dbInstance = app.get("db");
+  const {
+    projectLocation,
+    address,
+    facility,
+    industry,
+    squareFootage
+  } = req.body;
 
   dbInstance
-    .postSpreadsheet([req.user.authid, JSON.stringify(req.user.newFile)])
+    .postSpreadsheet([
+      req.user.authid,
+      JSON.stringify(req.user.newFile),
+      projectLocation,
+      address,
+      facility,
+      industry,
+      squareFootage
+    ])
     .then(response => {
       res.status(200).json(response);
     })
     .catch(error => {
-      res.status(500).json();
+      res.status(500).json(error);
     });
 });
 
@@ -128,7 +143,7 @@ app.get("/api/getFile", (req, res, next) => {
   const dbInstance = app.get("db");
 
   dbInstance
-    .getSpreadsheet([req.user.authid])
+    .getSpreadsheets([req.user.authid])
     .then(response => {
       res.status(200).json(response);
     })
