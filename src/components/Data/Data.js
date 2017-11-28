@@ -38,7 +38,8 @@ import {
 import {
   addMonths,
   monthlyCost,
-  degreeDaysFinder
+  degreeDaysFinder,
+  degreeDaysUpdater
 } from "./../../helpers/comboChartHelpers";
 
 import "./Data.css";
@@ -130,12 +131,10 @@ class Data extends Component {
           } else if (this.props.facility === "Commercial") {
             let newArray = [];
             let newData = response.data.newFile;
-
             let totalCost = [];
             let totalAnnualBreakdown = [];
             let typeHolder = [];
             changedArray(newData, newArray, this.state);
-
             commercialPercentage(newArray, typeHolder);
             totalAnnualCostCommercial(
               newData,
@@ -150,13 +149,13 @@ class Data extends Component {
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
             degreeDaysFinder(newData, this.props.updateMonthlyDegreeDays);
+            degreeDaysUpdater(this.props.monthlyDegreeDays);
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.commercialHeaders;
             newState.chartData2.labels = this.props.monthsFromBill;
             newState.chartData2.datasets[0].data = this.props.monthlyCost;
-
             this.setState(newState);
           } else if (
             this.props.facility === "Industrial" &&
@@ -180,13 +179,11 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
-
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.petroleumHeaders;
             newState.chartData2.labels = this.props.monthsFromBill;
             newState.chartData2.datasets[0].data = this.props.monthlyCost;
-
             this.setState(newState);
           } else if (
             this.props.facility === "Industrial" &&
@@ -210,13 +207,11 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
-
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.chemicalHeaders;
             newState.chartData2.labels = this.props.monthsFromBill;
             newState.chartData2.datasets[0].data = this.props.monthlyCost;
-
             this.setState(newState);
           } else if (
             this.props.facility === "Industrial" &&
@@ -241,13 +236,11 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
-
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.paperHeaders;
             newState.chartData2.labels = this.props.monthsFromBill;
             newState.chartData2.datasets[0].data = this.props.monthlyCost;
-
             this.setState(newState);
           } else if (
             this.props.facility === "Industrial" &&
@@ -271,13 +264,11 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
-
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.foodHeaders;
             newState.chartData2.labels = this.props.monthsFromBill;
             newState.chartData2.datasets[0].data = this.props.monthlyCost;
-
             this.setState(newState);
           } else if (
             this.props.facility === "Industrial" &&
@@ -301,13 +292,11 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
-
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.metalsHeaders;
             newState.chartData2.labels = this.props.monthsFromBill;
             newState.chartData2.datasets[0].data = this.props.monthlyCost;
-
             this.setState(newState);
           }
         });

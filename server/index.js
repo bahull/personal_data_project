@@ -111,7 +111,6 @@ app.get("/api/me", (req, res, next) => {
 //Retrieves blob and stores it on the user object on session to save
 app.post("/api/retrieveFile", (req, res, next) => {
   req.user.newFile = req.body.file;
-  res.status(200).json(req.user.newFile);
   const dbInstance = app.get("db");
   const {
     projectLocation,

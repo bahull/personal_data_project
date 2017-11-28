@@ -71,3 +71,13 @@ export const degreeDaysFinder = (newData, updateMonthlyDegreeDays) => {
   console.log("Check here!", month, year, total);
   updateMonthlyDegreeDays(month, 15, total);
 };
+
+export const degreeDaysUpdater = degreeDays => {
+  let holder = [];
+  if (degreeDays) {
+    degreeDays.map(curr => {
+      return holder.push(curr.hdd);
+    });
+  }
+  console.log(holder);
+};
