@@ -13,6 +13,9 @@ const UPDATE_ANNUAL_BREAKDOWN = "UPDATE_ANNUAL_BREAKDOWN";
 const UPDATE_ANNUAL_MONTHS = "UPDATE_ANNUAL_MONTHS";
 const UPDATE_MONTHLY_COST = "UPDATE_MONTHLY_COST";
 const UPDATE_MONTHLY_DEGREE_DAYS = "UPDATE_MONTHLY_DEGREE_DAYS";
+const UPDATE_MONTHLY_KW = "UPDATE_MONTHLY_KW";
+const UPDATE_ANNUAL_KW = "UPDATE_ANNUAL_KW";
+
 // ACTION BUILDERS
 export function updateUserPermission(permission) {
   return {
@@ -94,8 +97,23 @@ export function updateMonthlyDegreeDays(month, year, total) {
   };
 }
 
+export function updateMonthlyKW(monthlyKW) {
+  return {
+    type: UPDATE_MONTHLY_KW,
+    payload: monthlyKW
+  };
+}
+export function updateAnnualKW(annualKW) {
+  return {
+    type: UPDATE_ANNUAL_KW,
+    payload: annualKW
+  };
+}
+
 let initialState = {
   access: undefined,
+  monthlyKW: [],
+  annualKW: 0,
   annualCost: "",
   annualCostBreakdown: "",
   projectLocation: "",
@@ -205,6 +223,14 @@ export default function(state = initialState, action) {
     case UPDATE_MONTHLY_DEGREE_DAYS + "_FULFILLED":
       return Object.assign({}, state, {
         monthlyDegreeDays: action.payload
+      });
+    case UPDATE_MONTHLY_KW:
+      return Object.assign({}, state, {
+        monthlyKW: action.payload
+      });
+    case UPDATE_ANNUAL_KW:
+      return Object.assign({}, state, {
+        annualKW: action.payload
       });
     default:
       return state;

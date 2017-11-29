@@ -69,3 +69,19 @@ export const degreeDaysUpdater = (hdd, degreeDays) => {
 
   return degreeDays;
 };
+
+export const getMonthlyKw = (newData, updateMonthlyKW, updateAnnualKW) => {
+  let holder = [];
+
+  newData.map(curr => {
+    return holder.push(parseFloat(curr[1].replace(",", "")));
+  });
+  updateMonthlyKW(holder);
+};
+
+export const getAnnualKw = (newData, updateAnnualKW, monthlyKW) => {
+  let holder = monthlyKW.slice();
+  holder = holder.reduce((a, b) => a + b);
+  console.log("holder: ", holder);
+  updateAnnualKW(holder);
+};

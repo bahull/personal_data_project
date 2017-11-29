@@ -8,15 +8,16 @@ import { Bar, Pie } from "react-chartjs-2";
 import { Row, Col } from "react-materialize";
 
 import DataTable from "./DataTable/DataTable";
-
-import Tryitout from "./tryitout";
+import EnergyTable from "./EnergyTable/EnergyTable";
 
 import {
   updateAnnualCost,
   updateAnnualBreakdown,
   updateAnnualMonths,
   updateMonthlyCost,
-  updateMonthlyDegreeDays
+  updateMonthlyDegreeDays,
+  updateMonthlyKW,
+  updateAnnualKW
 } from "./../../ducks/reducer";
 
 import {
@@ -38,8 +39,9 @@ import {
 import {
   addMonths,
   monthlyCost,
-  degreeDaysFinder,
-  degreeDaysUpdater
+  degreeDaysUpdater,
+  getMonthlyKw,
+  getAnnualKw
 } from "./../../helpers/comboChartHelpers";
 
 import "./Data.css";
@@ -82,7 +84,7 @@ class Data extends Component {
         labels: this.props.monthsFromBill,
         datasets: [
           {
-            label: "Not Energy Use",
+            label: "Monthly Cost",
             backgroundColor: [
               "rgba(255, 99, 132, 0.6)",
               "rgba(54, 162, 235, 0.6)",
@@ -108,7 +110,7 @@ class Data extends Component {
           },
           {
             data: [20, 50, 100, 75, 25, 0, 150, 49, 200, 299, 149, 100],
-            label: "Left dataset",
+            label: "Total Degree Days",
             type: "line",
             backgroundColor: ["rgba(0, 0, 0, .01)"],
             borderColor: ["rgba(0, 0, 0, 1)"],
@@ -132,7 +134,6 @@ class Data extends Component {
             let newArray = [];
             let newData = response.data.newFile;
             let totalCost = [];
-            let totalAnnualBreakdown = [];
             let typeHolder = [];
             let degreeDays = [];
             changedArray(newData, newArray, this.state);
@@ -151,6 +152,13 @@ class Data extends Component {
             monthlyCost(newData, this.props.updateMonthlyCost);
 
             degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
+
+            getMonthlyKw(newData, this.props.updateMonthlyKW);
+            getAnnualKw(
+              newData,
+              this.props.updateAnnualKW,
+              this.props.monthlyKW
+            );
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
@@ -183,6 +191,13 @@ class Data extends Component {
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
             degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
+
+            getMonthlyKw(newData, this.props.updateMonthlyKW);
+            getAnnualKw(
+              newData,
+              this.props.updateAnnualKW,
+              this.props.monthlyKW
+            );
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
@@ -217,6 +232,13 @@ class Data extends Component {
             monthlyCost(newData, this.props.updateMonthlyCost);
             degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
 
+            getMonthlyKw(newData, this.props.updateMonthlyKW);
+            getAnnualKw(
+              newData,
+              this.props.updateAnnualKW,
+              this.props.monthlyKW
+            );
+
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.chemicalHeaders;
@@ -249,6 +271,13 @@ class Data extends Component {
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
             degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
+
+            getMonthlyKw(newData, this.props.updateMonthlyKW);
+            getAnnualKw(
+              newData,
+              this.props.updateAnnualKW,
+              this.props.monthlyKW
+            );
 
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
@@ -283,6 +312,13 @@ class Data extends Component {
             monthlyCost(newData, this.props.updateMonthlyCost);
             degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
 
+            getMonthlyKw(newData, this.props.updateMonthlyKW);
+            getAnnualKw(
+              newData,
+              this.props.updateAnnualKW,
+              this.props.monthlyKW
+            );
+
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.foodHeaders;
@@ -316,6 +352,13 @@ class Data extends Component {
             monthlyCost(newData, this.props.updateMonthlyCost);
             degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
 
+            getMonthlyKw(newData, this.props.updateMonthlyKW);
+            getAnnualKw(
+              newData,
+              this.props.updateAnnualKW,
+              this.props.monthlyKW
+            );
+
             let newState = Object.assign({}, this.state);
             newState.chartData.datasets[0].data = typeHolder;
             newState.chartData.labels = this.props.metalsHeaders;
@@ -340,7 +383,10 @@ class Data extends Component {
     return (
       <div>
         <Header />
-        <Row>
+        <h4 className="center-align">
+          {this.props.projectLocation}`s Energy User Profile
+        </h4>
+        <Row className="data-top">
           <div className="data-headers">
             <div id="splitCharts">
               <Col s={6}>
@@ -389,7 +435,7 @@ class Data extends Component {
               options={{
                 title: {
                   display: this.props.displayTitle,
-                  text: "Energy Usage",
+                  text: "Monthly Cost vs. Temperature Dependent",
                   fontSize: 25
                 },
                 legend: {
@@ -418,6 +464,7 @@ class Data extends Component {
                 // maintainAspectRatio: false
               }}
             />
+            <EnergyTable />
           </div>
         </div>
       </div>
@@ -434,6 +481,8 @@ export default withRouter(
     updateAnnualBreakdown,
     updateAnnualMonths,
     updateMonthlyCost,
-    updateMonthlyDegreeDays
+    updateMonthlyDegreeDays,
+    updateMonthlyKW,
+    updateAnnualKW
   })(Data)
 );
