@@ -46,8 +46,8 @@ class Header extends Component {
           </Navbar>
         )}
         {this.props.access === true || this.props.access === false ? (
-          <Navbar className="navbar" brand="Raze" right>
-            <ul className="nav-list">
+          <Navbar className="navbar" right>
+            <ul className="nav-list" data="./../../images/razeLogo.png">
               <Link to="/dashboard">
                 <li>Dashboard</li>
               </Link>

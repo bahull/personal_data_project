@@ -130,7 +130,11 @@ class Data extends Component {
       } else {
         axios.get("/api/get").then(response => {
           if (!response.data.newFile) {
-          } else if (this.props.facility === "Commercial") {
+            console.log("Nope You found the other one");
+          } else if (
+            this.props.facility === "Commercial" &&
+            this.props.access === true
+          ) {
             let newArray = [];
             let newData = response.data.newFile;
             let totalCost = [];
@@ -169,7 +173,8 @@ class Data extends Component {
             this.setState(newState);
           } else if (
             this.props.facility === "Industrial" &&
-            this.props.industry === "Petroleum"
+            this.props.industry === "Petroleum" &&
+            this.props.access === true
           ) {
             let newArray = [];
             let newData = response.data.newFile;
@@ -209,7 +214,8 @@ class Data extends Component {
             this.setState(newState);
           } else if (
             this.props.facility === "Industrial" &&
-            this.props.industry === "Chemical"
+            this.props.industry === "Chemical" &&
+            this.props.access === true
           ) {
             let newArray = [];
             let newData = response.data.newFile;
@@ -249,7 +255,8 @@ class Data extends Component {
             this.setState(newState);
           } else if (
             this.props.facility === "Industrial" &&
-            this.props.industry === "Paper"
+            this.props.industry === "Paper" &&
+            this.props.access === true
           ) {
             let newArray = [];
             let newData = response.data.newFile;
@@ -289,7 +296,8 @@ class Data extends Component {
             this.setState(newState);
           } else if (
             this.props.facility === "Industrial" &&
-            this.props.industry === "Food"
+            this.props.industry === "Food" &&
+            this.props.access === true
           ) {
             let newArray = [];
             let newData = response.data.newFile;
@@ -329,7 +337,8 @@ class Data extends Component {
             this.setState(newState);
           } else if (
             this.props.facility === "Industrial" &&
-            this.props.industry === "Primary Metals"
+            this.props.industry === "Primary Metals" &&
+            this.props.access === true
           ) {
             let newArray = [];
             let newData = response.data.newFile;
@@ -367,6 +376,8 @@ class Data extends Component {
             newState.chartData2.datasets[1].data = degreeDays;
 
             this.setState(newState);
+          } else if (this.props.access === false) {
+            console.log("You Found Me");
           }
         });
       }

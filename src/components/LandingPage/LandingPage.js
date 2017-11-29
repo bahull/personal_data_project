@@ -16,7 +16,7 @@ class LandingPage extends Component {
         <Header />
         <div className="landing-body">
           <div className="landing-title">
-            {/* <Particles
+            <Particles
               params={{
                 particles: {
                   number: {
@@ -70,7 +70,7 @@ class LandingPage extends Component {
                 },
                 retina_detect: false
               }}
-            /> */}
+            />
 
             <div className="app-intro">
               <h3>Raze Energy Sales Solutions</h3>

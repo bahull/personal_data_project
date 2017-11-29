@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import CardMaker from "./CardMaker/CardMaker";
-
 import { Modal, Button } from "react-materialize";
 
 import { connect } from "react-redux";
