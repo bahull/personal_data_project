@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export const addMonths = (months, newData, updateAnnualMonths) => {
   let firstMonth = (function(newData) {
     switch (newData) {

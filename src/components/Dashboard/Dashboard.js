@@ -208,18 +208,9 @@ class Dashboard extends Component {
               </Col>
             </Row>
           )}
-
-          <HistoryCards />
-          {/* <ul>
-              {this.state.file &&
-                this.state.file.map((x, i) => {
-                  return x.map((cur, i) => {
-                    if (i <= 3) {
-                      return <li key={i}> {cur} </li>;
-                    }
-                  });
-                })}
-            </ul> */}
+          <div id="notmine">
+            <HistoryCards />
+          </div>
         </div>
         <Footer />
       </div>

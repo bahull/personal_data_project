@@ -158,7 +158,7 @@ app.get("/api/get", (req, res, next) => {
 
 //Destroys current session on logout
 app.get("/api/logout", (req, res, next) => {
-  req.sessions.destroy();
+  req.session.destroy();
   res.status(200).json("Session Destroyed");
 });
 

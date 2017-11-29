@@ -3,12 +3,8 @@ import axios from "axios";
 
 import { Navbar, NavItem } from "react-materialize";
 
-
-
 import { connect } from "react-redux";
-import { withRouter, Link } from 'react-router-dom'
-
-import razeLogo from "./../../images/razeLogo.png";
+import { withRouter, Link } from "react-router-dom";
 
 import "./Header.css";
 
@@ -50,14 +46,20 @@ class Header extends Component {
         {this.props.access === true || this.props.access === false ? (
           <Navbar className="navbar" brand="Raze" right>
             <ul className="nav-list">
-              <Link to="/dashboard"><li>Dashboard</li></Link>
-              <Link to="/donate"><li>Donate</li></Link>
-              <Link to="/"><li>Logout</li></Link>
+              <Link to="/dashboard">
+                <li>Dashboard</li>
+              </Link>
+              <Link to="/donate">
+                <li>Donate</li>
+              </Link>
+              <Link to="/">
+                <li onClick={this.logout}>Logout</li>
+              </Link>
             </ul>
           </Navbar>
         ) : (
-            ""
-          )}
+          ""
+        )}
       </div>
     );
   }

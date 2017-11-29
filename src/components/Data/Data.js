@@ -380,43 +380,43 @@ class Data extends Component {
           </div>
         </Row>
         <div className="data-headers">
-          <Bar
-            data={this.state.chartData2}
-            options={{
-              title: {
-                display: this.props.displayTitle,
-                text: "Energy Usage",
-                fontSize: 25
-              },
-              legend: {
-                display: this.props.displayLegend,
-                position: this.props.legendPosition
-              },
-              scales: {
-                xAxes: {
-                  gridLines: false
+          <div className="lower-graph">
+            <Bar
+              data={this.state.chartData2}
+              options={{
+                title: {
+                  display: this.props.displayTitle,
+                  text: "Energy Usage",
+                  fontSize: 25
                 },
-                yAxes: [
-                  {
-                    id: "left-y-axis",
-                    type: "linear",
-                    position: "left",
+                legend: {
+                  display: this.props.displayLegend,
+                  position: this.props.legendPosition
+                },
+                scales: {
+                  xAxes: {
                     gridLines: false
                   },
-                  {
-                    id: "right-y-axis",
-                    type: "linear",
-                    position: "right",
-                    gridLines: false
-                  }
-                ]
-              }
-              // maintainAspectRatio: false
-            }}
-          />
+                  yAxes: [
+                    {
+                      id: "left-y-axis",
+                      type: "linear",
+                      position: "left",
+                      gridLines: false
+                    },
+                    {
+                      id: "right-y-axis",
+                      type: "linear",
+                      position: "right",
+                      gridLines: false
+                    }
+                  ]
+                }
+                // maintainAspectRatio: false
+              }}
+            />
+          </div>
         </div>
-
-        <Tryitout />
       </div>
     );
   }
