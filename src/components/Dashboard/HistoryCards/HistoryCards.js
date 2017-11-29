@@ -29,6 +29,7 @@ class HistoryCards extends Component {
   }
 
   setHistory(historicalData) {
+    console.log(historicalData);
     degreeDaysFinder(
       historicalData.exceldata,
       this.props.updateMonthlyDegreeDays

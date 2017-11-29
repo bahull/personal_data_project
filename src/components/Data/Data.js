@@ -17,7 +17,9 @@ import {
   updateMonthlyCost,
   updateMonthlyDegreeDays,
   updateMonthlyKW,
-  updateAnnualKW
+  updateAnnualKW,
+  updateProjectLocation,
+  updateSquareFootage
 } from "./../../ducks/reducer";
 
 import {
@@ -112,8 +114,8 @@ class Data extends Component {
             data: [20, 50, 100, 75, 25, 0, 150, 49, 200, 299, 149, 100],
             label: "Total Degree Days",
             type: "line",
-            backgroundColor: ["rgba(0, 0, 0, .01)"],
-            borderColor: ["rgba(0, 0, 0, 1)"],
+            backgroundColor: ["rgba(100, 152, 200, 1)"],
+            // borderColor: ["rgba(0, 0, 0, 1)"],
 
             // This binds the dataset to the left y axis
             yAxisID: "right-y-axis"
@@ -131,6 +133,142 @@ class Data extends Component {
         axios.get("/api/get").then(response => {
           if (!response.data.newFile) {
             console.log("Nope You found the other one");
+
+            this.props.updateProjectLocation("Fictional Academy");
+
+            this.props.updateSquareFootage(10000);
+
+            this.props.updateAnnualCost(100000);
+
+            this.props.updateAnnualBreakdown([
+              36000,
+              16000,
+              26000,
+              20000,
+              2000
+            ]);
+
+            this.props.updateMonthlyCost([
+              8000,
+              6000,
+              5000,
+              10000,
+              8000,
+              12000,
+              15000,
+              9000,
+              7000,
+              8000,
+              3000,
+              9000
+            ]);
+
+            this.props.updateMonthlyDegreeDays(1, 15, 12);
+
+            this.props.updateMonthlyKW([
+              6000,
+              8000,
+              10000,
+              12000,
+              5000,
+              6000,
+              10000,
+              9000,
+              8000,
+              9000,
+              3000,
+              4000
+            ]);
+
+            this.props.updateAnnualKW(90000);
+
+            let newState = Object.assign({}, this.state);
+            newState = {
+              chartData: {
+                labels: this.props.commercialHeaders,
+                datasets: [
+                  {
+                    label: "Energy Use",
+                    backgroundColor: [
+                      "rgba(255, 99, 132, 0.6)",
+                      "rgba(54, 162, 235, 0.6)",
+                      "rgba(255, 206, 86, 0.6)",
+                      "rgba(75, 192, 192, 0.6)",
+                      "rgba(133, 102, 266, 0.6)",
+                      "rgba(255, 159, 64, 0.6)",
+                      "rgba(255, 99, 132, 0.6)",
+                      "rgba(255, 99, 132, 0.6)",
+                      "rgba(54, 162, 235, 0.6)",
+                      "rgba(255, 206, 86, 0.6)",
+                      "rgba(75, 192, 192, 0.6)",
+                      "rgba(133, 102, 266, 0.6)",
+                      "rgba(255, 159, 64, 0.6)",
+                      "rgba(255, 99, 132, 0.6)"
+                    ],
+                    borderColor: "rgba(255,99,132,1)",
+                    borderWidth: 1,
+                    hoverBackgroundColor: "rgba(255,99,132,0.4)",
+                    hoverBorderColor: "rgba(255,99,132,1)",
+                    data: [8000, 24223, 12000, 8400, 16000]
+                  }
+                ]
+              },
+              chartData2: {
+                labels: this.props.months,
+                datasets: [
+                  {
+                    label: "Monthly Cost",
+                    backgroundColor: [
+                      "rgba(255, 99, 132, 0.6)",
+                      "rgba(54, 162, 235, 0.6)",
+                      "rgba(255, 206, 86, 0.6)",
+                      "rgba(75, 192, 192, 0.6)",
+                      "rgba(133, 102, 266, 0.6)",
+                      "rgba(255, 159, 64, 0.6)",
+                      "rgba(255, 99, 132, 0.6)",
+                      "rgba(255, 99, 132, 0.6)",
+                      "rgba(54, 162, 235, 0.6)",
+                      "rgba(255, 206, 86, 0.6)",
+                      "rgba(75, 192, 192, 0.6)",
+                      "rgba(133, 102, 266, 0.6)",
+                      "rgba(255, 159, 64, 0.6)",
+                      "rgba(255, 99, 132, 0.6)"
+                    ],
+                    borderColor: "rgba(255,99,132,1)",
+                    borderWidth: 1,
+                    hoverBackgroundColor: "rgba(255,99,132,0.4)",
+                    hoverBorderColor: "rgba(255,99,132,1)",
+                    data: this.props.monthlyCost,
+                    yAxisID: "left-y-axis"
+                  },
+                  {
+                    data: [
+                      840,
+                      905,
+                      443,
+                      297,
+                      282,
+                      163,
+                      187,
+                      393,
+                      499,
+                      378,
+                      387,
+                      238
+                    ],
+                    label: "Total Degree Days",
+                    type: "line",
+                    backgroundColor: ["rgba(100, 152, 200, 1)"],
+                    // borderColor: ["rgba(0, 0, 0, 1)"],
+
+                    // This binds the dataset to the left y axis
+                    yAxisID: "right-y-axis"
+                  }
+                ]
+              }
+            };
+
+            this.setState(newState);
           } else if (
             this.props.facility === "Commercial" &&
             this.props.access === true
@@ -510,6 +648,8 @@ export default withRouter(
     updateMonthlyCost,
     updateMonthlyDegreeDays,
     updateMonthlyKW,
-    updateAnnualKW
+    updateAnnualKW,
+    updateProjectLocation,
+    updateSquareFootage
   })(Data)
 );

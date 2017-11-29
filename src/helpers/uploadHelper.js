@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const degreeDaysFinder = (file, updateMonthlyDegreeDays) => {
+  console.log(file);
   let copyOfFile = file;
   // let trashHolder = copyOfFile.splice(0, 1);
   // console.log("degreeDays in helper for history", trashHolder);
