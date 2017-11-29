@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 
 import "./Header.css";
+import { updateUserPermission } from "../../ducks/reducer";
 
 class Header extends Component {
   constructor(props) {
@@ -24,7 +25,8 @@ class Header extends Component {
     axios
       .get("/api/logout")
       .then(response => {
-        console.log("logged Out");
+        console.log("Logged Out!");
+        this.props.updateUserPermission(undefined);
       })
       .catch(error => {
         console.log(error);
@@ -68,4 +70,6 @@ const mapStateToProps = state => {
   return state;
 };
 
-export default withRouter(connect(mapStateToProps)(Header));
+export default withRouter(
+  connect(mapStateToProps, { updateUserPermission })(Header)
+);

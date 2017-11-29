@@ -70,7 +70,7 @@ class HistoryCards extends Component {
       });
     return (
       <div>
-        <Modal header="Modal Header" trigger={<Button>MODAL</Button>}>
+        <Modal header="" trigger={<Button>Past User Reports</Button>}>
           <div className="historyContainer">{historyDisplay}</div>
         </Modal>
       </div>

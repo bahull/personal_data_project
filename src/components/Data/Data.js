@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import Header from "./../Header/Header";
 import axios from "axios";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { Bar, Pie } from "react-chartjs-2";
 
-import { Row, Col } from "react-materialize";
+import { Row, Col, Button } from "react-materialize";
 
 import DataTable from "./DataTable/DataTable";
 import EnergyTable from "./EnergyTable/EnergyTable";
@@ -383,13 +383,16 @@ class Data extends Component {
     return (
       <div>
         <Header />
+        <Link to="/dashboard">
+          <Button className="backButton">Back to Dashboard</Button>
+        </Link>
         <h4 className="center-align">
-          {this.props.projectLocation}`s Energy User Profile
+          {this.props.projectLocation}`s Energy Profile
         </h4>
         <Row className="data-top">
           <div className="data-headers">
-            <div id="splitCharts">
-              <Col s={6}>
+            <Col s={6}>
+              <div className="boxes">
                 <DataTable
                   headers={
                     (this.props.facility === "" &&
@@ -407,8 +410,11 @@ class Data extends Component {
                     (this.props.industry === "Food" && this.props.foodHeaders)
                   }
                 />
-              </Col>
-              <Col id="pieChart" s={6}>
+              </div>
+            </Col>
+
+            <Col s={6}>
+              <div className="boxes">
                 <Pie
                   data={this.state.chartData}
                   options={{
@@ -424,49 +430,59 @@ class Data extends Component {
                     // maintainAspectRatio: false
                   }}
                 />
+              </div>
+            </Col>
+          </div>
+        </Row>
+        <Row>
+          <div className="data-headers">
+            <div className="lower-graph">
+              <Col s={6}>
+                <div className="boxes">
+                  <Bar
+                    data={this.state.chartData2}
+                    options={{
+                      title: {
+                        display: this.props.displayTitle,
+                        text: "Monthly Cost vs. Temperature Dependent",
+                        fontSize: 25
+                      },
+                      legend: {
+                        display: this.props.displayLegend,
+                        position: this.props.legendPosition
+                      },
+                      scales: {
+                        xAxes: {
+                          gridLines: true
+                        },
+                        yAxes: [
+                          {
+                            id: "left-y-axis",
+                            type: "linear",
+                            position: "left",
+                            gridLines: true
+                          },
+                          {
+                            id: "right-y-axis",
+                            type: "linear",
+                            position: "right",
+                            gridLines: true
+                          }
+                        ]
+                      }
+                      // maintainAspectRatio: false
+                    }}
+                  />
+                </div>
+              </Col>
+              <Col s={6}>
+                <div className="boxes">
+                  <EnergyTable />
+                </div>
               </Col>
             </div>
           </div>
         </Row>
-        <div className="data-headers">
-          <div className="lower-graph">
-            <Bar
-              data={this.state.chartData2}
-              options={{
-                title: {
-                  display: this.props.displayTitle,
-                  text: "Monthly Cost vs. Temperature Dependent",
-                  fontSize: 25
-                },
-                legend: {
-                  display: this.props.displayLegend,
-                  position: this.props.legendPosition
-                },
-                scales: {
-                  xAxes: {
-                    gridLines: false
-                  },
-                  yAxes: [
-                    {
-                      id: "left-y-axis",
-                      type: "linear",
-                      position: "left",
-                      gridLines: false
-                    },
-                    {
-                      id: "right-y-axis",
-                      type: "linear",
-                      position: "right",
-                      gridLines: false
-                    }
-                  ]
-                }
-                // maintainAspectRatio: false
-              }}
-            />
-            <EnergyTable />
-          </div>
-        </div>
       </div>
     );
   }
