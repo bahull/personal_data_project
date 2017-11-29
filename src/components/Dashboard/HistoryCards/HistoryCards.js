@@ -5,7 +5,21 @@ import CardMaker from "./CardMaker/CardMaker";
 
 import { Modal, Button } from "react-materialize";
 
+import { connect } from "react-redux";
+
+import { Link, withRouter } from "react-router-dom";
+
 import "./HistoryCards.css";
+import { degreeDaysFinder, sendToNode } from "../../../helpers/uploadHelper";
+import {
+  updateMonthlyDegreeDays,
+  updateProjectLocation,
+  updateAddress,
+  updateFacility,
+  updateSquareFootage,
+  updateIndustryType
+} from "../../../ducks/reducer";
+import { setTimeout } from "timers";
 
 class HistoryCards extends Component {
   constructor() {
@@ -17,14 +31,22 @@ class HistoryCards extends Component {
   }
 
   setHistory(historicalData) {
-    console.log(historicalData);
+    degreeDaysFinder(
+      historicalData.exceldata,
+      this.props.updateMonthlyDegreeDays
+    );
+    sendToNode(historicalData.exceldata);
+    this.props.updateProjectLocation(historicalData.projectlocation);
+    this.props.updateAddress(historicalData.street);
+    this.props.updateFacility(historicalData.facility);
+    this.props.updateSquareFootage(historicalData.sqfoot);
+    this.props.updateIndustryType(historicalData.industry);
   }
 
   componentDidMount() {
     axios
       .get("/api/getFile")
       .then(response => {
-        console.log(response.data);
         this.setState({ history: response.data });
       })
       .catch(console.log());
@@ -33,8 +55,6 @@ class HistoryCards extends Component {
     let historyDisplay =
       this.state.history.length > 0 &&
       this.state.history.map((curr, index) => {
-        console.log(curr);
-
         return (
           <div className="card" key={index}>
             <h5>{curr.projectlocation}</h5>
@@ -42,7 +62,9 @@ class HistoryCards extends Component {
             <p>{curr.industry}</p>
             <p>{curr.street}</p>
             <p>{curr.sqfoot}</p>
-            <button onClick={() => this.setHistory(curr)}> Select </button>
+            <button onClick={() => this.setHistory(curr)}>
+              <Link to="/data"> Select </Link>
+            </button>
           </div>
         );
       });
@@ -56,4 +78,15 @@ class HistoryCards extends Component {
   }
 }
 
-export default HistoryCards;
+const mapStateToProps = state => state;
+
+export default withRouter(
+  connect(mapStateToProps, {
+    updateMonthlyDegreeDays,
+    updateProjectLocation,
+    updateAddress,
+    updateFacility,
+    updateSquareFootage,
+    updateIndustryType
+  })(HistoryCards)
+);

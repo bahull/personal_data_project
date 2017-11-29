@@ -1,5 +1,5 @@
 export const changedArray = function(newData, newArray) {
-  let holder = newData.splice(0, 1);
+  // let holder = newData.splice(0, 1);
   return newData.map(function(current) {
     return newArray.push(parseFloat(current[1].replace(",", "")));
   });
@@ -106,7 +106,6 @@ export const totalAnnualCostCommercial = (
   });
 
   totalCost = totalCost.reduce((curr, accu) => curr + accu);
-
   updateAnnualCost(totalCost);
   let newArray = [];
   let otherUses = Math.floor(totalCost * 0.36);

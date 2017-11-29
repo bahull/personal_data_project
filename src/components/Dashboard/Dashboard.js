@@ -62,7 +62,7 @@ class Dashboard extends Component {
         squareFootage: this.props.squareFootage
       })
       .then(response => {
-        console.log(response);
+        response;
       })
       .catch(console.log);
   }
@@ -70,7 +70,6 @@ class Dashboard extends Component {
   degreeDaysFinder() {
     let copyOfFile = this.state.file;
     let trashHolder = copyOfFile.splice(0, 1);
-    copyOfFile;
     let startMonth = [];
     startMonth = copyOfFile[0][0].split(/[/-]/g);
 
@@ -104,7 +103,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    this.props.monthlyDegreeDays;
     return (
       <div>
         <Header />

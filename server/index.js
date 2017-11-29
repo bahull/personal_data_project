@@ -138,6 +138,12 @@ app.post("/api/retrieveFile", (req, res, next) => {
     });
 });
 
+//Post a saved spreadsheet to user.newfile
+app.post("/api/retrieveSavedFile", (req, res, next) => {
+  req.user.newFile = req.body.file;
+  res.status(200).json(req.user);
+});
+
 app.get("/api/getFile", (req, res, next) => {
   const dbInstance = app.get("db");
 

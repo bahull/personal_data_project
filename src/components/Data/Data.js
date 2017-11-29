@@ -189,6 +189,8 @@ class Data extends Component {
             newState.chartData.labels = this.props.petroleumHeaders;
             newState.chartData2.labels = this.props.monthsFromBill;
             newState.chartData2.datasets[0].data = this.props.monthlyCost;
+            newState.chartData2.datasets[1].data = degreeDays;
+
             this.setState(newState);
           } else if (
             this.props.facility === "Industrial" &&
@@ -220,6 +222,8 @@ class Data extends Component {
             newState.chartData.labels = this.props.chemicalHeaders;
             newState.chartData2.labels = this.props.monthsFromBill;
             newState.chartData2.datasets[0].data = this.props.monthlyCost;
+            newState.chartData2.datasets[1].data = degreeDays;
+
             this.setState(newState);
           } else if (
             this.props.facility === "Industrial" &&
@@ -227,7 +231,6 @@ class Data extends Component {
           ) {
             let newArray = [];
             let newData = response.data.newFile;
-            console.log("newData: ", newData);
             let typeHolder = [];
             let totalCost = [];
             let degreeDays = [];
@@ -252,6 +255,8 @@ class Data extends Component {
             newState.chartData.labels = this.props.paperHeaders;
             newState.chartData2.labels = this.props.monthsFromBill;
             newState.chartData2.datasets[0].data = this.props.monthlyCost;
+            newState.chartData2.datasets[1].data = degreeDays;
+
             this.setState(newState);
           } else if (
             this.props.facility === "Industrial" &&
@@ -283,6 +288,8 @@ class Data extends Component {
             newState.chartData.labels = this.props.foodHeaders;
             newState.chartData2.labels = this.props.monthsFromBill;
             newState.chartData2.datasets[0].data = this.props.monthlyCost;
+            newState.chartData2.datasets[1].data = degreeDays;
+
             this.setState(newState);
           } else if (
             this.props.facility === "Industrial" &&
@@ -314,15 +321,13 @@ class Data extends Component {
             newState.chartData.labels = this.props.metalsHeaders;
             newState.chartData2.labels = this.props.monthsFromBill;
             newState.chartData2.datasets[0].data = this.props.monthlyCost;
+            newState.chartData2.datasets[1].data = degreeDays;
+
             this.setState(newState);
           }
         });
       }
     });
-  }
-
-  componentShouldUpdate() {
-    this.state.degreeDays;
   }
 
   static defaultProps = {
@@ -338,8 +343,6 @@ class Data extends Component {
         <Row>
           <div className="data-headers">
             <div id="splitCharts">
-              <h4> {this.props.projectLocation} </h4>
-              <h4> {this.props.address} </h4>
               <Col s={6}>
                 <DataTable
                   headers={
