@@ -564,6 +564,7 @@ class Data extends Component {
         {/* <h4 className="center-align">
           {this.props.projectLocation}`s Energy Profile
         </h4> */}
+        <button />
         <Row className="data-top">
           <div className="data-headers">
             <Col s={5}>
