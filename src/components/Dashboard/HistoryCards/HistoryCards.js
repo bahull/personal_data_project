@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import { Modal, Button } from "react-materialize";
+import { Modal, Button, Card } from "react-materialize";
 
 import { connect } from "react-redux";
 
@@ -56,19 +56,28 @@ class HistoryCards extends Component {
       this.state.history.map((curr, index) => {
         return (
           <div className="card" key={index}>
-            <h5>{curr.projectlocation}</h5>
-            <p>{curr.facility}</p>
-            <p>{curr.industry}</p>
-            <p>{curr.street}</p>
-            <p>{curr.sqfoot}</p>
             <button
               className="modal-close"
               onClick={() => this.setHistory(curr)}
             >
               <Link to="/data">
-                <Button className="blue" waves="light">
-                  Select
-                </Button>
+                <Card
+                  className="blue-grey darken-1"
+                  textClassName="white-text"
+                  title={curr.projectlocation}
+                  actions={
+                    <Link to="/data">
+                      <Button className="center-align center-words">
+                        Select
+                      </Button>
+                    </Link>
+                  }
+                >
+                  <p>{curr.facility}</p>
+                  <p>{curr.industry}</p>
+                  <p>{curr.street}</p>
+                  <p>{curr.sqfoot}</p>
+                </Card>
               </Link>
             </button>
           </div>
