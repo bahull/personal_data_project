@@ -5,7 +5,7 @@ import "./Footer.css";
 class Footers extends Component {
   render() {
     return (
-      <div>
+      <div className="footerBody">
         <Footer
           id="myfooter"
           copyrights="Coded by Bryce Hull"
@@ -46,7 +46,7 @@ class Footers extends Component {
             software, feel free to reach out to me through one of the social
             media links on the right.
           </p>
-        </Footer>;
+        </Footer>
       </div>
     );
   }

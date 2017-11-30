@@ -28,7 +28,7 @@
 
 .sideNavOpen {
   left: 0;
-  height: 180vh;
+  height: 117.8vh;
   width: 15vw;
   background: lightblue;
   float: left;
@@ -41,7 +41,7 @@
 
 .sideNavClose {
   left: 0;
-  height: 180vh;
+  height: 117.8vh;
   width: 15vw;
   background: lightblue;
   float: left;
@@ -107,4 +107,5 @@
   justify-items: center;
   align-content: center;
   grid-gap: 10px 15px;
+  margin-bottom: 45px;
 }

@@ -9,6 +9,7 @@ import { Row, Col, Button, SideNav, SideNavItem } from "react-materialize";
 
 import DataTable from "./DataTable/DataTable";
 import EnergyTable from "./EnergyTable/EnergyTable";
+import Footer from "./../Footer/Footer";
 
 import {
   updateAnnualCost,
@@ -673,6 +674,7 @@ class Data extends Component {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
