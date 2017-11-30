@@ -67,7 +67,7 @@ class HistoryCards extends Component {
                   title={curr.projectlocation}
                   actions={
                     <Link to="/data">
-                      <Button className="center-align center-words">
+                      <Button className="center-align yellow center-words">
                         Select
                       </Button>
                     </Link>

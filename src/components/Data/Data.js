@@ -5,7 +5,16 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import { Bar, Pie } from "react-chartjs-2";
 
-import { Row, Col, Button, SideNav, SideNavItem } from "react-materialize";
+import {
+  Row,
+  Col,
+  Button,
+  SideNav,
+  SideNavItem,
+  Collapsible,
+  CollapsibleItem,
+  Input
+} from "react-materialize";
 
 import DataTable from "./DataTable/DataTable";
 import EnergyTable from "./EnergyTable/EnergyTable";
@@ -123,12 +132,24 @@ class Data extends Component {
           }
         ]
       },
-      active: true
+      active: true,
+      annualCostTable: true,
+      annualEnergyChart: true,
+      annualDegreeDayChart: true,
+      overallSqFtCost: true,
+      history: []
     };
     this.toggleClass = this.toggleClass.bind(this);
   }
 
   componentDidMount() {
+    axios
+      .get("/api/getFile")
+      .then(response => {
+        this.setState({ history: response.data });
+      })
+      .catch(console.log());
+
     axios.get("/api/me").then(response => {
       if (!response.data) {
         this.props.history.push("/");
@@ -535,28 +556,70 @@ class Data extends Component {
     const currentState = this.state.active;
     this.setState({ active: !currentState });
   }
+  toggleClassCostTable() {
+    const currentState = this.state.annualCostTable;
+    this.setState({ annualCostTable: !currentState });
+  }
+  toggleClassEnergyChart() {
+    const currentState = this.state.annualEnergyChart;
+    this.setState({ annualEnergyChart: !currentState });
+  }
+  toggleClassDegreeDays() {
+    const currentState = this.state.annualDegreeDayChart;
+    this.setState({ annualDegreeDayChart: !currentState });
+  }
+  toggleClassSqFt() {
+    const currentState = this.state.overallSqFtCost;
+    this.setState({ overallSqFtCost: !currentState });
+  }
 
   render() {
+    let historyCards = this.state.history.length > 0 &&
+    this.state.history.map((curr, index) => {
+      return (;
     return (
       <div className="dataBody">
         <Header />
-        <a class="waves-effect waves-light btn" onClick={this.toggleClass}>
-          button
+        <a class="waves-effect waves-light" onClick={this.toggleClass}>
+          <i class="material-icons">menu</i>
         </a>
         <div
           className={
             this.state.active
-              ? "sideNavOpen z-depth-5 grey lighten-5"
-              : " z-depth-5 grey lighten-5 sideNavClose"
+              ? "sideNavClose z-depth-5 grey lighten-5"
+              : " z-depth-5 grey lighten-5 sideNavOpen"
           }
         >
           {this.state.active ? (
-            <a class="waves-effect waves-light btn" onClick={this.toggleClass}>
-              button
+            <a class="waves-effect waves-light" onClick={this.toggleClass}>
+              {/* <i class="material-icons">menu</i> */}
             </a>
           ) : (
             ""
           )}
+
+          <Collapsible
+            popout={true}
+            accordion={true}
+            onSelect={this.props.onSelect}
+          >
+            <CollapsibleItem header="Display Options">
+              <Input name="ch" type="checkbox" label="Annual Use Cost" />
+              <Input
+                name="ch"
+                type="checkbox"
+                label="Annual Energy Consumption"
+              />
+              <Input name="ch" type="checkbox" label="Monthly Cost" />
+              <Input
+                name="ch"
+                type="checkbox"
+                label="Energy Utilization Analysis"
+              />
+            </CollapsibleItem>
+            <CollapsibleItem header="Saved User Profiles" />
+            <CollapsibleItem header="Hello"> "453" </CollapsibleItem>
+          </Collapsible>
         </div>
 
         {/* <Link to="/dashboard">
@@ -565,114 +628,121 @@ class Data extends Component {
         {/* <h4 className="center-align">
           {this.props.projectLocation}`s Energy Profile
         </h4> */}
-
         <div className="gridholder">
-          <div className="dataTableHolder">
-            <div className="boxes">
-              <div className="borderHeaders">
-                <h5 className="headerText">Annual End Use Cost</h5>
-              </div>
+          {this.state.annualCostTable && (
+            <div className="dataTableHolder">
+              <div className="boxes">
+                <div className="borderHeaders">
+                  <h5 className="headerText">Annual End Use Cost</h5>
+                </div>
 
-              <DataTable
-                headers={
-                  (this.props.facility === "" &&
-                    this.props.commercialHeaders) ||
-                  (this.props.facility === "Commercial" &&
-                    this.props.commercialHeaders) ||
-                  (this.props.industry === "Petroleum" &&
-                    this.props.petroleumHeaders) ||
-                  (this.props.industry === "Chemical" &&
-                    this.props.chemicalHeaders) ||
-                  (this.props.industry === "Paper" &&
-                    this.props.paperHeaders) ||
-                  (this.props.industry === "Primary Metals" &&
-                    this.props.metalsHeaders) ||
-                  (this.props.industry === "Food" && this.props.foodHeaders)
-                }
-              />
-            </div>
-          </div>
-
-          <div className="pieholder">
-            <div className="boxes">
-              <div className="borderHeaders">
-                <h5 className="headerText">
-                  Annual End Use Energy Consumption
-                </h5>
-              </div>
-              <div className="charts">
-                <Pie
-                  data={this.state.chartData}
-                  options={{
-                    title: {
-                      display: this.props.displayTitle
-                    },
-                    legend: {
-                      display: this.props.displayLegend,
-                      position: this.props.legendPosition
-                    },
-                    maintainAspectRatio: false
-                  }}
+                <DataTable
+                  headers={
+                    (this.props.facility === "" &&
+                      this.props.commercialHeaders) ||
+                    (this.props.facility === "Commercial" &&
+                      this.props.commercialHeaders) ||
+                    (this.props.industry === "Petroleum" &&
+                      this.props.petroleumHeaders) ||
+                    (this.props.industry === "Chemical" &&
+                      this.props.chemicalHeaders) ||
+                    (this.props.industry === "Paper" &&
+                      this.props.paperHeaders) ||
+                    (this.props.industry === "Primary Metals" &&
+                      this.props.metalsHeaders) ||
+                    (this.props.industry === "Food" && this.props.foodHeaders)
+                  }
                 />
               </div>
             </div>
-          </div>
+          )}
 
-          <div className="barholder">
-            <div className="boxes">
-              <div className="borderHeaders">
-                <h5 className="headerText">
-                  Monthly Cost vs. Monthly Temperature{" "}
-                </h5>
-              </div>
-              <div className="charts">
-                <Bar
-                  data={this.state.chartData2}
-                  options={{
-                    title: {
-                      display: this.props.displayTitle
-                    },
-                    legend: {
-                      display: this.props.displayLegend,
-                      position: this.props.legendPosition
-                    },
-                    scales: {
-                      xAxes: {
-                        gridLines: true
+          {this.state.annualEnergyChart && (
+            <div className="pieholder">
+              <div className="boxes">
+                <div className="borderHeaders">
+                  <h5 className="headerText">
+                    Annual End Use Energy Consumption
+                  </h5>
+                </div>
+                <div className="charts">
+                  <Pie
+                    data={this.state.chartData}
+                    options={{
+                      title: {
+                        display: this.props.displayTitle
                       },
-                      yAxes: [
-                        {
-                          id: "left-y-axis",
-                          type: "linear",
-                          position: "left",
+                      legend: {
+                        display: this.props.displayLegend,
+                        position: this.props.legendPosition
+                      },
+                      maintainAspectRatio: false
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {this.state.annualDegreeDayChart && (
+            <div className="barholder">
+              <div className="boxes">
+                <div className="borderHeaders">
+                  <h5 className="headerText">
+                    Monthly Cost vs. Monthly Temperature{" "}
+                  </h5>
+                </div>
+                <div className="charts">
+                  <Bar
+                    data={this.state.chartData2}
+                    options={{
+                      title: {
+                        display: this.props.displayTitle
+                      },
+                      legend: {
+                        display: this.props.displayLegend,
+                        position: this.props.legendPosition
+                      },
+                      scales: {
+                        xAxes: {
                           gridLines: true
                         },
-                        {
-                          id: "right-y-axis",
-                          type: "linear",
-                          position: "right",
-                          gridLines: true
-                        }
-                      ]
-                    },
-                    maintainAspectRatio: false
-                  }}
-                />
+                        yAxes: [
+                          {
+                            id: "left-y-axis",
+                            type: "linear",
+                            position: "left",
+                            gridLines: true
+                          },
+                          {
+                            id: "right-y-axis",
+                            type: "linear",
+                            position: "right",
+                            gridLines: true
+                          }
+                        ]
+                      },
+                      maintainAspectRatio: false
+                    }}
+                  />
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
-          <div className="EnergyHolder">
-            <div className="boxes">
-              <div className="borderHeaders">
-                <h5 className="headerText">Energy Utilization Analysis</h5>
-              </div>
+          {this.state.overallSqFtCost && (
+            <div className="EnergyHolder">
+              <div className="boxes">
+                <div className="borderHeaders">
+                  <h5 className="headerText">Energy Utilization Analysis</h5>
+                </div>
 
-              <div className="tables">
-                <EnergyTable />
+                <div className="tables">
+                  <EnergyTable />
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
         <Footer />
       </div>
