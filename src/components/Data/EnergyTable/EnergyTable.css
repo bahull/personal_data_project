@@ -16,6 +16,14 @@ table tr {
   border: 1px solid #ddd;
   padding: 0.35em;
 }
+
+.tableRowEnergy {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 0.35em;
+  height: 58px;
+}
+
 table th,
 table td {
   padding: 0.625em;

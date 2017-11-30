@@ -13,7 +13,7 @@ class EnergyTable extends Component {
           {/* <caption>Energy Utilization Analysis</caption> */}
 
           <tbody>
-            <tr>
+            <tr className="tableRowEnergy">
               <td data-label="Account" className="boldRows">
                 Max KW/SF
               </td>
@@ -24,7 +24,7 @@ class EnergyTable extends Component {
                 kw/ sq ft
               </td>
             </tr>
-            <tr>
+            <tr className="tableRowEnergy">
               <td scope="row" data-label="Account" className="boldRows">
                 Min KW/SF
               </td>
@@ -35,7 +35,7 @@ class EnergyTable extends Component {
                 kw/ sq ft
               </td>
             </tr>
-            <tr>
+            <tr className="tableRowEnergy">
               <td scope="row" data-label="Account" className="boldRows">
                 Avg KW/SF
               </td>
@@ -48,7 +48,7 @@ class EnergyTable extends Component {
                 kw/ sq ft
               </td>
             </tr>
-            <tr>
+            <tr className="tableRowEnergy">
               <td scope="row" data-label="Acount" className="boldRows">
                 Cost/SF Electric
               </td>
@@ -57,7 +57,7 @@ class EnergyTable extends Component {
                 $/sq ft
               </td>
             </tr>
-            <tr>
+            <tr className="tableRowEnergy">
               <td scope="row" data-label="Acount" className="boldRows">
                 Building Area
               </td>

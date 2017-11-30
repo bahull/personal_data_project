@@ -564,122 +564,115 @@ class Data extends Component {
         {/* <h4 className="center-align">
           {this.props.projectLocation}`s Energy Profile
         </h4> */}
-        <button />
-        <Row className="data-top">
-          <div className="data-headers">
-            <Col s={5}>
-              <div className="boxes">
-                <div className="borderHeaders">
-                  <h5 className="headerText">Annual End Use Cost</h5>
-                </div>
-                <div className="table1">
-                  <DataTable
-                    headers={
-                      (this.props.facility === "" &&
-                        this.props.commercialHeaders) ||
-                      (this.props.facility === "Commercial" &&
-                        this.props.commercialHeaders) ||
-                      (this.props.industry === "Petroleum" &&
-                        this.props.petroleumHeaders) ||
-                      (this.props.industry === "Chemical" &&
-                        this.props.chemicalHeaders) ||
-                      (this.props.industry === "Paper" &&
-                        this.props.paperHeaders) ||
-                      (this.props.industry === "Primary Metals" &&
-                        this.props.metalsHeaders) ||
-                      (this.props.industry === "Food" && this.props.foodHeaders)
-                    }
-                  />
-                </div>
-              </div>
-            </Col>
 
-            <Col s={5}>
-              <div className="boxes">
-                <div className="borderHeaders">
-                  <h5 className="headerText">
-                    Annual End Use Energy Consumption
-                  </h5>
-                </div>
-                <div className="charts">
-                  <Pie
-                    data={this.state.chartData}
-                    options={{
-                      title: {
-                        display: this.props.displayTitle
-                      },
-                      legend: {
-                        display: this.props.displayLegend,
-                        position: this.props.legendPosition
-                      },
-                      maintainAspectRatio: false
-                    }}
-                  />
-                </div>
+        <div className="gridholder">
+          <div className="dataTableHolder">
+            <div className="boxes">
+              <div className="borderHeaders">
+                <h5 className="headerText">Annual End Use Cost</h5>
               </div>
-            </Col>
-          </div>
-        </Row>
 
-        <Row className="bottomData">
-          <div className="data-headers">
-            <div className="lower-graph">
-              <Col s={5}>
-                <div className="boxes">
-                  <div className="borderHeaders">
-                    <h5 className="headerText">
-                      Monthly Cost vs. Monthly Temperature{" "}
-                    </h5>
-                  </div>
-                  <div className="charts">
-                    <Bar
-                      data={this.state.chartData2}
-                      options={{
-                        title: {
-                          display: this.props.displayTitle
-                        },
-                        legend: {
-                          display: this.props.displayLegend,
-                          position: this.props.legendPosition
-                        },
-                        scales: {
-                          xAxes: {
-                            gridLines: true
-                          },
-                          yAxes: [
-                            {
-                              id: "left-y-axis",
-                              type: "linear",
-                              position: "left",
-                              gridLines: true
-                            },
-                            {
-                              id: "right-y-axis",
-                              type: "linear",
-                              position: "right",
-                              gridLines: true
-                            }
-                          ]
-                        },
-                        maintainAspectRatio: false
-                      }}
-                    />
-                  </div>
-                </div>
-              </Col>
-              <Col s={5}>
-                <div className="boxes">
-                  <div className="borderHeaders">
-                    <h5 className="headerText">Energy Utilization Analysis</h5>
-                  </div>
-                  <div className="tables">
-                    <EnergyTable />
-                  </div>
-                </div>
-              </Col>
+              <DataTable
+                headers={
+                  (this.props.facility === "" &&
+                    this.props.commercialHeaders) ||
+                  (this.props.facility === "Commercial" &&
+                    this.props.commercialHeaders) ||
+                  (this.props.industry === "Petroleum" &&
+                    this.props.petroleumHeaders) ||
+                  (this.props.industry === "Chemical" &&
+                    this.props.chemicalHeaders) ||
+                  (this.props.industry === "Paper" &&
+                    this.props.paperHeaders) ||
+                  (this.props.industry === "Primary Metals" &&
+                    this.props.metalsHeaders) ||
+                  (this.props.industry === "Food" && this.props.foodHeaders)
+                }
+              />
             </div>
           </div>
-        </Row>
+
+          <div className="pieholder">
+            <div className="boxes">
+              <div className="borderHeaders">
+                <h5 className="headerText">
+                  Annual End Use Energy Consumption
+                </h5>
+              </div>
+              <div className="charts">
+                <Pie
+                  data={this.state.chartData}
+                  options={{
+                    title: {
+                      display: this.props.displayTitle
+                    },
+                    legend: {
+                      display: this.props.displayLegend,
+                      position: this.props.legendPosition
+                    },
+                    maintainAspectRatio: false
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="barholder">
+            <div className="boxes">
+              <div className="borderHeaders">
+                <h5 className="headerText">
+                  Monthly Cost vs. Monthly Temperature{" "}
+                </h5>
+              </div>
+              <div className="charts">
+                <Bar
+                  data={this.state.chartData2}
+                  options={{
+                    title: {
+                      display: this.props.displayTitle
+                    },
+                    legend: {
+                      display: this.props.displayLegend,
+                      position: this.props.legendPosition
+                    },
+                    scales: {
+                      xAxes: {
+                        gridLines: true
+                      },
+                      yAxes: [
+                        {
+                          id: "left-y-axis",
+                          type: "linear",
+                          position: "left",
+                          gridLines: true
+                        },
+                        {
+                          id: "right-y-axis",
+                          type: "linear",
+                          position: "right",
+                          gridLines: true
+                        }
+                      ]
+                    },
+                    maintainAspectRatio: false
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="EnergyHolder">
+            <div className="boxes">
+              <div className="borderHeaders">
+                <h5 className="headerText">Energy Utilization Analysis</h5>
+              </div>
+
+              <div className="tables">
+                <EnergyTable />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
