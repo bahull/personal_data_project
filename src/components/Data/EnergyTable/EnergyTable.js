@@ -10,7 +10,7 @@ class EnergyTable extends Component {
     return (
       <div>
         <table>
-          <caption>Energy Utilization Analysis</caption>
+          {/* <caption>Energy Utilization Analysis</caption> */}
 
           <tbody>
             <tr>

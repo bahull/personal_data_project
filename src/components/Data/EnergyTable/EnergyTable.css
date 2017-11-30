@@ -6,6 +6,7 @@ table {
   width: 100%;
   table-layout: fixed;
 }
+
 table caption {
   font-size: 1.5em;
   margin: 0.5em 0 0.75em;

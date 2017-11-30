@@ -61,7 +61,10 @@ class HistoryCards extends Component {
             <p>{curr.industry}</p>
             <p>{curr.street}</p>
             <p>{curr.sqfoot}</p>
-            <button onClick={() => this.setHistory(curr)}>
+            <button
+              className="modal-close"
+              onClick={() => this.setHistory(curr)}
+            >
               <Link to="/data"> Select </Link>
             </button>
           </div>

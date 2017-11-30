@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import { Bar, Pie } from "react-chartjs-2";
 
-import { Row, Col, Button } from "react-materialize";
+import { Row, Col, Button, SideNav, SideNavItem } from "react-materialize";
 
 import DataTable from "./DataTable/DataTable";
 import EnergyTable from "./EnergyTable/EnergyTable";
@@ -121,8 +121,10 @@ class Data extends Component {
             yAxisID: "right-y-axis"
           }
         ]
-      }
+      },
+      active: true
     };
+    this.toggleClass = this.toggleClass.bind(this);
   }
 
   componentDidMount() {
@@ -528,105 +530,149 @@ class Data extends Component {
     legendPosition: "bottom"
   };
 
+  toggleClass() {
+    const currentState = this.state.active;
+    this.setState({ active: !currentState });
+  }
+
   render() {
     return (
-      <div>
+      <div className="dataBody">
         <Header />
-        <Link to="/dashboard">
+        <a class="waves-effect waves-light btn" onClick={this.toggleClass}>
+          button
+        </a>
+        <div
+          className={
+            this.state.active
+              ? "sideNavOpen z-depth-5 grey lighten-5"
+              : " z-depth-5 grey lighten-5 sideNavClose"
+          }
+        >
+          {this.state.active ? (
+            <a class="waves-effect waves-light btn" onClick={this.toggleClass}>
+              button
+            </a>
+          ) : (
+            ""
+          )}
+        </div>
+
+        {/* <Link to="/dashboard">
           <Button className="backButton">Back to Dashboard</Button>
-        </Link>
-        <h4 className="center-align">
+        </Link> */}
+        {/* <h4 className="center-align">
           {this.props.projectLocation}`s Energy Profile
-        </h4>
+        </h4> */}
         <Row className="data-top">
           <div className="data-headers">
-            <Col s={6}>
+            <Col s={5}>
               <div className="boxes">
-                <DataTable
-                  headers={
-                    (this.props.facility === "" &&
-                      this.props.commercialHeaders) ||
-                    (this.props.facility === "Commercial" &&
-                      this.props.commercialHeaders) ||
-                    (this.props.industry === "Petroleum" &&
-                      this.props.petroleumHeaders) ||
-                    (this.props.industry === "Chemical" &&
-                      this.props.chemicalHeaders) ||
-                    (this.props.industry === "Paper" &&
-                      this.props.paperHeaders) ||
-                    (this.props.industry === "Primary Metals" &&
-                      this.props.metalsHeaders) ||
-                    (this.props.industry === "Food" && this.props.foodHeaders)
-                  }
-                />
+                <div className="borderHeaders">
+                  <h5 className="headerText">Annual End Use Cost</h5>
+                </div>
+                <div className="table1">
+                  <DataTable
+                    headers={
+                      (this.props.facility === "" &&
+                        this.props.commercialHeaders) ||
+                      (this.props.facility === "Commercial" &&
+                        this.props.commercialHeaders) ||
+                      (this.props.industry === "Petroleum" &&
+                        this.props.petroleumHeaders) ||
+                      (this.props.industry === "Chemical" &&
+                        this.props.chemicalHeaders) ||
+                      (this.props.industry === "Paper" &&
+                        this.props.paperHeaders) ||
+                      (this.props.industry === "Primary Metals" &&
+                        this.props.metalsHeaders) ||
+                      (this.props.industry === "Food" && this.props.foodHeaders)
+                    }
+                  />
+                </div>
               </div>
             </Col>
 
-            <Col s={6}>
+            <Col s={5}>
               <div className="boxes">
-                <Pie
-                  data={this.state.chartData}
-                  options={{
-                    title: {
-                      display: this.props.displayTitle,
-                      text: "Energy Usage",
-                      fontSize: 25
-                    },
-                    legend: {
-                      display: this.props.displayLegend,
-                      position: this.props.legendPosition
-                    }
-                    // maintainAspectRatio: false
-                  }}
-                />
-              </div>
-            </Col>
-          </div>
-        </Row>
-        <Row>
-          <div className="data-headers">
-            <div className="lower-graph">
-              <Col s={6}>
-                <div className="boxes">
-                  <Bar
-                    data={this.state.chartData2}
+                <div className="borderHeaders">
+                  <h5 className="headerText">
+                    Annual End Use Energy Consumption
+                  </h5>
+                </div>
+                <div className="charts">
+                  <Pie
+                    data={this.state.chartData}
                     options={{
                       title: {
-                        display: this.props.displayTitle,
-                        text: "Monthly Cost vs. Temperature Dependent",
-                        fontSize: 25
+                        display: this.props.displayTitle
                       },
                       legend: {
                         display: this.props.displayLegend,
                         position: this.props.legendPosition
                       },
-                      scales: {
-                        xAxes: {
-                          gridLines: true
-                        },
-                        yAxes: [
-                          {
-                            id: "left-y-axis",
-                            type: "linear",
-                            position: "left",
-                            gridLines: true
-                          },
-                          {
-                            id: "right-y-axis",
-                            type: "linear",
-                            position: "right",
-                            gridLines: true
-                          }
-                        ]
-                      }
-                      // maintainAspectRatio: false
+                      maintainAspectRatio: false
                     }}
                   />
                 </div>
-              </Col>
-              <Col s={6}>
+              </div>
+            </Col>
+          </div>
+        </Row>
+        <Row className="bottomData">
+          <div className="data-headers">
+            <div className="lower-graph">
+              <Col s={5}>
                 <div className="boxes">
-                  <EnergyTable />
+                  <div className="borderHeaders">
+                    <h5 className="headerText">
+                      Monthly Cost vs. Monthly Temperature{" "}
+                    </h5>
+                  </div>
+                  <div className="charts">
+                    <Bar
+                      data={this.state.chartData2}
+                      options={{
+                        title: {
+                          display: this.props.displayTitle
+                        },
+                        legend: {
+                          display: this.props.displayLegend,
+                          position: this.props.legendPosition
+                        },
+                        scales: {
+                          xAxes: {
+                            gridLines: true
+                          },
+                          yAxes: [
+                            {
+                              id: "left-y-axis",
+                              type: "linear",
+                              position: "left",
+                              gridLines: true
+                            },
+                            {
+                              id: "right-y-axis",
+                              type: "linear",
+                              position: "right",
+                              gridLines: true
+                            }
+                          ]
+                        },
+                        maintainAspectRatio: false
+                      }}
+                    />
+                  </div>
+                </div>
+              </Col>
+              <Col s={5}>
+                <div className="boxes">
+                  <div className="borderHeaders">
+                    <h5 className="headerText">Energy Utilization Analysis</h5>
+                  </div>
+                  <div className="tables">
+                    <EnergyTable />
+                  </div>
                 </div>
               </Col>
             </div>
