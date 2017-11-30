@@ -16,6 +16,7 @@ import {
   Input
 } from "react-materialize";
 
+import HistoryCards from "./../Dashboard/HistoryCards/HistoryCards";
 import DataTable from "./DataTable/DataTable";
 import EnergyTable from "./EnergyTable/EnergyTable";
 import Footer from "./../Footer/Footer";
@@ -65,7 +66,6 @@ import {
 } from "./../../helpers/uploadHelper";
 
 import "./Data.css";
-import { lchmod } from "fs";
 
 class Data extends Component {
   constructor(props) {
@@ -612,6 +612,7 @@ class Data extends Component {
   }
 
   render() {
+    console.log(this.props.match.path);
     let historyCards =
       this.state.history.length > 0 &&
       this.state.history.map((curr, index) => {
@@ -665,24 +666,42 @@ class Data extends Component {
                 type="checkbox"
                 label="Annual Use Cost"
                 value="1"
+                onChange={this.toggleClassCostTable}
               />
               <Input
                 name="ch"
                 type="checkbox"
                 label="Annual Energy Consumption"
                 value="2"
+                onChange={this.toggleClassEnergyChart}
               />
-              <Input name="ch" type="checkbox" label="Monthly Cost" value="3" />
+              <Input
+                name="ch"
+                type="checkbox"
+                label="Monthly Cost"
+                value="3"
+                onChange={this.toggleClassDegreeDays}
+              />
               <Input
                 name="ch"
                 type="checkbox"
                 label="Energy Utilization Analysis"
                 value="4"
+                onChange={this.toggleClassSqFt}
               />
+              <hr />
+              <Button className="loadButton">Load</Button>
             </CollapsibleItem>
             <CollapsibleItem header="Saved User Profiles">
-              {historyCards}
-              <button onClick={() => this.chart.update()}>Load</button>
+              {/* <HistoryCards location={this.props.match.path} /> */}
+              <Link
+                to={{
+                  pathname: "/dashboard",
+                  state: { showModal: true }
+                }}
+              >
+                <p className="modal-open">Saved Profiles</p>
+              </Link>
             </CollapsibleItem>
             <CollapsibleItem header="Hello"> "453" </CollapsibleItem>
           </Collapsible>

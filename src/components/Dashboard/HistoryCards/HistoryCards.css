@@ -1,9 +1,9 @@
-#dashboardModal {
-  width: 45%;
-  height: 60vh;
+.dashboardModal {
+  width: 55%;
+  height: 70vh;
   position: absolute;
-  top: 20%;
-  left: 27%;
+  top: 22%;
+  left: 22.4%;
   border-radius: 4px;
   background-color: white;
   border-radius: 10px;
@@ -16,9 +16,23 @@
   background-clip: padding-box;
   z-index: 2000;
 }
+
+.modalBackground {
+  height: 200px;
+  width: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .card {
   height: 40vh;
   width: 22vw;
+  margin: 10px 0;
   /* margin: 5vh;
   padding: 10px;
   border-radius: 5px;
@@ -30,22 +44,25 @@
 }
 
 .card h5 {
-  font-size: 20px;
+  /* font-size: 20px;
   text-decoration: underline;
-  text-transform: uppercase;
+  text-transform: uppercase; */
 }
 .card p {
-  font-size: 16px;
+  /* font-size: 16px; */
 }
 
 .historyContainer {
-  /* display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap; */
+  height: 490px;
+
+  /* height: 50vh; */
+
+  margin: 5px 5px;
+  overflow: scroll;
   display: grid;
   justify-items: center;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 40% 40%;
+  grid-template-rows: 1fr 1fr;
   grid-gap: 20px;
 }
 
@@ -53,4 +70,11 @@
   position: relative;
   left: 10px;
   color: black;
+}
+.exitButton {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  left: 97%;
+  bottom: 95%;
 }

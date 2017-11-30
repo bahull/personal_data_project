@@ -10,7 +10,7 @@
   box-shadow: 3px 3px 5px 6px #ccc;
   border-radius: 9px;
   width: 39vw;
-  height: 53vh;
+  height: 58vh;
   /* display: flex;  */
   /* justify-content: center; */
   padding: 10px;
@@ -103,7 +103,7 @@
 }
 
 .charts {
-  height: 80%;
+  height: 85%;
   width: 37vw;
 }
 /* .tables {
@@ -123,4 +123,8 @@
 .profilesButton {
   width: 10vw;
   margin: 5px;
+}
+
+.loadButton {
+  left: 10px;
 }
