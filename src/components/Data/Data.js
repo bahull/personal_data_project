@@ -619,6 +619,7 @@ class Data extends Component {
             </Col>
           </div>
         </Row>
+
         <Row className="bottomData">
           <div className="data-headers">
             <div className="lower-graph">
