@@ -8,7 +8,10 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 
 import "./HistoryCards.css";
-import { degreeDaysFinder, sendToNode } from "../../../helpers/uploadHelper";
+import {
+  degreeDaysFinderUpload,
+  sendToNodeUpload
+} from "../../../helpers/uploadHelper";
 import {
   updateMonthlyDegreeDays,
   updateProjectLocation,
@@ -30,11 +33,11 @@ class HistoryCards extends Component {
 
   setHistory(historicalData) {
     console.log(historicalData);
-    degreeDaysFinder(
+    degreeDaysFinderUpload(
       historicalData.exceldata,
       this.props.updateMonthlyDegreeDays
     );
-    sendToNode(historicalData.exceldata);
+    sendToNodeUpload(historicalData.exceldata);
     this.props.updateProjectLocation(historicalData.projectlocation);
     this.props.updateAddress(historicalData.street);
     this.props.updateFacility(historicalData.facility);

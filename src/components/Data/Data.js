@@ -21,6 +21,9 @@ import EnergyTable from "./EnergyTable/EnergyTable";
 import Footer from "./../Footer/Footer";
 
 import {
+  updateAddress,
+  updateFacility,
+  updateIndustryType,
   updateAnnualCost,
   updateAnnualBreakdown,
   updateAnnualMonths,
@@ -56,7 +59,13 @@ import {
   getAnnualKw
 } from "./../../helpers/comboChartHelpers";
 
+import {
+  degreeDaysFinderUpload,
+  sendToNodeUpload
+} from "./../../helpers/uploadHelper";
+
 import "./Data.css";
+import { lchmod } from "fs";
 
 class Data extends Component {
   constructor(props) {
@@ -140,6 +149,13 @@ class Data extends Component {
       history: []
     };
     this.toggleClass = this.toggleClass.bind(this);
+    this.setHistory = this.setHistory.bind(this);
+    this.toggleClassCostTable = this.toggleClassCostTable.bind(this);
+    this.toggleClassDegreeDays = this.toggleClassDegreeDays.bind(this);
+    this.toggleClassEnergyChart = this.toggleClassEnergyChart.bind(this);
+    this.toggleClassSqFt = this.toggleClassSqFt.bind(this);
+    // this.sendToNodeUpload = this.sendToNodeUpload.bind(this);
+    this.setHistory = this.setHistory.bind(this);
   }
 
   componentDidMount() {
@@ -552,10 +568,26 @@ class Data extends Component {
     legendPosition: "bottom"
   };
 
+  setHistory(historicalData) {
+    console.log(historicalData);
+    degreeDaysFinderUpload(
+      historicalData.exceldata,
+      this.props.updateMonthlyDegreeDays
+    );
+    sendToNodeUpload(historicalData.exceldata);
+    this.props.updateProjectLocation(historicalData.projectlocation);
+    this.props.updateAddress(historicalData.street);
+    this.props.updateFacility(historicalData.facility);
+    this.props.updateSquareFootage(historicalData.sqfoot);
+    this.props.updateIndustryType(historicalData.industry);
+    this.forceUpdate();
+  }
+
   toggleClass() {
     const currentState = this.state.active;
     this.setState({ active: !currentState });
   }
+
   toggleClassCostTable() {
     const currentState = this.state.annualCostTable;
     this.setState({ annualCostTable: !currentState });
@@ -572,22 +604,45 @@ class Data extends Component {
     const currentState = this.state.overallSqFtCost;
     this.setState({ overallSqFtCost: !currentState });
   }
+  handleCheckboxClick(event) {
+    this.toggleClassCostTable();
+    this.toggleClassEnergyChart();
+    this.toggleClassDegreeDays();
+    this.toggleClassSqFt();
+  }
 
   render() {
-    let historyCards = this.state.history.length > 0 &&
-    this.state.history.map((curr, index) => {
-      return (;
+    let historyCards =
+      this.state.history.length > 0 &&
+      this.state.history.map((curr, index) => {
+        return (
+          <div key={index}>
+            <button
+              className="profilesButton"
+              onClick={() => this.setHistory(curr)}
+            >
+              <Input
+                name="ch"
+                type="checkbox"
+                label={curr.projectlocation}
+                value={curr}
+              />
+            </button>
+          </div>
+        );
+      });
+
     return (
       <div className="dataBody">
         <Header />
-        <a class="waves-effect waves-light" onClick={this.toggleClass}>
-          <i class="material-icons">menu</i>
+        <a className="waves-effect waves-light" onClick={this.toggleClass}>
+          <i className="material-icons">menu</i>
         </a>
         <div
           className={
             this.state.active
-              ? "sideNavClose z-depth-5 grey lighten-5"
-              : " z-depth-5 grey lighten-5 sideNavOpen"
+              ? "sideNavClose z-depth-5"
+              : " z-depth-5 sideNavOpen"
           }
         >
           {this.state.active ? (
@@ -604,20 +659,31 @@ class Data extends Component {
             onSelect={this.props.onSelect}
           >
             <CollapsibleItem header="Display Options">
-              <Input name="ch" type="checkbox" label="Annual Use Cost" />
+              Check to remove from Dashboard
+              <Input
+                name="ch"
+                type="checkbox"
+                label="Annual Use Cost"
+                value="1"
+              />
               <Input
                 name="ch"
                 type="checkbox"
                 label="Annual Energy Consumption"
+                value="2"
               />
-              <Input name="ch" type="checkbox" label="Monthly Cost" />
+              <Input name="ch" type="checkbox" label="Monthly Cost" value="3" />
               <Input
                 name="ch"
                 type="checkbox"
                 label="Energy Utilization Analysis"
+                value="4"
               />
             </CollapsibleItem>
-            <CollapsibleItem header="Saved User Profiles" />
+            <CollapsibleItem header="Saved User Profiles">
+              {historyCards}
+              <button onClick={() => this.chart.update()}>Load</button>
+            </CollapsibleItem>
             <CollapsibleItem header="Hello"> "453" </CollapsibleItem>
           </Collapsible>
         </div>
@@ -763,6 +829,11 @@ export default withRouter(
     updateMonthlyKW,
     updateAnnualKW,
     updateProjectLocation,
-    updateSquareFootage
+    updateSquareFootage,
+    updateProjectLocation,
+    updateAddress,
+    updateFacility,
+    updateSquareFootage,
+    updateIndustryType
   })(Data)
 );

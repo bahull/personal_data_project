@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const degreeDaysFinder = (file, updateMonthlyDegreeDays) => {
+export const degreeDaysFinderUpload = (file, updateMonthlyDegreeDays) => {
   console.log(file);
   let copyOfFile = file;
   // let trashHolder = copyOfFile.splice(0, 1);
@@ -16,7 +16,7 @@ export const degreeDaysFinder = (file, updateMonthlyDegreeDays) => {
   updateMonthlyDegreeDays(month, 15, total);
 };
 
-export const sendToNode = file => {
+export const sendToNodeUpload = file => {
   axios.post("/api/retrieveSavedFile", {
     file
   });
