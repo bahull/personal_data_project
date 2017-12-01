@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import csv from "csv";
+
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import Papa from "papaparse";
 
 import HistoryCards from "./HistoryCards/HistoryCards";
 
@@ -23,6 +24,30 @@ import Header from "./../Header/Header";
 import Footer from "./../Footer/Footer";
 
 import "./Dashboard.css";
+
+const config = {
+  delimiter: "", // auto-detect
+  newline: "", // auto-detect
+  quoteChar: '"',
+  header: false,
+  dynamicTyping: false,
+  preview: 0,
+  encoding: "",
+  worker: false,
+  comments: false,
+  step: undefined,
+  complete: undefined,
+  error: undefined,
+  download: false,
+  skipEmptyLines: false,
+  chunk: undefined,
+  fastMode: undefined,
+  beforeFirstChunk: undefined,
+  withCredentials: undefined,
+  stateSetter: file => {
+    this.setState({});
+  }
+};
 
 class Dashboard extends Component {
   constructor(props) {
@@ -52,6 +77,7 @@ class Dashboard extends Component {
   }
 
   sendToNode() {
+    console.log(this.state.file);
     axios
       .post("/api/retrieveFile", {
         file: this.state.file,
@@ -80,29 +106,41 @@ class Dashboard extends Component {
     this.props.updateMonthlyDegreeDays(month, 15, total);
   }
 
+  stateSetting(obj) {
+    this.setState({ file: obj });
+  }
+
   uploader(event) {
     event.preventDefault();
 
     let reader = new FileReader();
-    let file = event.target.files[0];
+    let fileUpload = event.target.files[0];
 
-    this.setState({ fileName: file.name });
+    this.setState({ fileName: fileUpload.name });
 
-    reader.onload = () => {
-      csv.parse(reader.result, (err, data) => {
-        this.setState({
-          file: data
-        });
-        this.degreeDaysFinder();
-        // this.sendToNode();
-      });
-    };
+    Papa.parse(fileUpload, {
+      complete: results => {
+        console.log("Finished:", results.data);
+        let newFile = results.data.slice(0, results.data.length - 1);
+        console.log("newFile: ", newFile);
+        this.setState({ file: newFile });
+      }
+    });
 
+    // reader.onload = () => {
+    //   console.log(reader.result);
+    //   Papa.parse(reader.result, config, this.stateSetting());
+    //     this.degreeDaysFinder();
+    //     // this.sendToNode();
+    //   });
+    // };
+    console.log("Not Render:              ___________", this.state.file);
     // reader.readAsDataURL(file);
-    reader.readAsBinaryString(file);
+    reader.readAsBinaryString(fileUpload);
   }
 
   render() {
+    console.log("file in render:              ___________", this.state.file);
     return (
       <div>
         <Header />

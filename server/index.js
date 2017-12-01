@@ -9,29 +9,28 @@ const configureStripe = require("stripe");
 
 // const users = require("./controllers/users");
 
-const { secret } = require("./config");
-const { domain, clientID, clientSecret } = require("./config").auth0;
-const { STRIPE_SECRET_KEY, CONNECTION_STRING } = require("./config");
+// const { domain, clientID, clientSecret } = require("./config").auth0;
+// const { STRIPE_SECRET_KEY, CONNECTION_STRING, secret } = require("./config");
 
 require("dotenv").config();
 
 const port = 3001;
 
 const app = express();
-const stripe = require("stripe")(STRIPE_SECRET_KEY);
-// app.use(express.static(`${__dirname}/build`));
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+app.use(express.static(`${__dirname}/build`));
 
 //Initialize session for use
 app.use(
   session({
-    secret,
+    secret: process.env.SECRET,
     resave: true,
     saveUninitialized: true
   })
 );
 
 //Initialize massive and gain access to db
-massive(CONNECTION_STRING)
+massive(process.env.CONNECTION_STRING)
   .then(db => app.set("db", db))
   .catch(console.log);
 
@@ -47,9 +46,9 @@ app.use(passport.session());
 passport.use(
   new Auth0Strategy(
     {
-      domain,
-      clientID,
-      clientSecret,
+      domain: process.env.AUTH0_DOMAIN,
+      clientID: process.env.AUTH0_CLIENT_ID,
+      clientSecret: process.env.AUTH0_CLIENT_SECRET,
       callbackURL: "/login"
     },
     function(accessToken, refreshToken, extraParams, profile, done) {
@@ -111,6 +110,8 @@ app.get("/api/me", (req, res, next) => {
 //Retrieves blob and stores it on the user object on session to save
 app.post("/api/retrieveFile", (req, res, next) => {
   req.user.newFile = req.body.file;
+  console.log("req.user.newFile: ", req.user);
+
   const dbInstance = app.get("db");
   const {
     projectLocation,
@@ -141,6 +142,7 @@ app.post("/api/retrieveFile", (req, res, next) => {
 //Post a saved spreadsheet to user.newfile
 app.post("/api/retrieveSavedFile", (req, res, next) => {
   req.user.newFile = req.body.file;
+
   res.status(200).json(req.user);
 });
 
@@ -159,6 +161,7 @@ app.get("/api/getFile", (req, res, next) => {
 
 //Retrieves the uploaded file
 app.get("/api/get", (req, res, next) => {
+  console.log("_____Node sending back_____:", req.user);
   res.status(200).json(req.user);
 });
 
@@ -208,6 +211,11 @@ app.post("/api/getDegreeDays", (req, res, next) => {
     .catch(error => {
       res.status(500).json(error);
     });
+});
+
+const path = require("path");
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build/index.html"));
 });
 
 app.listen(port, () => {

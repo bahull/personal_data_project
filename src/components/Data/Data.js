@@ -167,13 +167,12 @@ class Data extends Component {
       .catch(console.log());
 
     axios.get("/api/me").then(response => {
+      console.log("HERE IS YOUR RESPONSE__-_____------____--__", response);
       if (!response.data) {
         this.props.history.push("/");
       } else {
         axios.get("/api/get").then(response => {
           if (!response.data.newFile) {
-            console.log("Nope You found the other one");
-
             this.props.updateProjectLocation("Fictional Academy");
 
             this.props.updateSquareFootage(10000);
@@ -612,7 +611,6 @@ class Data extends Component {
   }
 
   render() {
-    console.log(this.props.match.path);
     let historyCards =
       this.state.history.length > 0 &&
       this.state.history.map((curr, index) => {
@@ -690,7 +688,6 @@ class Data extends Component {
                 onChange={this.toggleClassSqFt}
               />
               <hr />
-              <Button className="loadButton">Load</Button>
             </CollapsibleItem>
             <CollapsibleItem header="Saved User Profiles">
               {/* <HistoryCards location={this.props.match.path} /> */}
