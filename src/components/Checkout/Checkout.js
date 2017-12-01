@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
 
-import { withRouter } from 'react-router-dom'
-
-import STRIPE_PUBLISHABLE from "./../../constants/stripe";
+import { withRouter } from "react-router-dom";
 
 const CURRENCY = "USD";
 const fromDollarToCent = amount => amount * 100;
@@ -19,7 +17,7 @@ class Checkout extends Component {
 
   successPayment(data) {
     console.log("Successful");
-    this.props.history.push('/dashboard')
+    this.props.history.push("/dashboard");
   }
 
   errorPayment(data) {
@@ -47,7 +45,7 @@ class Checkout extends Component {
         amount={fromDollarToCent(amount)}
         token={this.onToken(amount, description)}
         currency={CURRENCY}
-        stripeKey={STRIPE_PUBLISHABLE}
+        stripeKey={"pk_test_1BQt1dCV6VqbjfWEUyp8372v"}
         zipCode={true}
       />
     );
