@@ -20,19 +20,25 @@ class Footers extends Component {
                 <a
                   className="grey-text text-lighten-3 fa fa-linkedin fa-2x"
                   href="https://www.linkedin.com/in/bryce-hull-9a9429123/"
-                />
+                >
+                  {" "}
+                </a>
               </li>
               <li className="social-links">
                 <a
                   className="grey-text text-lighten-3 fa fa-twitter fa-2x"
                   href="https://twitter.com/BryceHull1"
-                />
+                >
+                  {" "}
+                </a>
               </li>
               <li className="social-links">
                 <a
                   className="grey-text text-lighten-3 fa fa-github fa-2x"
                   href="https://github.com/bahull"
-                />
+                >
+                  {" "}
+                </a>
               </li>
             </ul>
           }

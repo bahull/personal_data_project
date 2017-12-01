@@ -5,18 +5,8 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import { Bar, Pie } from "react-chartjs-2";
 
-import {
-  Row,
-  Col,
-  Button,
-  SideNav,
-  SideNavItem,
-  Collapsible,
-  CollapsibleItem,
-  Input
-} from "react-materialize";
+import { Collapsible, CollapsibleItem, Input } from "react-materialize";
 
-import HistoryCards from "./../Dashboard/HistoryCards/HistoryCards";
 import DataTable from "./DataTable/DataTable";
 import EnergyTable from "./EnergyTable/EnergyTable";
 import Footer from "./../Footer/Footer";
@@ -145,8 +135,7 @@ class Data extends Component {
       annualCostTable: true,
       annualEnergyChart: true,
       annualDegreeDayChart: true,
-      overallSqFtCost: true,
-      history: []
+      overallSqFtCost: true
     };
     this.toggleClass = this.toggleClass.bind(this);
     this.setHistory = this.setHistory.bind(this);
@@ -155,17 +144,9 @@ class Data extends Component {
     this.toggleClassEnergyChart = this.toggleClassEnergyChart.bind(this);
     this.toggleClassSqFt = this.toggleClassSqFt.bind(this);
     // this.sendToNodeUpload = this.sendToNodeUpload.bind(this);
-    this.setHistory = this.setHistory.bind(this);
   }
 
   componentDidMount() {
-    axios
-      .get("/api/getFile")
-      .then(response => {
-        this.setState({ history: response.data });
-      })
-      .catch(console.log());
-
     axios.get("/api/me").then(response => {
       console.log("HERE IS YOUR RESPONSE__-_____------____--__", response);
       if (!response.data) {
@@ -173,6 +154,11 @@ class Data extends Component {
       } else {
         axios.get("/api/get").then(response => {
           if (!response.data.newFile) {
+            console.log(
+              "  hit 1 your data is no good  -- -------  ----   -",
+              response.data.newFile
+            );
+
             this.props.updateProjectLocation("Fictional Academy");
 
             this.props.updateSquareFootage(10000);
@@ -312,6 +298,11 @@ class Data extends Component {
             this.props.facility === "Commercial" &&
             this.props.access === true
           ) {
+            console.log(
+              " Hit COmmercial Hopefully all is well         ",
+              response.data.newFile
+            );
+
             let newArray = [];
             let newData = response.data.newFile;
             let totalCost = [];
@@ -611,26 +602,6 @@ class Data extends Component {
   }
 
   render() {
-    let historyCards =
-      this.state.history.length > 0 &&
-      this.state.history.map((curr, index) => {
-        return (
-          <div key={index}>
-            <button
-              className="profilesButton"
-              onClick={() => this.setHistory(curr)}
-            >
-              <Input
-                name="ch"
-                type="checkbox"
-                label={curr.projectlocation}
-                value={curr}
-              />
-            </button>
-          </div>
-        );
-      });
-
     return (
       <div className="dataBody">
         <Header />
@@ -645,7 +616,7 @@ class Data extends Component {
           }
         >
           {this.state.active ? (
-            <a class="waves-effect waves-light" onClick={this.toggleClass}>
+            <a className="waves-effect waves-light" onClick={this.toggleClass}>
               {/* <i class="material-icons">menu</i> */}
             </a>
           ) : (
@@ -700,7 +671,6 @@ class Data extends Component {
                 <p className="modal-open">Saved Profiles</p>
               </Link>
             </CollapsibleItem>
-            <CollapsibleItem header="Hello"> "453" </CollapsibleItem>
           </Collapsible>
         </div>
 
@@ -844,8 +814,6 @@ export default withRouter(
     updateMonthlyDegreeDays,
     updateMonthlyKW,
     updateAnnualKW,
-    updateProjectLocation,
-    updateSquareFootage,
     updateProjectLocation,
     updateAddress,
     updateFacility,

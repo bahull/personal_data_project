@@ -17,9 +17,11 @@ require("dotenv").config();
 const port = 3001;
 
 const app = express();
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-app.use(express.static(`${__dirname}/build`));
 
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
+app.use(express.static(`${__dirname}/../build`));
+//
 //Initialize session for use
 app.use(
   session({
@@ -49,7 +51,7 @@ passport.use(
       domain: process.env.AUTH0_DOMAIN,
       clientID: process.env.AUTH0_CLIENT_ID,
       clientSecret: process.env.AUTH0_CLIENT_SECRET,
-      callbackURL: "/login"
+      callbackURL: "/auth"
     },
     function(accessToken, refreshToken, extraParams, profile, done) {
       app
@@ -82,17 +84,16 @@ passport.deserializeUser(function(user, done) {
 
 //On successful login redirects to the dashboard
 app.get(
-  "/login",
+  "/auth",
   passport.authenticate("auth0", {
-    successRedirect: "http://localhost:3000/dashboard",
-    failureRedirect: "/login"
+    successRedirect: "/dashboard"
   })
 );
 
 //On component render checks if their is a user object on session, otherwise redirects them to login
 app.get("/api/me", (req, res, next) => {
   if (!req.user) {
-    res.json("");
+    res.redirect("/");
   } else {
     const dbInstance = app.get("db");
 
@@ -118,7 +119,10 @@ app.post("/api/retrieveFile", (req, res, next) => {
     address,
     facility,
     industry,
-    squareFootage
+    squareFootage,
+    month,
+    year,
+    total
   } = req.body;
 
   dbInstance
@@ -129,7 +133,10 @@ app.post("/api/retrieveFile", (req, res, next) => {
       address,
       facility,
       industry,
-      squareFootage
+      squareFootage,
+      month,
+      year,
+      total
     ])
     .then(response => {
       res.status(200).json(response);
@@ -213,9 +220,9 @@ app.post("/api/getDegreeDays", (req, res, next) => {
     });
 });
 
-const path = require("path");
+var path = require("path");
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build/index.html"));
+  res.sendFile(path.join(`${__dirname}/../build`));
 });
 
 app.listen(port, () => {

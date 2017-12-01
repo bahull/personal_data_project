@@ -9,7 +9,12 @@ import Footers from "./../Footer/Footer";
 
 import "./LandingPage.css";
 
+import { Link } from "react-materialize";
+
 class LandingPage extends Component {
+  goLogin() {
+    window.location.href = "/auth";
+  }
   render() {
     return (
       <div id="top">
@@ -75,13 +80,18 @@ class LandingPage extends Component {
             <div className="app-intro">
               <h3>Raze Energy Sales Solutions</h3>
               <h5>Deliver quicker. Solve better. Close faster.</h5>
-              <a
-                href="http://localhost:3001/login"
+
+              {/* <a href="/login" id="free-trial-button" className="btn yellow">
+                Sign up for a demo
+              </a> */}
+              <button
+                // href="/login"
                 id="free-trial-button"
                 className="btn yellow"
+                onClick={this.goLogin}
               >
                 Sign up for a demo
-              </a>
+              </button>
             </div>
           </div>
           <Features />

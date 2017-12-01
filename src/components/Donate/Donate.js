@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import Particles from "react-particles-js";
 import axios from "axios";
 
-import { withRouter } from 'react-router-dom'
+import { withRouter } from "react-router-dom";
 
-import { Input, Row, Col } from "react-materialize";
+import { Input } from "react-materialize";
 import { updateAmount } from "./../../ducks/reducer";
 
 import Header from "./../Header/Header";
@@ -19,7 +19,7 @@ class Donate extends Component {
       if (!response.data) {
         this.props.history.push("/");
       }
-    })
+    });
   }
 
   render() {
@@ -28,61 +28,61 @@ class Donate extends Component {
         <div id="donate-background">
           <div id="top">
             <Header />
-            {/* <Particles
-            params={{
-              particles: {
-                number: {
-                  value: 80,
-                  density: {
-                    enable: true,
-                    value_area: 1800
-                  }
-                },
-                size: {
-                  value: 4,
-                  random: true,
-                  anim: {
-                    enable: false,
-                    speed: 40,
-                    size_min: 0.1,
-                    sync: false
-                  }
-                },
-                line_linked: {
-                  enable: true,
-                  distance: 100,
-                  color: "#ffffff",
-                  opacity: 0.8,
-                  width: 1
-                },
-                move: {
-                  enable: true,
-                  speed: 6,
-                  direction: "none",
-                  random: false,
-                  straight: false,
-                  out_mode: "out",
-                  bounce: false,
-                  attract: {
-                    enable: false,
-                    rotateX: 600,
-                    rotateY: 1200
-                  }
-                }
-              },
-              interactivity: {
-                detect_on: "canvas",
-                events: {
-                  onhover: {
-                    enable: true,
-                    mode: "grab"
+            <Particles
+              params={{
+                particles: {
+                  number: {
+                    value: 80,
+                    density: {
+                      enable: true,
+                      value_area: 1800
+                    }
                   },
-                  resize: true
-                }
-              },
-              retina_detect: false
-            }}
-          /> */}
+                  size: {
+                    value: 4,
+                    random: true,
+                    anim: {
+                      enable: false,
+                      speed: 40,
+                      size_min: 0.1,
+                      sync: false
+                    }
+                  },
+                  line_linked: {
+                    enable: true,
+                    distance: 100,
+                    color: "#ffffff",
+                    opacity: 0.8,
+                    width: 1
+                  },
+                  move: {
+                    enable: true,
+                    speed: 6,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: {
+                      enable: false,
+                      rotateX: 600,
+                      rotateY: 1200
+                    }
+                  }
+                },
+                interactivity: {
+                  detect_on: "canvas",
+                  events: {
+                    onhover: {
+                      enable: true,
+                      mode: "grab"
+                    },
+                    resize: true
+                  }
+                },
+                retina_detect: false
+              }}
+            />
             <div id="box">
               <div id="inner-box-donate">
                 <h4>

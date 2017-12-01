@@ -24,20 +24,26 @@ class Contact extends Component {
               <a
                 className="grey-text text-lighten-3 fa fa-linkedin fa-4x"
                 href="https://www.linkedin.com/in/bryce-hull-9a9429123/"
-              />
+              >
+                {" "}
+              </a>
             </Col>
 
             <Col s={4} className="grid-example">
               <a
                 className="grey-text text-lighten-3 fa fa-twitter fa-4x"
                 href="https://twitter.com/BryceHull1"
-              />
+              >
+                {" "}
+              </a>
             </Col>
             <Col s={4} className="grid-example">
               <a
                 className="grey-text text-lighten-3 fa fa-github fa-4x"
                 href="https://github.com/bahull"
-              />
+              >
+                {" "}
+              </a>
             </Col>
           </Row>
         </div>

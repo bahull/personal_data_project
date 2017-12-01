@@ -20,7 +20,6 @@ import {
   updateSquareFootage,
   updateIndustryType
 } from "../../../ducks/reducer";
-import { setTimeout } from "timers";
 
 class HistoryCards extends Component {
   constructor() {
@@ -76,9 +75,9 @@ class HistoryCards extends Component {
         // if (this.props.location === "/data") {
         return (
           <div className="card" key={index}>
-            <button onClick={() => this.setHistory(curr)}>
+            <div onClick={() => this.setHistory(curr)}>
               <Link to="/data">
-                <Card
+                {/* <Card
                   className="blue-grey darken-1"
                   textClassName="white-text"
                   title={curr.projectlocation}
@@ -89,14 +88,18 @@ class HistoryCards extends Component {
                       </Button>
                     </Link>
                   }
-                >
-                  <p>{curr.facility}</p>
-                  <p>{curr.industry}</p>
-                  <p>{curr.street}</p>
-                  <p>{curr.sqfoot}</p>
-                </Card>
+                > */}
+                <h5>{curr.facility}</h5>
+                <p>{curr.industry}</p>
+                <p>{curr.street}</p>
+                <p>{curr.sqfoot}</p>
+                {/* </Card> */}
+                <div className="bottom-card">
+                  <hr className="hrCard" />
+                  <Button className="bottom-card-button yellow center-align" />
+                </div>
               </Link>
-            </button>
+            </div>
           </div>
         );
         // } else {

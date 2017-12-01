@@ -25,30 +25,6 @@ import Footer from "./../Footer/Footer";
 
 import "./Dashboard.css";
 
-const config = {
-  delimiter: "", // auto-detect
-  newline: "", // auto-detect
-  quoteChar: '"',
-  header: false,
-  dynamicTyping: false,
-  preview: 0,
-  encoding: "",
-  worker: false,
-  comments: false,
-  step: undefined,
-  complete: undefined,
-  error: undefined,
-  download: false,
-  skipEmptyLines: false,
-  chunk: undefined,
-  fastMode: undefined,
-  beforeFirstChunk: undefined,
-  withCredentials: undefined,
-  stateSetter: file => {
-    this.setState({});
-  }
-};
-
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -56,7 +32,10 @@ class Dashboard extends Component {
     this.state = {
       file: null,
       fileName: null,
-      degreeDays: []
+      degreeDays: [],
+      month: "",
+      year: "",
+      total: ""
     };
 
     this.uploader = this.uploader.bind(this);
@@ -77,37 +56,33 @@ class Dashboard extends Component {
   }
 
   sendToNode() {
-    console.log(this.state.file);
-    axios
-      .post("/api/retrieveFile", {
-        file: this.state.file,
-        projectLocation: this.props.projectLocation,
-        address: this.props.address,
-        facility: this.props.facility,
-        industry: this.props.industry,
-        squareFootage: this.props.squareFootage
-      })
-      .then(response => {
-        response;
-      })
-      .catch(console.log);
+    axios.post("/api/retrieveFile", {
+      file: this.state.file,
+      month: parseInt(this.state.month, 10),
+      year: parseInt(this.state.year, 10),
+      total: parseInt(this.state.total, 10),
+      projectLocation: this.props.projectLocation,
+      address: this.props.address,
+      facility: this.props.facility,
+      industry: this.props.industry,
+      squareFootage: this.props.squareFootage
+    });
   }
 
-  degreeDaysFinder() {
-    let copyOfFile = this.state.file;
-    let trashHolder = copyOfFile.splice(0, 1);
+  degreeDaysFinder(file) {
+    console.log("Begin degreeDaysFinder", file);
+    let copyOfFile = file;
+    // let trashHolder = copyOfFile.splice(0, 1);
     let startMonth = [];
     startMonth = copyOfFile[0][0].split(/[/-]/g);
 
-    let month = parseInt(startMonth[0]);
-    let year = parseInt(startMonth[2].substr(2, 2));
+    let month = parseInt(startMonth[0], 10);
+    let year = parseInt(startMonth[2].substr(2, 2), 10);
     let total = copyOfFile.length;
 
-    this.props.updateMonthlyDegreeDays(month, 15, total);
-  }
+    this.setState({ month, year, total });
 
-  stateSetting(obj) {
-    this.setState({ file: obj });
+    this.props.updateMonthlyDegreeDays(month, year, total);
   }
 
   uploader(event) {
@@ -120,9 +95,9 @@ class Dashboard extends Component {
 
     Papa.parse(fileUpload, {
       complete: results => {
-        console.log("Finished:", results.data);
-        let newFile = results.data.slice(0, results.data.length - 1);
-        console.log("newFile: ", newFile);
+        let newFile = results.data.slice(1, results.data.length - 1);
+        this.degreeDaysFinder(newFile);
+
         this.setState({ file: newFile });
       }
     });
@@ -130,17 +105,23 @@ class Dashboard extends Component {
     // reader.onload = () => {
     //   console.log(reader.result);
     //   Papa.parse(reader.result, config, this.stateSetting());
-    //     this.degreeDaysFinder();
+    // this.degreeDaysFinder();
     //     // this.sendToNode();
     //   });
     // };
-    console.log("Not Render:              ___________", this.state.file);
+
     // reader.readAsDataURL(file);
     reader.readAsBinaryString(fileUpload);
   }
 
   render() {
-    console.log("file in render:              ___________", this.state.file);
+    console.log(
+      "Value for Month Year Total:    ",
+      this.state.month,
+      this.state.year,
+      this.state.total
+    );
+
     return (
       <div>
         <Header />

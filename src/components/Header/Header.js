@@ -13,12 +13,7 @@ class Header extends Component {
   constructor(props) {
     super(props);
 
-    this.goLogin = this.goLogin.bind(this);
     this.logout = this.logout.bind(this);
-  }
-
-  goLogin() {
-    window.location.href = "http://localhost:3001/login";
   }
 
   logout() {
@@ -42,7 +37,7 @@ class Header extends Component {
               Features
             </NavItem>
             <NavItem href="#contact">Contact Us</NavItem>
-            <NavItem href="http://localhost:3001/login">Login/Register</NavItem>
+            <NavItem href="http://localhost:3001/auth">Login/Register</NavItem>
           </Navbar>
         )}
         {this.props.access === true || this.props.access === false ? (

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { Table } from "react-materialize";
-
 import "./EnergyTable.css";
 
 class EnergyTable extends Component {
@@ -10,8 +8,6 @@ class EnergyTable extends Component {
     return (
       <div>
         <table>
-          {/* <caption>Energy Utilization Analysis</caption> */}
-
           <tbody>
             <tr className="tableRowEnergy">
               <td data-label="Account" className="boldRows">
@@ -25,7 +21,7 @@ class EnergyTable extends Component {
               </td>
             </tr>
             <tr className="tableRowEnergy">
-              <td scope="row" data-label="Account" className="boldRows">
+              <td data-label="Account" className="boldRows">
                 Min KW/SF
               </td>
               <td data-label="Due Date">
@@ -36,7 +32,7 @@ class EnergyTable extends Component {
               </td>
             </tr>
             <tr className="tableRowEnergy">
-              <td scope="row" data-label="Account" className="boldRows">
+              <td data-label="Account" className="boldRows">
                 Avg KW/SF
               </td>
               <td data-label="Due Date">
@@ -49,7 +45,7 @@ class EnergyTable extends Component {
               </td>
             </tr>
             <tr className="tableRowEnergy">
-              <td scope="row" data-label="Acount" className="boldRows">
+              <td data-label="Acount" className="boldRows">
                 Cost/SF Electric
               </td>
               <td data-label="Due Date">
@@ -58,7 +54,7 @@ class EnergyTable extends Component {
               </td>
             </tr>
             <tr className="tableRowEnergy">
-              <td scope="row" data-label="Acount" className="boldRows">
+              <td data-label="Acount" className="boldRows">
                 Building Area
               </td>
               <td data-label="Due Date">{this.props.squareFootage} sq ft</td>
