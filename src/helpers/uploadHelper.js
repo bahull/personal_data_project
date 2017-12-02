@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const degreeDaysFinderUpload = (file, updateMonthlyDegreeDays) => {
+  console.log("____________inside degree days uploader", file);
   // console.log(file);
   // let copyOfFile = file;
   // let trashHolder = copyOfFile.splice(0, 1);

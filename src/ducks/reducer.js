@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 
 //CONSTANTS
 const UPDATE_USER_ACCESS = "UPDATE_USER_ACCESS";
@@ -15,8 +15,17 @@ const UPDATE_MONTHLY_COST = "UPDATE_MONTHLY_COST";
 const UPDATE_MONTHLY_DEGREE_DAYS = "UPDATE_MONTHLY_DEGREE_DAYS";
 const UPDATE_MONTHLY_KW = "UPDATE_MONTHLY_KW";
 const UPDATE_ANNUAL_KW = "UPDATE_ANNUAL_KW";
+const UPDATE_FILE_ID = "UPDATE_FILE_ID";
 
 // ACTION BUILDERS
+export function updateFileId(excelId) {
+  console.log("hit in the reducer");
+  return {
+    type: UPDATE_FILE_ID,
+    payload: excelId
+  };
+}
+
 export function updateUserPermission(permission) {
   return {
     type: UPDATE_USER_ACCESS,
@@ -87,13 +96,19 @@ export function updateMonthlyCost(months) {
   };
 }
 
-export function updateMonthlyDegreeDays(month, year, total) {
+export function updateMonthlyDegreeDays(
+  degreeArray
+  // month, year, total
+) {
+  console.log("hit degree days reducer");
   return {
     type: UPDATE_MONTHLY_DEGREE_DAYS,
-    payload: axios
-      .post("/api/getDegreeDays", { month, year, total })
-      .then(response => response.data)
-      .catch(error => console.log(error))
+    payload: degreeArray
+    // axios
+    //   .post("/api/getDegreeDays", { month, year, total })
+    //   .then(response => console.log("response.data: ", response))
+
+    //   .catch(error => console.log(error))
   };
 }
 
@@ -187,7 +202,8 @@ let initialState = {
   ],
   monthsFromBill: "",
   monthlyCost: "",
-  monthlyDegreeDays: []
+  monthlyDegreeDays: [],
+  excelId: ""
 };
 //REDUCER
 export default function(state = initialState, action) {
@@ -218,9 +234,11 @@ export default function(state = initialState, action) {
       });
     case UPDATE_MONTHLY_COST:
       return Object.assign({}, state, { monthlyCost: action.payload });
-    case UPDATE_MONTHLY_DEGREE_DAYS + "_PENDING":
-      return Object.assign({}, state, { isLoading: true });
-    case UPDATE_MONTHLY_DEGREE_DAYS + "_FULFILLED":
+    // case UPDATE_MONTHLY_DEGREE_DAYS + "_PENDING":
+    //   return Object.assign({}, state, { isLoading: true });
+    case UPDATE_MONTHLY_DEGREE_DAYS:
+      // + "_FULFILLED":
+      console.log(action.payload);
       return Object.assign({}, state, {
         monthlyDegreeDays: action.payload
       });
@@ -231,6 +249,10 @@ export default function(state = initialState, action) {
     case UPDATE_ANNUAL_KW:
       return Object.assign({}, state, {
         annualKW: action.payload
+      });
+    case UPDATE_FILE_ID:
+      return Object.assign({}, state, {
+        excelId: action.payload
       });
     default:
       return state;
