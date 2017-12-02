@@ -14,7 +14,7 @@ const configureStripe = require("stripe");
 
 require("dotenv").config();
 
-const port = 80;
+const port = 3001;
 
 const app = express();
 
@@ -110,11 +110,14 @@ app.get("/api/me", (req, res, next) => {
 
 //Retrieves blob and stores it on the user object on session to save
 app.post("/api/retrieveFile", (req, res, next) => {
-  req.user.newFile = req.body.file;
-  console.log("req.user.newFile: ", req.user);
-
+  // req.user.newFile = req.body.file;
+  // console.log("req.user.newFile: ", req.user);
+  console.log("you hit me", req.body.file);
   const dbInstance = app.get("db");
   const {
+    file,
+    authid,
+    exceldata,
     projectLocation,
     address,
     facility,
@@ -128,7 +131,10 @@ app.post("/api/retrieveFile", (req, res, next) => {
   dbInstance
     .postSpreadsheet([
       req.user.authid,
-      JSON.stringify(req.user.newFile),
+      JSON.stringify(file),
+      // req.body.file,
+      // authid,
+      // exceldata,
       projectLocation,
       address,
       facility,
@@ -139,7 +145,9 @@ app.post("/api/retrieveFile", (req, res, next) => {
       total
     ])
     .then(response => {
-      res.status(200).json(response);
+      req.user.excelID = response[0].id;
+      console.log("req.user.excelID: ", req.user.excelID);
+      res.status(200).json(response[0].id);
     })
     .catch(error => {
       res.status(500).json(error);
@@ -167,9 +175,20 @@ app.get("/api/getFile", (req, res, next) => {
 });
 
 //Retrieves the uploaded file
-app.get("/api/get", (req, res, next) => {
+app.post("/api/get", (req, res, next) => {
   console.log("_____Node sending back_____:", req.user);
-  res.status(200).json(req.user);
+  // res.status(200).json(req.user);
+  const dbInstance = app.get("db");
+
+  dbInstance
+    .uploadedFile([req.body.file])
+    .then(response => {
+      res.status(200).json(response[0]);
+      console.log("Heres the resposne        ", response);
+    })
+    .catch(error => {
+      res.status(500).json();
+    });
 });
 
 //Destroys current session on logout
@@ -214,6 +233,40 @@ app.post("/api/getDegreeDays", (req, res, next) => {
     .getDegreeDays([month, year, total])
     .then(response => {
       res.status(200).json(response);
+      // app.post((req, res, next) => {});
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
+app.post("/api/actualDegreeDays", (req, res, next) => {
+  console.log("THE FINAL TRUTH++++++", req.body);
+  const { fullDegree, spreadsheetId } = req.body;
+  const dbInstance = app.get("db");
+
+  dbInstance
+    .addDegreeFinal([JSON.stringify(fullDegree), spreadsheetId])
+
+    .then(response => {
+      res.status(200).json(response);
+      console.log(response);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
+app.post("/api/actualDegreeDays", (req, res, next) => {
+  const { spreadsheetId } = req.body;
+  const dbInstance = app.get("db");
+
+  dbInstance
+    .getDegreeDayFinal([spreadsheetId])
+
+    .then(response => {
+      res.status(200).json(response);
+      console.log(response);
     })
     .catch(error => {
       res.status(500).json(error);

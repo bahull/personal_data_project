@@ -1,0 +1,1 @@
+SELECT degreedayarray FROM spreadsheets WHERE id = $1;

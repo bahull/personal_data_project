@@ -15,7 +15,8 @@ import {
   updateFacility,
   updateSquareFootage,
   updateIndustryType,
-  updateMonthlyDegreeDays
+  updateMonthlyDegreeDays,
+  updateFileId
 } from "./../../ducks/reducer";
 
 import { Row, Input, Button, Col, Icon } from "react-materialize";
@@ -35,7 +36,8 @@ class Dashboard extends Component {
       degreeDays: [],
       month: "",
       year: "",
-      total: ""
+      total: "",
+      degreeDayObject: ""
     };
 
     this.uploader = this.uploader.bind(this);
@@ -55,18 +57,38 @@ class Dashboard extends Component {
     });
   }
 
-  sendToNode() {
-    axios.post("/api/retrieveFile", {
-      file: this.state.file,
-      month: parseInt(this.state.month, 10),
-      year: parseInt(this.state.year, 10),
-      total: parseInt(this.state.total, 10),
-      projectLocation: this.props.projectLocation,
-      address: this.props.address,
-      facility: this.props.facility,
-      industry: this.props.industry,
-      squareFootage: this.props.squareFootage
-    });
+  sendToNode(file) {
+    console.log("hit send to node", file);
+    axios
+      .post("/api/retrieveFile", {
+        file,
+        month: parseInt(this.state.month, 10),
+        year: parseInt(this.state.year, 10),
+        total: parseInt(this.state.total, 10),
+        projectLocation: this.props.projectLocation,
+        address: this.props.address,
+        facility: this.props.facility,
+        industry: this.props.industry,
+        squareFootage: this.props.squareFootage
+      })
+      .then(response => {
+        console.log(
+          response,
+          "heres the resposneses______-------",
+          response.data
+        );
+        this.props.updateFileId(response.data);
+        console.log(
+          "NEW UPDATE FOR YOU +++++++++++++++++++",
+          this.state.fileId,
+          response.data
+        );
+        axios.post("/api/actualDegreeDays", {
+          fullDegree: this.state.degreeDayObject,
+          spreadsheetId: response.data
+        });
+      })
+      .catch(console.log);
   }
 
   degreeDaysFinder(file) {
@@ -81,8 +103,17 @@ class Dashboard extends Component {
     let total = copyOfFile.length;
 
     this.setState({ month, year, total });
+    axios
+      .post("/api/getDegreeDays", { month, year, total })
+      .then(response => {
+        // this.props.updateMonthlyDegreeDays(response.data),
+        this.setState({ degreeDayObject: response.data });
+      })
 
-    this.props.updateMonthlyDegreeDays(month, year, total);
+      .catch(error => console.log(error));
+
+    // this.props.updateMonthlyDegreeDays(month, year, total);
+    console.log("degree  days!!!!!!  ", this.props.monthlyDegreeDays);
   }
 
   uploader(event) {
@@ -97,8 +128,8 @@ class Dashboard extends Component {
       complete: results => {
         let newFile = results.data.slice(1, results.data.length - 1);
         this.degreeDaysFinder(newFile);
-
-        this.setState({ file: newFile });
+        this.sendToNode(newFile);
+        // this.setState({ file: newFile });
       }
     });
 
@@ -106,7 +137,7 @@ class Dashboard extends Component {
     //   console.log(reader.result);
     //   Papa.parse(reader.result, config, this.stateSetting());
     // this.degreeDaysFinder();
-    //     // this.sendToNode();
+    // this.sendToNode();
     //   });
     // };
 
@@ -202,7 +233,7 @@ class Dashboard extends Component {
                     className="input-dashboard blue"
                     waves="light"
                     id="final-submit"
-                    onClick={this.sendToNode}
+                    // onClick={this.sendToNode}
                   >
                     Submit
                   </Button>
@@ -246,6 +277,7 @@ export default withRouter(
     updateFacility,
     updateSquareFootage,
     updateIndustryType,
-    updateMonthlyDegreeDays
+    updateMonthlyDegreeDays,
+    updateFileId
   })(Dashboard)
 );

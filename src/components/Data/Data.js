@@ -148,15 +148,15 @@ class Data extends Component {
 
   componentDidMount() {
     axios.get("/api/me").then(response => {
-      console.log("HERE IS YOUR RESPONSE__-_____------____--__", response);
       if (!response.data) {
         this.props.history.push("/");
       } else {
-        axios.get("/api/get").then(response => {
-          if (!response.data.newFile) {
+        console.log("the post request", this.props.excelId);
+        axios.post("/api/get", { file: this.props.excelId }).then(response => {
+          if (!response.data) {
             console.log(
               "  hit 1 your data is no good  -- -------  ----   -",
-              response.data.newFile
+              response
             );
 
             this.props.updateProjectLocation("Fictional Academy");
@@ -300,11 +300,13 @@ class Data extends Component {
           ) {
             console.log(
               " Hit COmmercial Hopefully all is well         ",
-              response.data.newFile
+              response.data.exceldata,
+              "Heres the stuff you need",
+              response.data.degreedayarray
             );
 
             let newArray = [];
-            let newData = response.data.newFile;
+            let newData = response.data.exceldata;
             let totalCost = [];
             let typeHolder = [];
             let degreeDays = [];
@@ -323,7 +325,7 @@ class Data extends Component {
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
 
-            degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
+            degreeDaysUpdater(response.data.degreedayarray, degreeDays);
 
             getMonthlyKw(newData, this.props.updateMonthlyKW);
             getAnnualKw(
@@ -345,7 +347,7 @@ class Data extends Component {
             this.props.access === true
           ) {
             let newArray = [];
-            let newData = response.data.newFile;
+            let newData = response.data.exceldata;
             let typeHolder = [];
             let totalCost = [];
             let degreeDays = [];
@@ -363,7 +365,7 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
-            degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
+            degreeDaysUpdater(response.data.degreedayarray, degreeDays);
 
             getMonthlyKw(newData, this.props.updateMonthlyKW);
             getAnnualKw(
@@ -386,7 +388,7 @@ class Data extends Component {
             this.props.access === true
           ) {
             let newArray = [];
-            let newData = response.data.newFile;
+            let newData = response.data.exceldata;
             let typeHolder = [];
             let totalCost = [];
             let degreeDays = [];
@@ -404,7 +406,7 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
-            degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
+            degreeDaysUpdater(response.data.degreedayarray, degreeDays);
 
             getMonthlyKw(newData, this.props.updateMonthlyKW);
             getAnnualKw(
@@ -427,7 +429,7 @@ class Data extends Component {
             this.props.access === true
           ) {
             let newArray = [];
-            let newData = response.data.newFile;
+            let newData = response.data.exceldata;
             let typeHolder = [];
             let totalCost = [];
             let degreeDays = [];
@@ -445,7 +447,7 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
-            degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
+            degreeDaysUpdater(response.data.degreedayarray, degreeDays);
 
             getMonthlyKw(newData, this.props.updateMonthlyKW);
             getAnnualKw(
@@ -468,7 +470,7 @@ class Data extends Component {
             this.props.access === true
           ) {
             let newArray = [];
-            let newData = response.data.newFile;
+            let newData = response.data.exceldata;
             let typeHolder = [];
             let totalCost = [];
             let degreeDays = [];
@@ -486,7 +488,7 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
-            degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
+            degreeDaysUpdater(response.data.degreedayarray, degreeDays);
 
             getMonthlyKw(newData, this.props.updateMonthlyKW);
             getAnnualKw(
@@ -509,7 +511,7 @@ class Data extends Component {
             this.props.access === true
           ) {
             let newArray = [];
-            let newData = response.data.newFile;
+            let newData = response.data.exceldata;
             let typeHolder = [];
             let totalCost = [];
             let degreeDays = [];
@@ -527,7 +529,7 @@ class Data extends Component {
               this.props.updateAnnualMonths
             );
             monthlyCost(newData, this.props.updateMonthlyCost);
-            degreeDaysUpdater(this.props.monthlyDegreeDays, degreeDays);
+            degreeDaysUpdater(response.data.degreedayarray, degreeDays);
 
             getMonthlyKw(newData, this.props.updateMonthlyKW);
             getAnnualKw(

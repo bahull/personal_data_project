@@ -156,7 +156,6 @@ class HistoryCards extends Component {
                   x="0px"
                   y="0px"
                   viewBox="0 0 1000 1000"
-                  enable-background="new 0 0 1000 1000"
                 >
                   <g>
                     <g transform="translate(0.000000,511.000000) scale(0.100000,-0.100000)">
