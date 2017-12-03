@@ -100,7 +100,6 @@ export function updateMonthlyDegreeDays(
   degreeArray
   // month, year, total
 ) {
-  console.log("hit degree days reducer");
   return {
     type: UPDATE_MONTHLY_DEGREE_DAYS,
     payload: degreeArray
@@ -238,6 +237,7 @@ export default function(state = initialState, action) {
     //   return Object.assign({}, state, { isLoading: true });
     case UPDATE_MONTHLY_DEGREE_DAYS:
       // + "_FULFILLED":
+
       console.log(action.payload);
       return Object.assign({}, state, {
         monthlyDegreeDays: action.payload

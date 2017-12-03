@@ -79,8 +79,8 @@ class Dashboard extends Component {
         );
         this.props.updateFileId(response.data);
         console.log(
-          "NEW UPDATE FOR YOU +++++++++++++++++++",
-          this.state.fileId,
+          "Update File id from SendToNode resonse-------",
+          this.props.excelId,
           response.data
         );
         axios.post("/api/actualDegreeDays", {
@@ -113,7 +113,11 @@ class Dashboard extends Component {
       .catch(error => console.log(error));
 
     // this.props.updateMonthlyDegreeDays(month, year, total);
-    console.log("degree  days!!!!!!  ", this.props.monthlyDegreeDays);
+    console.log(
+      "degree  days!!!!!!  ",
+      this.props.monthlyDegreeDays,
+      this.state.degreeDayObject
+    );
   }
 
   uploader(event) {
@@ -146,13 +150,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log(
-      "Value for Month Year Total:    ",
-      this.state.month,
-      this.state.year,
-      this.state.total
-    );
-
     return (
       <div>
         <Header />

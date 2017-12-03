@@ -15,6 +15,17 @@
   -moz-background-clip: padding-box;
   background-clip: padding-box;
   z-index: 2000;
+  /* animation: bounce 0.5s; */
+  animation: minimise 0.3s;
+}
+
+@-webkit-keyframes minimise {
+  0% {
+    -webkit-transform: scale3d(0.1, 0.1, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+  }
 }
 
 .modalBackground {

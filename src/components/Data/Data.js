@@ -148,6 +148,7 @@ class Data extends Component {
 
   componentDidMount() {
     axios.get("/api/me").then(response => {
+      console.log(response);
       if (!response.data) {
         this.props.history.push("/");
       } else {

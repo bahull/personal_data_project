@@ -18,7 +18,8 @@ import {
   updateAddress,
   updateFacility,
   updateSquareFootage,
-  updateIndustryType
+  updateIndustryType,
+  updateFileId
 } from "../../../ducks/reducer";
 
 class HistoryCards extends Component {
@@ -34,7 +35,7 @@ class HistoryCards extends Component {
   }
 
   setHistory(historicalData) {
-    console.log(historicalData);
+    console.log("Historical data for cards here", historicalData);
     degreeDaysFinderUpload(
       historicalData.exceldata,
       this.props.updateMonthlyDegreeDays
@@ -45,6 +46,7 @@ class HistoryCards extends Component {
     this.props.updateFacility(historicalData.facility);
     this.props.updateSquareFootage(historicalData.sqfoot);
     this.props.updateIndustryType(historicalData.industry);
+    this.props.updateFileId(historicalData.id);
     this.setState({ numberChanger: Math.random() });
   }
 
@@ -133,17 +135,11 @@ class HistoryCards extends Component {
       });
     return (
       <div>
-        <Modal
-          header=""
-          id="foo"
-          ref={ref => {
-            this.modal = ref;
-          }}
-          trigger={<Button>Saved Profiles</Button>}
-        >
-          <div className="historyContainer">{historyDisplay}</div>
-        </Modal>
-        <Button onClick={this.toggleModal}>Modal</Button>
+        {this.props.access ? (
+          <Button onClick={this.toggleModal}>Saved Profiles</Button>
+        ) : (
+          ""
+        )}
         {this.state.modal && (
           <div className="modalBackground" onClick={console.log("Hello")}>
             <div className="dashboardModal">
@@ -182,6 +178,7 @@ export default withRouter(
     updateAddress,
     updateFacility,
     updateSquareFootage,
-    updateIndustryType
+    updateIndustryType,
+    updateFileId
   })(HistoryCards)
 );

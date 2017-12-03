@@ -13,7 +13,8 @@ import { Link } from "react-materialize";
 
 class LandingPage extends Component {
   goLogin() {
-    window.location.href = "/auth";
+    window.location.href = "http://localhost:3001/auth";
+    console.log("hit auth");
   }
   render() {
     return (
