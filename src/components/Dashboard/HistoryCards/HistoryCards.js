@@ -91,14 +91,28 @@ class HistoryCards extends Component {
                     </Link>
                   }
                 > */}
-                <h5>{curr.facility}</h5>
-                <p>{curr.industry}</p>
-                <p>{curr.street}</p>
-                <p>{curr.sqfoot}</p>
+
+                <h4>{curr.projectlocation}</h4>
+
+                {curr.facility && curr.industry ? (
+                  <div className="histCardP">
+                    <h5>{curr.facility}</h5>
+
+                    <p>{curr.industry}</p>
+                  </div>
+                ) : (
+                  <h5>{curr.facility}</h5>
+                )}
+                <div className="left-align">
+                  <p>{curr.street}</p>
+                  <p>{curr.sqfoot} sq ft</p>
+                </div>
                 {/* </Card> */}
                 <div className="bottom-card">
                   <hr className="hrCard" />
-                  <Button className="bottom-card-button yellow center-align" />
+                  <Button className="bottom-card-button yellow center-align">
+                    Select
+                  </Button>
                 </div>
               </Link>
             </div>
@@ -136,7 +150,9 @@ class HistoryCards extends Component {
     return (
       <div>
         {this.props.access ? (
-          <Button onClick={this.toggleModal}>Saved Profiles</Button>
+          <Button className="modalButton" onClick={this.toggleModal}>
+            Saved Profiles
+          </Button>
         ) : (
           ""
         )}

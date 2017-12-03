@@ -1,6 +1,7 @@
 .dashboardContainer {
-  width: 75%;
+  width: 57%;
   margin: auto;
+  height: 642px;
 }
 
 .dashboard-headers {
@@ -23,6 +24,7 @@
 }
 #file-upload {
   margin: 20px 30% 40px;
+  bottom: 27%;
 }
 
 .text-fields {
@@ -34,6 +36,8 @@
   margin: 5px;
   text-align: left;
 }
+.modalButton {
+}
 
 #dash-row {
   margin: 50px 20px 20px;
@@ -41,4 +45,34 @@
 
 #final-submit {
   margin: 20px 45% 40px;
+}
+
+/* input[type="file"] {
+  display: none;
+} */
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background: #2196f3 !important;
+  text-align: center;
+  letter-spacing: 0.5px;
+  border-radius: 5px;
+  line-height: 36px;
+  color: white;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-sizing: inherit;
+  z-index: 1;
+  vertical-align: middle;
+  user-select: none;
+  transition: 0.3s ease-out;
+  text-transform: uppercase;
+  width: 42%;
+  height: 44%;
+  font-family: "Alegreya Sans", sans-serif;
+  font-size: 14;
+  margin-top: 4.5%;
+  margin-left: 81%;
 }

@@ -182,15 +182,19 @@ app.post("/api/get", (req, res, next) => {
   // res.status(200).json(req.user);
   const dbInstance = app.get("db");
 
-  dbInstance
-    .uploadedFile([req.body.file])
-    .then(response => {
-      res.status(200).json(response[0]);
-      console.log("Heres the resposne        ", response);
-    })
-    .catch(error => {
-      res.status(500).json();
-    });
+  if (!req.body.file) {
+    res.status(200).json("");
+  } else {
+    dbInstance
+      .uploadedFile([req.body.file])
+      .then(response => {
+        res.status(200).json(response[0]);
+        console.log("Heres the resposne        ", response);
+      })
+      .catch(error => {
+        res.status(500).json();
+      });
+  }
 });
 
 //Destroys current session on logout

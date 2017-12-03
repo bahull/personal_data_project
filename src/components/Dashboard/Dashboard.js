@@ -78,11 +78,11 @@ class Dashboard extends Component {
           response.data
         );
         this.props.updateFileId(response.data);
-        console.log(
-          "Update File id from SendToNode resonse-------",
-          this.props.excelId,
-          response.data
-        );
+        // console.log(
+        //   "Update File id from SendToNode resonse-------",
+        //   this.props.excelId,
+        //   response.data
+        // );
         axios.post("/api/actualDegreeDays", {
           fullDegree: this.state.degreeDayObject,
           spreadsheetId: response.data
@@ -154,9 +154,7 @@ class Dashboard extends Component {
       <div>
         <Header />
         <div className="dashboardContainer">
-          <h3 className="dashboard-headers">
-            Welcome to Raze Energy Sales Solutions Energy User Profile Creator
-          </h3>
+          <h3 className="dashboard-headers">Energy User Profile Creator</h3>
           <h5 className="dashboard-headers">
             To continue to view your energy user profile, please fill out the
             form below and upload your .csv provided to you by your Raze
@@ -213,28 +211,38 @@ class Dashboard extends Component {
           {this.props.access === true && (
             <Row>
               <Col s={6}>
-                <Button id="file-upload" waves="light" className="blue">
-                  <input
-                    className="fileInput"
-                    type="file"
-                    onChange={event => this.uploader(event)}
-                  />
-                  Upload
-                  <Icon left>attach_file</Icon>
-                </Button>
-                <p>{this.state.fileName}</p>
+                <div id="notmine">
+                  <HistoryCards />
+                </div>
+                {/* <p>{this.state.fileName}</p> */}
               </Col>
               <Col s={6}>
-                <Link to="/data">
-                  <Button
-                    className="input-dashboard blue"
-                    waves="light"
-                    id="final-submit"
-                    // onClick={this.sendToNode}
-                  >
-                    Submit
+                <div className="uploadSubmit">
+                  {/* <label htmlFor="file-upload" className="custom-file-upload">
+                    <i className="fa fa-cloud-upload" /> Custom Upload
+                  </label>
+                  <input id="file-upload" type="file" /> */}
+                  <Button id="file-upload" waves="light" className="blue">
+                    <input
+                      className="fileInput"
+                      type="file"
+                      onChange={event => this.uploader(event)}
+                    />
+                    Upload
+                    <Icon left>attach_file</Icon>
                   </Button>
-                </Link>
+                  <Link to="/data">
+                    <Button
+                      className="input-dashboard blue"
+                      waves="light"
+                      id="final-submit"
+                      // onClick={this.sendToNode}
+                    >
+                      Submit
+                    </Button>
+                  </Link>
+                </div>
+                <p>{this.state.fileName}</p>
               </Col>
             </Row>
           )}
@@ -247,15 +255,12 @@ class Dashboard extends Component {
                     waves="light"
                     id="final-submit"
                   >
-                    Push to see results
+                    See Data
                   </Button>
                 </Link>
               </Col>
             </Row>
           )}
-          <div id="notmine">
-            <HistoryCards />
-          </div>
         </div>
         <Footer />
       </div>

@@ -34,12 +34,12 @@ body {
   color: black;
 }
 
-.nav-list{
-  display: flex
+.nav-list {
+  display: flex;
 }
 
-@media only screen and (max-width: 993px){
-  .nav-list{
-    display: block
+@media only screen and (max-width: 993px) {
+  .nav-list {
+    display: block;
   }
 }

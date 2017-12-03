@@ -46,7 +46,7 @@
   margin: 10px 0;
   margin: 5vh;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 6px;
   /* background-color: #f5f5f5; */
   background-color: #546e7a;
   border: 1px solid #e3e3e3;
@@ -61,16 +61,23 @@
   color: inherit;
 }
 
-.card h5 {
-  font-size: 20px;
-  text-decoration: underline;
-  text-transform: uppercase;
+.card h4 {
+  font-size: 25px;
+  border-bottom: 1px solid black;
 }
 .card p {
   font-size: 16px;
   color: white;
 }
+.card h5 {
+  font-size: 20px;
+  color: white;
+}
 
+.histCardP {
+  /* display: grid;
+  grid-template-columns: 1fr 1fr; */
+}
 .bottom-card {
   position: absolute;
   bottom: 8%;
@@ -81,11 +88,12 @@
   width: 90%;
 }
 .bottom-card-button {
-  width: 40%;
+  width: 56%;
+  color: black;
 }
 
 .historyContainer {
-  height: 490px;
+  height: 519px;
 
   /* height: 50vh; */
 
@@ -95,7 +103,6 @@
   justify-items: center;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  grid-gap: 20px;
 }
 
 .center-words {
@@ -109,4 +116,27 @@
   position: absolute;
   left: 96.5%;
   bottom: 94.5%;
+}
+.uploadSubmit {
+  position: relative;
+  top: -20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-around;
+  margin-bottom: -36xp;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center; */
+}
+
+#notmine {
+  /* position: absolute;
+  left: 25%;
+  top: 59%; */
+  display: grid;
+  justify-content: center;
+  /* margin-top: 22px; */
+}
+
+@media only screen and (max-width: 1024) {
 }
