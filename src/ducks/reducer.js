@@ -16,10 +16,18 @@ const UPDATE_MONTHLY_DEGREE_DAYS = "UPDATE_MONTHLY_DEGREE_DAYS";
 const UPDATE_MONTHLY_KW = "UPDATE_MONTHLY_KW";
 const UPDATE_ANNUAL_KW = "UPDATE_ANNUAL_KW";
 const UPDATE_FILE_ID = "UPDATE_FILE_ID";
+const UPDATE_MODAL_TRUTHY = "UPDATE_MODAL_TRUTHY";
 
 // ACTION BUILDERS
+export function updateModalTruthy(boo) {
+  console.log("hit recuerdf truthy");
+  return {
+    type: UPDATE_MODAL_TRUTHY,
+    payload: boo
+  };
+}
+
 export function updateFileId(excelId) {
-  console.log("hit in the reducer");
   return {
     type: UPDATE_FILE_ID,
     payload: excelId
@@ -202,7 +210,8 @@ let initialState = {
   monthsFromBill: "",
   monthlyCost: "",
   monthlyDegreeDays: [],
-  excelId: ""
+  excelId: "",
+  modalTruthy: false
 };
 //REDUCER
 export default function(state = initialState, action) {
@@ -253,6 +262,11 @@ export default function(state = initialState, action) {
     case UPDATE_FILE_ID:
       return Object.assign({}, state, {
         excelId: action.payload
+      });
+    case UPDATE_MODAL_TRUTHY:
+      console.log("Hit actual reducer");
+      return Object.assign({}, state, {
+        modalTruthy: action.payload
       });
     default:
       return state;

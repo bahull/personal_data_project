@@ -94,8 +94,9 @@ app.get(
 
 //On component render checks if their is a user object on session, otherwise redirects them to login
 app.get("/api/me", (req, res, next) => {
-  if (!req.user) {
-    res.redirect("/");
+  console.log(req.user, "req.user line 97");
+  if (!req.user || undefined) {
+    res.redirect("http://localhost:3000/");
   } else {
     const dbInstance = app.get("db");
 
@@ -256,7 +257,7 @@ app.post("/api/actualDegreeDays", (req, res, next) => {
 
     .then(response => {
       res.status(200).json(response);
-      console.log(response);
+      console.log("degree day response", response);
     })
     .catch(error => {
       res.status(500).json(error);

@@ -19,7 +19,8 @@ import {
   updateFacility,
   updateSquareFootage,
   updateIndustryType,
-  updateFileId
+  updateFileId,
+  updateModalTruthy
 } from "../../../ducks/reducer";
 
 class HistoryCards extends Component {
@@ -57,6 +58,9 @@ class HistoryCards extends Component {
         this.setState({ history: response.data });
       })
       .catch(console.log());
+    {
+      this.requestHistory === true && this.setState({ modal: true });
+    }
     // if (this.props.location.state.showModal) {
     //   this.setState({ modal: true });
     // } else {
@@ -67,7 +71,8 @@ class HistoryCards extends Component {
   }
 
   toggleModal() {
-    this.setState({ modal: !this.state.modal });
+    console.log("GuUadiuwef");
+    this.props.updateModalTruthy(!this.props.modalTruthy);
   }
 
   render() {
@@ -110,7 +115,10 @@ class HistoryCards extends Component {
                 {/* </Card> */}
                 <div className="bottom-card">
                   <hr className="hrCard" />
-                  <Button className="bottom-card-button yellow center-align">
+                  <Button
+                    className="bottom-card-button yellow center-align"
+                    onClick={this.toggleModal}
+                  >
                     Select
                   </Button>
                 </div>
@@ -150,13 +158,18 @@ class HistoryCards extends Component {
     return (
       <div>
         {this.props.access ? (
-          <Button className="modalButton" onClick={this.toggleModal}>
+          <Button
+            className="modalButton"
+            onClick={() => {
+              this.toggleModal();
+            }}
+          >
             Saved Profiles
           </Button>
         ) : (
           ""
         )}
-        {this.state.modal && (
+        {this.props.modalTruthy && (
           <div className="modalBackground" onClick={console.log("Hello")}>
             <div className="dashboardModal">
               <div className="historyContainer">{historyDisplay}</div>
@@ -195,6 +208,7 @@ export default withRouter(
     updateFacility,
     updateSquareFootage,
     updateIndustryType,
-    updateFileId
+    updateFileId,
+    updateModalTruthy
   })(HistoryCards)
 );

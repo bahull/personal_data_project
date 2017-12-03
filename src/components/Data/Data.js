@@ -9,6 +9,7 @@ import { Collapsible, CollapsibleItem, Input } from "react-materialize";
 
 import DataTable from "./DataTable/DataTable";
 import EnergyTable from "./EnergyTable/EnergyTable";
+import HistoryCards from "./../Dashboard/HistoryCards/HistoryCards";
 import Footer from "./../Footer/Footer";
 
 import {
@@ -23,7 +24,8 @@ import {
   updateMonthlyKW,
   updateAnnualKW,
   updateProjectLocation,
-  updateSquareFootage
+  updateSquareFootage,
+  updateModalTruthy
 } from "./../../ducks/reducer";
 
 import {
@@ -148,7 +150,7 @@ class Data extends Component {
 
   componentDidMount() {
     axios.get("/api/me").then(response => {
-      console.log(response);
+      console.log(response, "api/me response");
       if (!response.data) {
         this.props.history.push("/");
       } else {
@@ -663,15 +665,24 @@ class Data extends Component {
               />
               <hr />
             </CollapsibleItem>
-            <CollapsibleItem header="Saved User Profiles">
+            <CollapsibleItem header="Profiles">
               {/* <HistoryCards location={this.props.match.path} /> */}
+              <Link to={"/dashboard"}>
+                <div
+                  onClick={() => {
+                    this.props.updateModalTruthy(!this.props.modalTruthy);
+                  }}
+                >
+                  <p className="modal-open">Saved Profiles</p>
+                </div>
+              </Link>
+
               <Link
                 to={{
-                  pathname: "/dashboard",
-                  state: { showModal: true }
+                  pathname: "/dashboard"
                 }}
               >
-                <p className="modal-open">Saved Profiles</p>
+                <p className="modal-open">New Profile</p>
               </Link>
             </CollapsibleItem>
           </Collapsible>
@@ -799,7 +810,6 @@ class Data extends Component {
             </div>
           )}
         </div>
-        <Footer />
       </div>
     );
   }
@@ -821,6 +831,7 @@ export default withRouter(
     updateAddress,
     updateFacility,
     updateSquareFootage,
-    updateIndustryType
+    updateIndustryType,
+    updateModalTruthy
   })(Data)
 );

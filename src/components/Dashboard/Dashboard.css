@@ -23,8 +23,9 @@
   top: 0;
 }
 #file-upload {
-  margin: 20px 30% 40px;
+  margin: 20px;
   bottom: 27%;
+  width: 149px;
 }
 
 .text-fields {
@@ -44,7 +45,7 @@
 }
 
 #final-submit {
-  margin: 20px 45% 40px;
+  margin: 20px;
 }
 
 /* input[type="file"] {

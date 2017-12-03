@@ -41,7 +41,7 @@ class Dashboard extends Component {
     };
 
     this.uploader = this.uploader.bind(this);
-    this.sendToNode = this.sendToNode.bind(this);
+    // this.sendToNode = this.sendToNode.bind(this);
     this.degreeDaysFinder = this.degreeDaysFinder.bind(this);
   }
 
@@ -55,40 +55,6 @@ class Dashboard extends Component {
         this.props.updateUserPermission(false);
       }
     });
-  }
-
-  sendToNode(file) {
-    console.log("hit send to node", file);
-    axios
-      .post("/api/retrieveFile", {
-        file,
-        month: parseInt(this.state.month, 10),
-        year: parseInt(this.state.year, 10),
-        total: parseInt(this.state.total, 10),
-        projectLocation: this.props.projectLocation,
-        address: this.props.address,
-        facility: this.props.facility,
-        industry: this.props.industry,
-        squareFootage: this.props.squareFootage
-      })
-      .then(response => {
-        console.log(
-          response,
-          "heres the resposneses______-------",
-          response.data
-        );
-        this.props.updateFileId(response.data);
-        // console.log(
-        //   "Update File id from SendToNode resonse-------",
-        //   this.props.excelId,
-        //   response.data
-        // );
-        axios.post("/api/actualDegreeDays", {
-          fullDegree: this.state.degreeDayObject,
-          spreadsheetId: response.data
-        });
-      })
-      .catch(console.log);
   }
 
   degreeDaysFinder(file) {
@@ -106,8 +72,38 @@ class Dashboard extends Component {
     axios
       .post("/api/getDegreeDays", { month, year, total })
       .then(response => {
-        // this.props.updateMonthlyDegreeDays(response.data),
         this.setState({ degreeDayObject: response.data });
+        console.log("degreeDayObject: ", this.state.degreeDayObject);
+
+        return axios
+          .post("/api/retrieveFile", {
+            file,
+            month: parseInt(month, 10),
+            year: parseInt(year, 10),
+            total: parseInt(this.state.total, 10),
+            projectLocation: this.props.projectLocation,
+            address: this.props.address,
+            facility: this.props.facility,
+            industry: this.props.industry,
+            squareFootage: this.props.squareFootage
+          })
+          .then(response => {
+            console.log(
+              response,
+              "heres the resposneses______-------",
+              response.data
+            );
+            this.props.updateFileId(response.data);
+            console.log(
+              "here the degrees days should be defined",
+              this.state.degreeDayObject
+            );
+            axios.post("/api/actualDegreeDays", {
+              fullDegree: this.state.degreeDayObject,
+              spreadsheetId: response.data
+            });
+          })
+          .catch(console.log);
       })
 
       .catch(error => console.log(error));
@@ -119,6 +115,64 @@ class Dashboard extends Component {
       this.state.degreeDayObject
     );
   }
+
+  // sendToNode(file) {
+  //   console.log("hit send to node", file);
+  //   axios
+  //     .post("/api/retrieveFile", {
+  //       file,
+  //       month: parseInt(this.state.month, 10),
+  //       year: parseInt(this.state.year, 10),
+  //       total: parseInt(this.state.total, 10),
+  //       projectLocation: this.props.projectLocation,
+  //       address: this.props.address,
+  //       facility: this.props.facility,
+  //       industry: this.props.industry,
+  //       squareFootage: this.props.squareFootage
+  //     })
+  //     .then(response => {
+  //       console.log(
+  //         response,
+  //         "heres the resposneses______-------",
+  //         response.data
+  //       );
+  //       this.props.updateFileId(response.data);
+
+  //       axios.post("/api/actualDegreeDays", {
+  //         fullDegree: this.state.degreeDayObject,
+  //         spreadsheetId: response.data
+  //       });
+  //     })
+  //     .catch(console.log);
+  // }
+
+  // degreeDaysFinder(file) {
+  //   console.log("Begin degreeDaysFinder", file);
+  //   let copyOfFile = file;
+
+  //   let startMonth = [];
+  //   startMonth = copyOfFile[0][0].split(/[/-]/g);
+
+  //   let month = parseInt(startMonth[0], 10);
+  //   let year = parseInt(startMonth[2].substr(2, 2), 10);
+  //   let total = copyOfFile.length;
+
+  //   this.setState({ month, year, total });
+  //   axios
+  //     .post("/api/getDegreeDays", { month, year, total })
+  //     .then(response => {
+
+  //       this.setState({ degreeDayObject: response.data });
+  //     })
+
+  //     .catch(error => console.log(error));
+
+  //   console.log(
+  //     "degree  days!!!!!!  ",
+  //     this.props.monthlyDegreeDays,
+  //     this.state.degreeDayObject
+  //   );
+  // }
 
   uploader(event) {
     event.preventDefault();
@@ -132,7 +186,7 @@ class Dashboard extends Component {
       complete: results => {
         let newFile = results.data.slice(1, results.data.length - 1);
         this.degreeDaysFinder(newFile);
-        this.sendToNode(newFile);
+        // this.sendToNode(newFile);
         // this.setState({ file: newFile });
       }
     });
@@ -155,10 +209,12 @@ class Dashboard extends Component {
         <Header />
         <div className="dashboardContainer">
           <h3 className="dashboard-headers">Energy User Profile Creator</h3>
-          <h5 className="dashboard-headers">
-            To continue to view your energy user profile, please fill out the
-            form below and upload your .csv provided to you by your Raze
-            Ambassador
+          <h5 className="dashboard-headers largeViewText">
+            To view your energy user profile, please fill out the form below and
+            upload your .csv provided to you by your Raze Ambassador
+          </h5>
+          <h5 className="smallViewText">
+            Click on Saved Profiles to view your saved Energy User Profiles
           </h5>
 
           <Row id="dash-row">
@@ -210,40 +266,42 @@ class Dashboard extends Component {
           </Row>
           {this.props.access === true && (
             <Row>
-              <Col s={6}>
-                <div id="notmine">
-                  <HistoryCards />
-                </div>
-                {/* <p>{this.state.fileName}</p> */}
-              </Col>
-              <Col s={6}>
-                <div className="uploadSubmit">
-                  {/* <label htmlFor="file-upload" className="custom-file-upload">
+              <div className="testFlex">
+                <Col s={6}>
+                  <div id="notmine">
+                    <HistoryCards />
+                  </div>
+                  {/* <p>{this.state.fileName}</p> */}
+                </Col>
+                <Col s={6}>
+                  <div className="uploadSubmit">
+                    {/* <label htmlFor="file-upload" className="custom-file-upload">
                     <i className="fa fa-cloud-upload" /> Custom Upload
                   </label>
                   <input id="file-upload" type="file" /> */}
-                  <Button id="file-upload" waves="light" className="blue">
-                    <input
-                      className="fileInput"
-                      type="file"
-                      onChange={event => this.uploader(event)}
-                    />
-                    Upload
-                    <Icon left>attach_file</Icon>
-                  </Button>
-                  <Link to="/data">
-                    <Button
-                      className="input-dashboard blue"
-                      waves="light"
-                      id="final-submit"
-                      // onClick={this.sendToNode}
-                    >
-                      Submit
+                    <Button id="file-upload" waves="light" className="blue">
+                      <input
+                        className="fileInput"
+                        type="file"
+                        onChange={event => this.uploader(event)}
+                      />
+                      Upload
+                      <Icon left>attach_file</Icon>
                     </Button>
-                  </Link>
-                </div>
-                <p>{this.state.fileName}</p>
-              </Col>
+                    <Link to="/data">
+                      <Button
+                        className="input-dashboard blue"
+                        waves="light"
+                        id="final-submit"
+                        // onClick={this.sendToNode}
+                      >
+                        Submit
+                      </Button>
+                    </Link>
+                  </div>
+                  <p>{this.state.fileName}</p>
+                </Col>
+              </div>
             </Row>
           )}
           {this.props.access === false && (

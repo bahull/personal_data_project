@@ -41,11 +41,10 @@
 }
 
 .card {
-  height: 30vh;
-  width: 15vw;
-  margin: 10px 0;
-  margin: 5vh;
-  padding: 10px;
+  height: 37vh;
+  width: 17vw;
+  margin: 5vh 0vw 0vh;
+  padding: 10px 4%;
   border-radius: 6px;
   /* background-color: #f5f5f5; */
   background-color: #546e7a;
@@ -62,15 +61,15 @@
 }
 
 .card h4 {
-  font-size: 25px;
+  font-size: 30px;
   border-bottom: 1px solid black;
 }
 .card p {
-  font-size: 16px;
+  font-size: 17px;
   color: white;
 }
 .card h5 {
-  font-size: 20px;
+  font-size: 23px;
   color: white;
 }
 
@@ -93,10 +92,7 @@
 }
 
 .historyContainer {
-  height: 519px;
-
-  /* height: 50vh; */
-
+  height: 94%;
   margin: 5px 5px;
   overflow: scroll;
   display: grid;
@@ -123,7 +119,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: space-around;
-  margin-bottom: -36xp;
+  margin-bottom: -36px;
+  width: 61%;
   /* display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center; */
@@ -137,6 +134,244 @@
   justify-content: center;
   /* margin-top: 22px; */
 }
+.smallViewText {
+  display: none;
+}
 
-@media only screen and (max-width: 1024) {
+@media only screen and (max-width: 1450px) {
+  #file-upload {
+    margin: 20px 40px;
+    width: 109px;
+  }
+  .uploadsubmit {
+    width: 39%;
+  }
+  .modalButton {
+    margin-left: -66px;
+  }
+  #final-submit {
+    margin: 20px;
+  }
+  .exitButton {
+    left: 94.5%;
+    bottom: 94.5%;
+  }
+}
+@media only screen and (max-width: 1205px) {
+  .exitButton {
+    left: 93.5%;
+    bottom: 93.5%;
+  }
+  #file-upload {
+    margin: 20px -7% 40px;
+  }
+  .card {
+    margin: 5vh 0vw 0vh 0vw;
+  }
+  .bottom-card {
+    width: 90%;
+    right: 7px;
+  }
+  .card h4 {
+    font-size: 2vw;
+  }
+  .card p {
+    font-size: 1.2vw;
+  }
+  .card h5 {
+    font-size: 1.3vw;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
+  .historyContainer {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    height: 37vh;
+    width: 25vw;
+    margin: 10px 0;
+  }
+  .card h4 {
+    font-size: 2.8vw;
+  }
+  .card p {
+    font-size: 2vw;
+  }
+  .card h5 {
+    font-size: 1.8vw;
+  }
+  #file-upload {
+    margin: 20px 0;
+  }
+}
+
+@media only screen and (max-width: 910px) {
+  .card h4 {
+    font-size: 2.4vw;
+  }
+  .card p {
+    font-size: 1.7vw;
+  }
+  .card h5 {
+    font-size: 1.5vw;
+  }
+  .modalButton {
+    margin-left: -50px;
+  }
+  .dashboardModal {
+    width: 50vw;
+    left: 27%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .exitButton {
+    left: 90.5%;
+    bottom: 93.5%;
+  }
+
+  #file-upload {
+    margin: 20px -48% 40px;
+  }
+  .dashboardModal {
+  }
+  .modalButton {
+    margin-left: -95px;
+  }
+  .card h4 {
+    font-size: 2.9vw;
+  }
+  .card p {
+    font-size: 2.2vw;
+  }
+  .card h5 {
+    font-size: 2.5vw;
+  }
+  .modalButton {
+    margin-left: -50px;
+  }
+  .modalButton {
+    margin-left: -130px;
+  }
+}
+@media only screen and (max-width: 680px) {
+  .modalButton {
+    margin-left: -180px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .card {
+    width: 33vw;
+  }
+  .dashboardModal {
+    width: 60vw;
+  }
+  .card h4 {
+    font-size: 3.2vw;
+  }
+  .card p {
+    font-size: 2.8vw;
+  }
+  .card h5 {
+    font-size: 2.7vw;
+  }
+}
+@media only screen and (max-width: 550px) {
+  #file-upload {
+    margin-left: 68px !important;
+    width: 120px !important;
+  }
+  #final-submit {
+    margin-right: -32px !important;
+  }
+  .modalButton {
+    margin-left: -165px;
+  }
+}
+@media only screen and (max-width: 470px) {
+  .card h4 {
+    font-size: 3.5vw;
+  }
+  .card p {
+    font-size: 3vw;
+  }
+  .card h5 {
+    font-size: 2.9vw;
+  }
+  .bottom-card-button {
+    width: 67%;
+  }
+  h5.dashboard-headers.largeViewText {
+    font-size: 4vw;
+  }
+  h3.dashboard-headers {
+    font-size: 7vw;
+  }
+  .smallViewText {
+    display: block;
+    font-size: 4vw;
+  }
+  .largeViewText {
+    display: none;
+  }
+  #dash-row {
+    display: none;
+  }
+  #file-upload {
+    display: none;
+  }
+  #final-submit {
+    display: none;
+  }
+}
+@media only screen and (max-width: 440px) {
+  .card h4 {
+    font-size: 5vw;
+  }
+  .card p {
+    font-size: 3.3vw;
+  }
+  .card h5 {
+    font-size: 3.6vw;
+  }
+  .bottom-card-button {
+    width: 67%;
+  }
+  .dashboardModal {
+    width: 65vw;
+    left: 18%;
+    top: 21%;
+  }
+  .card {
+    width: 44vw;
+  }
+  .testFlex {
+    display: flex;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .card h4 {
+    font-size: 6vw;
+  }
+  .card p {
+    font-size: 4vw;
+  }
+  .card h5 {
+    font-size: 4.5vw;
+  }
+  .bottom-card-button {
+    width: 67%;
+  }
+  .dashboardModal {
+    width: 72vw;
+    left: 12%;
+  }
+  .card {
+    width: 44vw;
+  }
+  .exitButton {
+    left: 90.3%;
+  }
 }

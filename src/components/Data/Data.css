@@ -98,7 +98,7 @@
 .headerText {
   text-align: center;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 700;
   margin: 0;
 }
 
@@ -127,4 +127,9 @@
 
 .loadButton {
   left: 10px;
+}
+.collapsible-header {
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
 }
