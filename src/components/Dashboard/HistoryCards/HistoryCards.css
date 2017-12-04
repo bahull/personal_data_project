@@ -347,6 +347,30 @@
     width: 200px;
     height: 100px;
   }
+
+  .dashboardModal {
+    width: 103vw;
+    height: 105vh;
+    top: 25vh;
+    margin-top: -2px;
+    left: -1%;
+    border: 0px;
+    background: #f2f2f2;
+    padding-top: 10px;
+    animation: none;
+  }
+  .exitButton {
+    display: none;
+  }
+  .modalBackground {
+    display: none;
+  }
+  .modalButton {
+    display: none;
+  }
+  .card {
+    width: 50vw;
+  }
 }
 @media only screen and (max-width: 460px) {
   .smallHistoryDisplay {
@@ -416,7 +440,7 @@
   .dashboardModal {
     width: 103vw;
     height: 105vh;
-    top: 30vh;
+    top: 36vh;
     margin-top: -2px;
     left: -1%;
     border: 0px;
@@ -425,7 +449,7 @@
     animation: none;
   }
   .card {
-    height: 37vh;
+    height: 40vh;
   }
   .exitButton {
     display: none;
@@ -446,7 +470,7 @@
 }
 @media only screen and (max-width: 375px) {
   .dashboardModal {
-    top: 32vh;
+    top: 35vh;
     /* margin-top: -2px;
     left: -1%;
     border: 0px;
@@ -458,7 +482,7 @@
     font-size: 6vw;
   }
   .card {
-    height: 35vh;
+    height: 38vh;
   }
 }
 

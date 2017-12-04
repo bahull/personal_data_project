@@ -14,15 +14,15 @@ class Features extends Component {
           </div>
           <div className="rows">
             <h5>
-              Ability to print custom charts with only information you want to
-              show your client
+              Ability to customize charts with only information you want to show
+              your client
             </h5>
             <i className="large material-icons">local_printshop</i>
           </div>
           <div className="rows">
             <i className="fa fa-thermometer-empty fa-5x" aria-hidden="true" />
             <h5>
-              High Level analysis of clients temperature dependent energy use
+              High level analysis of clients temperature dependent energy use
             </h5>
           </div>
           <div className="rows">

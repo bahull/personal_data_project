@@ -150,7 +150,7 @@ class Data extends Component {
   componentDidMount() {
     axios.get("/api/me").then(response => {
       console.log(response, "api/me response");
-      if (!response.data) {
+      if (response.data.access === "No User") {
         this.props.history.push("/");
       } else {
         console.log("the post request", this.props.excelId);

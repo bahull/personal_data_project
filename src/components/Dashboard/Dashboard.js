@@ -45,9 +45,10 @@ class Dashboard extends Component {
     this.degreeDaysFinder = this.degreeDaysFinder.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     axios.get("/api/me").then(response => {
-      if (!response.data) {
+      console.log(response.data.access);
+      if (response.data === "No User") {
         this.props.history.push("/");
       } else if (response.data[0].access === "true") {
         this.props.updateUserPermission(true);

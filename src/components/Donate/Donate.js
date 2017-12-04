@@ -16,7 +16,7 @@ import "./Donate.css";
 class Donate extends Component {
   componentDidMount() {
     axios.get("/api/me").then(response => {
-      if (!response.data) {
+      if (response.data.access === "No User") {
         this.props.history.push("/");
       }
     });
