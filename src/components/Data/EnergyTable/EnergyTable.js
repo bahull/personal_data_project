@@ -10,10 +10,8 @@ class EnergyTable extends Component {
         <table>
           <tbody>
             <tr className="tableRowEnergy">
-              <td data-label="Account" className="boldRows">
-                Max KW/SF
-              </td>
-              <td data-label="Due Date">
+              <td className="boldRows">Max KW/SF</td>
+              <td>
                 {(
                   Math.max(...this.props.monthlyKW) / this.props.squareFootage
                 ).toFixed(2)}{" "}
@@ -21,10 +19,8 @@ class EnergyTable extends Component {
               </td>
             </tr>
             <tr className="tableRowEnergy">
-              <td data-label="Account" className="boldRows">
-                Min KW/SF
-              </td>
-              <td data-label="Due Date">
+              <td className="boldRows">Min KW/SF</td>
+              <td>
                 {(
                   Math.min(...this.props.monthlyKW) / this.props.squareFootage
                 ).toFixed(2)}{" "}
@@ -32,10 +28,8 @@ class EnergyTable extends Component {
               </td>
             </tr>
             <tr className="tableRowEnergy">
-              <td data-label="Account" className="boldRows">
-                Avg KW/SF
-              </td>
-              <td data-label="Due Date">
+              <td className="boldRows">Avg KW/SF</td>
+              <td>
                 {(
                   this.props.annualKW /
                   this.props.monthlyKW.length /
@@ -45,19 +39,15 @@ class EnergyTable extends Component {
               </td>
             </tr>
             <tr className="tableRowEnergy">
-              <td data-label="Acount" className="boldRows">
-                Cost/SF Electric
-              </td>
-              <td data-label="Due Date">
+              <td className="boldRows">Cost/SF Electric</td>
+              <td>
                 ${(this.props.annualCost / this.props.squareFootage).toFixed(2)}{" "}
                 $/sq ft
               </td>
             </tr>
             <tr className="tableRowEnergy">
-              <td data-label="Acount" className="boldRows">
-                Building Area
-              </td>
-              <td data-label="Due Date">{this.props.squareFootage} sq ft</td>
+              <td className="boldRows">Building Area</td>
+              <td>{this.props.squareFootage} sq ft</td>
             </tr>
           </tbody>
         </table>

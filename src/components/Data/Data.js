@@ -9,7 +9,6 @@ import { Collapsible, CollapsibleItem, Input } from "react-materialize";
 
 import DataTable from "./DataTable/DataTable";
 import EnergyTable from "./EnergyTable/EnergyTable";
-import HistoryCards from "./../Dashboard/HistoryCards/HistoryCards";
 import Footer from "./../Footer/Footer";
 
 import {
@@ -688,6 +687,70 @@ class Data extends Component {
           </Collapsible>
         </div>
 
+        <div className="centerCollapse">
+          <Collapsible
+            popout={true}
+            accordion={true}
+            onSelect={this.props.onSelect}
+          >
+            <CollapsibleItem
+              header="Display Options"
+              className="displayCollapse"
+            >
+              Check to remove from Dashboard
+              <Input
+                name="ch"
+                type="checkbox"
+                label="Annual Use Cost"
+                value="1"
+                onChange={this.toggleClassCostTable}
+              />
+              <Input
+                name="ch"
+                type="checkbox"
+                label="Annual Energy Consumption"
+                value="2"
+                onChange={this.toggleClassEnergyChart}
+              />
+              <Input
+                name="ch"
+                type="checkbox"
+                label="Monthly Cost"
+                value="3"
+                onChange={this.toggleClassDegreeDays}
+              />
+              <Input
+                name="ch"
+                type="checkbox"
+                label="Energy Utilization Analysis"
+                value="4"
+                onChange={this.toggleClassSqFt}
+              />
+              <hr />
+            </CollapsibleItem>
+            <CollapsibleItem header="Profiles">
+              {/* <HistoryCards location={this.props.match.path} /> */}
+              <Link to={"/dashboard"}>
+                <div
+                  onClick={() => {
+                    this.props.updateModalTruthy(!this.props.modalTruthy);
+                  }}
+                >
+                  <p className="modal-open">Saved Profiles</p>
+                </div>
+              </Link>
+
+              <Link
+                to={{
+                  pathname: "/dashboard"
+                }}
+              >
+                <p className="modal-open profileDisplay">New Profile</p>
+              </Link>
+            </CollapsibleItem>
+          </Collapsible>
+        </div>
+
         {/* <Link to="/dashboard">
           <Button className="backButton">Back to Dashboard</Button>
         </Link> */}
@@ -810,6 +873,7 @@ class Data extends Component {
             </div>
           )}
         </div>
+        <Footer />
       </div>
     );
   }

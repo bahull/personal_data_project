@@ -15,7 +15,7 @@ table tr {
   background: #f8f8f8;
   border: 1px solid #ddd;
   padding: 0.35em;
-  height: 24px;
+  height: 81px;
   overflow: scroll;
 }
 
@@ -30,11 +30,14 @@ table th,
 table td {
   padding: 0.625em;
   text-align: center;
+  font-family: "Alegreya Sans";
+  font-size: 1.3em;
 }
 table th {
-  font-size: 0.85em;
+  font-size: 1.2em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  font-family: "Nunito";
 }
 @media screen and (max-width: 600px) {
   table {

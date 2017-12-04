@@ -133,3 +133,125 @@
   font-size: 17px;
   font-weight: 700;
 }
+.tableRowEnergy {
+  height: 97px;
+}
+.centerCollapse {
+  display: none;
+}
+
+@media only screen and (max-width: 3000px) {
+  table tr {
+    height: 68px;
+  }
+}
+@media only screen and (max-width: 1205px) {
+}
+
+@media only screen and (max-width: 1050px) {
+  .gridholder {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .boxes {
+    width: 54vw;
+  }
+  .charts {
+    margin: auto;
+  }
+  canvas {
+    width: 124% !important;
+    right: 11%;
+    position: relative;
+  }
+  .sideNavClose,
+  .sideNavOpen,
+  .material-icons {
+    display: none;
+  }
+  .centerCollapse {
+    display: block;
+    width: 50%;
+    margin: auto;
+  }
+}
+
+@media only screen and (max-width: 910px) {
+}
+
+@media only screen and (max-width: 800px) {
+}
+@media only screen and (max-width: 750px) {
+  .charts,
+  .pieholder,
+  .barholder,
+  .displayCollapse,
+  .profileDisplay {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  table td {
+    font-size: 1em;
+  }
+  .charts {
+    height: 44%;
+    width: 53vw;
+  }
+  .boxes {
+    width: 74vw;
+    height: 82vh;
+  }
+  table tr {
+    height: 78px;
+    overflow: hidden;
+  }
+  table th {
+    font-size: 1.16em;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+}
+
+@media only screen and (max-width: 416px) {
+  .boxes {
+    height: 105vh;
+  }
+}
+@media only screen and (max-width: 375px) {
+  table td {
+    font-size: 0.7em;
+  }
+  table tr {
+    height: 56px;
+  }
+  .boxes {
+    height: 73vh;
+  }
+  table th {
+    font-size: 0.98em;
+  }
+  .tableRowEnergy {
+    height: 70px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .tableRowEnergy {
+    height: 66px;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .tableRowEnergy {
+    height: 55px;
+  }
+  table th {
+    font-size: 0.8em;
+  }
+  .boxes {
+    height: 85vh;
+  }
+}

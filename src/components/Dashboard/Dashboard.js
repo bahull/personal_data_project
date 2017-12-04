@@ -214,7 +214,7 @@ class Dashboard extends Component {
             upload your .csv provided to you by your Raze Ambassador
           </h5>
           <h5 className="smallViewText">
-            Click on Saved Profiles to view your saved Energy User Profiles
+            Select a Saved Profiles to view your the energy profile
           </h5>
 
           <Row id="dash-row">

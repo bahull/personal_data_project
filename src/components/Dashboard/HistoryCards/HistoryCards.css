@@ -137,6 +137,9 @@
 .smallViewText {
   display: none;
 }
+.smallHistoryDisplay {
+  display: none;
+}
 
 @media only screen and (max-width: 1450px) {
   #file-upload {
@@ -188,8 +191,8 @@
     grid-template-columns: 1fr;
   }
   .card {
-    height: 37vh;
-    width: 25vw;
+    height: 24vh;
+    width: 30vw;
     margin: 10px 0;
   }
   .card h4 {
@@ -233,8 +236,6 @@
 
   #file-upload {
     margin: 20px -48% 40px;
-  }
-  .dashboardModal {
   }
   .modalButton {
     margin-left: -95px;
@@ -325,33 +326,22 @@
   #final-submit {
     display: none;
   }
+  .smallHistoryDisplay {
+    display: block;
+    display: initial;
+    width: 200px;
+    height: 100px;
+  }
 }
-@media only screen and (max-width: 440px) {
-  .card h4 {
-    font-size: 5vw;
-  }
-  .card p {
-    font-size: 3.3vw;
-  }
-  .card h5 {
-    font-size: 3.6vw;
+@media only screen and (max-width: 460px) {
+  .smallHistoryDisplay {
+    display: block;
+    display: initial;
   }
   .bottom-card-button {
     width: 67%;
   }
-  .dashboardModal {
-    width: 65vw;
-    left: 18%;
-    top: 21%;
-  }
-  .card {
-    width: 44vw;
-  }
-  .testFlex {
-    display: flex;
-  }
-}
-@media only screen and (max-width: 400px) {
+
   .card h4 {
     font-size: 6vw;
   }
@@ -364,14 +354,173 @@
   .bottom-card-button {
     width: 67%;
   }
+
   .dashboardModal {
-    width: 72vw;
-    left: 12%;
+    width: 103vw;
+    height: 105vh;
+    top: 30vh;
+    margin-top: -2px;
+    left: -1%;
+    border: 0px;
+    background: #f2f2f2;
+    padding-top: 10px;
+    animation: none;
   }
   .card {
-    width: 44vw;
+    width: 60vw;
   }
   .exitButton {
-    left: 90.3%;
+    display: none;
+  }
+  .modalBackground {
+    display: none;
+  }
+  .smallHistoryDisplay {
+    width: 200px;
+    height: 100px;
+  }
+  .input-dashboard {
+    display: none;
+  }
+  .modalButton {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 416px) {
+  .card h4 {
+    font-size: 6vw;
+  }
+  .card p {
+    font-size: 4.5vw;
+  }
+  .card h5 {
+    font-size: 4.7vw;
+  }
+
+  .dashboardModal {
+    width: 103vw;
+    height: 105vh;
+    top: 30vh;
+    margin-top: -2px;
+    left: -1%;
+    border: 0px;
+    background: #f2f2f2;
+    padding-top: 10px;
+    animation: none;
+  }
+  .card {
+    height: 37vh;
+  }
+  .exitButton {
+    display: none;
+  }
+  .modalBackground {
+    display: none;
+  }
+  .smallHistoryDisplay {
+    width: 200px;
+    height: 100px;
+  }
+  .input-dashboard {
+    display: none;
+  }
+  .modalButton {
+    display: none;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .dashboardModal {
+    top: 32vh;
+    /* margin-top: -2px;
+    left: -1%;
+    border: 0px;
+    background: #f2f2f2;
+    padding-top: 10px;
+    animation: none; */
+  }
+  .card h4 {
+    font-size: 6vw;
+  }
+  .card {
+    height: 35vh;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .card h4 {
+    font-size: 7vw;
+  }
+  .card p {
+    font-size: 5vw;
+  }
+  .card h5 {
+    font-size: 6.5vw;
+  }
+  .card {
+    width: 70vw;
+  }
+  .dashboardModal {
+    top: 38vh;
+    /* margin-top: -2px;
+    left: -1%;
+    border: 0px;
+    background: #f2f2f2;
+    padding-top: 10px;
+    animation: none; */
+  }
+  h5.dashboard-headers.largeViewText {
+    font-size: 7vw;
+  }
+  h3.dashboard-headers {
+    font-size: 8vw;
+  }
+  .modalBackground {
+    display: none;
+  }
+  .card {
+    width: 55vw;
+  }
+  .fallOffWhenSmall {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .card h4 {
+    font-size: 5vw;
+  }
+  .card p {
+    font-size: 4vw;
+  }
+  .card h5 {
+    font-size: 4.5vw;
+  }
+  .card {
+    width: 70vw;
+  }
+  .dashboardModal {
+    top: 38vh;
+    /* margin-top: -2px;
+    left: -1%;
+    border: 0px;
+    background: #f2f2f2;
+    padding-top: 10px;
+    animation: none; */
+  }
+  h5.dashboard-headers.largeViewText {
+    font-size: 7vw;
+  }
+  h3.dashboard-headers {
+    font-size: 8vw;
+  }
+  .modalBackground {
+    display: none;
+  }
+  .card {
+    width: 55vw;
+  }
+  .fallOffWhenSmall {
+    display: none;
   }
 }
