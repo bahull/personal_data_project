@@ -14,7 +14,7 @@ const configureStripe = require("stripe");
 
 require("dotenv").config();
 
-const port = 3001;
+const port = 80;
 
 const app = express();
 
@@ -88,7 +88,7 @@ passport.deserializeUser(function(user, done) {
 app.get(
   "/auth",
   passport.authenticate("auth0", {
-    successRedirect: "http://localhost:3000/dashboard"
+    successRedirect: "/dashboard"
   })
 );
 
@@ -282,10 +282,10 @@ app.post("/api/actualDegreeDays", (req, res, next) => {
     });
 });
 
-// var path = require("path");
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(`${__dirname}/../build/index.html`));
-// });
+var path = require("path");
+app.get("*", (req, res) => {
+  res.sendFile(path.join(`${__dirname}/../build/index.html`));
+});
 
 app.listen(port, () => {
   console.log(`listening at port: ${port}`);
