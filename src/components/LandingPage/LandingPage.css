@@ -23,9 +23,26 @@
   color: black;
   margin-top: 20px;
 }
-
+.particlesHider {
+  height: 600px;
+}
+@media only screen and (max-width: 1050px) {
+  .fontIcons {
+    display: none;
+  }
+}
 @media only screen and (max-width: 375px) {
   #free-trial-button {
     font-size: 0.7rem;
+  }
+  .features {
+    height: 566px;
+  }
+  .rows {
+    text-align: center;
+  }
+  .contact-small-text {
+    font-size: 16px;
+    line-height: 55px;
   }
 }

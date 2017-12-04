@@ -20,7 +20,10 @@ class Features extends Component {
             <i className="large material-icons">local_printshop</i>
           </div>
           <div className="rows">
-            <i className="fa fa-thermometer-empty fa-5x" aria-hidden="true" />
+            <i
+              className="fa fa-thermometer-empty fa-5x fontIcons"
+              aria-hidden="true"
+            />
             <h5>
               High level analysis of clients temperature dependent energy use
             </h5>
@@ -30,7 +33,7 @@ class Features extends Component {
               Readily access information to determine if an energy project is a
               viable and cost-effective measure to lower operation expenses
             </h5>
-            <i className="fa fa-money fa-5x" aria-hidden="true" />
+            <i className="fa fa-money fa-5x fontIcons" aria-hidden="true" />
           </div>
         </div>
       </div>
