@@ -14,13 +14,13 @@ const configureStripe = require("stripe");
 
 require("dotenv").config();
 
-const port = 80;
+const port = 3001;
 
 const app = express();
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-app.use(express.static(`${__dirname}/../build`));
+// app.use(express.static(`${__dirname}/../build`));
 //
 //Initialize session for use
 app.use(
@@ -88,7 +88,7 @@ passport.deserializeUser(function(user, done) {
 app.get(
   "/auth",
   passport.authenticate("auth0", {
-    successRedirect: "/dashboard"
+    successRedirect: "http://localhost:3000/dashboard"
   })
 );
 
@@ -282,10 +282,10 @@ app.post("/api/actualDegreeDays", (req, res, next) => {
     });
 });
 
-var path = require("path");
-app.get("*", (req, res) => {
-  res.sendFile(path.join(`${__dirname}/../build/index.html`));
-});
+// var path = require("path");
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(`${__dirname}/../build/index.html`));
+// });
 
 app.listen(port, () => {
   console.log(`listening at port: ${port}`);

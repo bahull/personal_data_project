@@ -609,23 +609,9 @@ class Data extends Component {
     return (
       <div className="dataBody">
         <Header />
-        <a className="waves-effect waves-light" onClick={this.toggleClass}>
-          <i className="material-icons">menu</i>
-        </a>
-        <div
-          className={
-            this.state.active
-              ? "sideNavClose z-depth-5"
-              : " z-depth-5 sideNavOpen"
-          }
-        >
-          {this.state.active ? (
-            <a className="waves-effect waves-light" onClick={this.toggleClass}>
-              {/* <i class="material-icons">menu</i> */}
-            </a>
-          ) : (
-            ""
-          )}
+
+        <div className="sideNavOpen z-depth-5">
+          <a className="waves-effect waves-light" onClick={this.toggleClass} />
 
           <Collapsible
             popout={true}
@@ -873,7 +859,6 @@ class Data extends Component {
             </div>
           )}
         </div>
-        <Footer />
       </div>
     );
   }

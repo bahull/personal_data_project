@@ -12,7 +12,7 @@ class Contact extends Component {
           <h2 id="contact-header" className="center-align">
             Contact Us
           </h2>
-          <h5>
+          <h5 className="contact-small-text">
             We at Raze hope that you were able to benefit from our software and
             were able to easily use it. If you have any questions, or
             suggestions, please reach out to us as we love hearing from our

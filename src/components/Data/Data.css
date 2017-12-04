@@ -4,7 +4,7 @@
 }
 .boxes {
   background: white;
-  border: black solid 1px;
+  border: rgb(228, 222, 222) solid 1px;
   -moz-box-shadow: 2px 3px #ccc;
   -webkit-box-shadow: 2px 3px #ccc;
   box-shadow: 2px 3px #ccc;
@@ -28,7 +28,7 @@
 
 .sideNavOpen {
   left: 0;
-  height: 117.8vh;
+  height: 119.8vh;
   width: 15vw;
   background: #ddd;
   float: left;
@@ -111,6 +111,7 @@
 } */
 
 .gridholder {
+  width: 80%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 40% 40%;
@@ -118,6 +119,7 @@
   align-content: center;
   grid-gap: 10px 15px;
   margin-bottom: 45px;
+  margin-left: 12%;
 }
 
 .profilesButton {
@@ -147,7 +149,7 @@
 }
 @media only screen and (max-width: 1920px) {
   .tableRowEnergy {
-    height: 67px;
+    height: 75px;
   }
 
   table tr {

@@ -9,7 +9,12 @@
   height: 600px;
   color: white;
   text-align: center;
+  padding-top: 3%;
 }
 .spaced-rows {
   margin-top: 125px;
+}
+.contact-small-text {
+  font-size: 22px;
+  line-height: 55px;
 }
