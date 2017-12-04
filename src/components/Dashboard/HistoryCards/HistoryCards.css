@@ -40,6 +40,10 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.accessFalseText {
+  display: none;
+}
+
 .card {
   height: 37vh;
   width: 17vw;
@@ -255,10 +259,18 @@
   .modalButton {
     margin-left: -130px;
   }
+  .falseAccess {
+    position: relative;
+    left: 5px;
+  }
 }
 @media only screen and (max-width: 680px) {
   .modalButton {
     margin-left: -180px;
+  }
+  .falseAccess {
+    position: relative;
+    left: 5px;
   }
 }
 
@@ -292,6 +304,9 @@
   }
 }
 @media only screen and (max-width: 470px) {
+  .accessFalseText {
+    display: block;
+  }
   .card h4 {
     font-size: 3.5vw;
   }

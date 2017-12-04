@@ -145,7 +145,17 @@
     height: 68px;
   }
 }
-@media only screen and (max-width: 1205px) {
+@media only screen and (max-width: 1920px) {
+  .tableRowEnergy {
+    height: 67px;
+  }
+  table td,
+  table th {
+    font-size: 1.15em;
+  }
+  table tr {
+    height: 0px;
+  }
 }
 
 @media only screen and (max-width: 1050px) {

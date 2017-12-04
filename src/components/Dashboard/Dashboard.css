@@ -37,8 +37,10 @@
   margin: 5px;
   text-align: left;
 }
-.modalButton {
-}
+/* .falseAccess {
+  position: relative;
+  left: 15%;
+} */
 
 #dash-row {
   margin: 50px 20px 20px;

@@ -305,19 +305,25 @@ class Dashboard extends Component {
             </Row>
           )}
           {this.props.access === false && (
-            <Row>
-              <Col s={12}>
-                <Link to="/data">
-                  <Button
-                    className="input-dashboard blue"
-                    waves="light"
-                    id="final-submit"
-                  >
-                    See Data
-                  </Button>
-                </Link>
-              </Col>
-            </Row>
+            <div>
+              <div className="accessFalseText red">
+                "You currently do not have any saved user profiles. Contact a
+                Raze Ambassador to gain full access, or visit our desktop site"
+              </div>
+              <Row>
+                <Col s={12}>
+                  <Link to="/data">
+                    <Button
+                      className="input-dashboard blue falseAccess"
+                      waves="light"
+                      id="final-submit"
+                    >
+                      See Data
+                    </Button>
+                  </Link>
+                </Col>
+              </Row>
+            </div>
           )}
         </div>
         <Footer />
