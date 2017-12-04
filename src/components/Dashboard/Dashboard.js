@@ -210,10 +210,18 @@ class Dashboard extends Component {
         <Header />
         <div className="dashboardContainer">
           <h3 className="dashboard-headers">Energy User Profile Creator</h3>
-          <h5 className="dashboard-headers largeViewText">
-            To view your energy user profile, please fill out the form below and
-            upload your .csv provided to you by your Raze Ambassador
-          </h5>
+          {this.props.access && (
+            <h5 className="dashboard-headers largeViewText">
+              To view your energy user profile, please fill out the form below
+              and upload your .csv provided to you by your Raze Ambassador
+            </h5>
+          )}
+          {!this.props.access && (
+            <h5 className="dashboard-headers largeViewText">
+              Input test data below to see a live verison of a Raze Energy User
+              Profile
+            </h5>
+          )}
           <h5 className="smallViewText">
             Select a Saved Profiles to view your the energy profile
           </h5>
