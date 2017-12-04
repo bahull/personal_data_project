@@ -20,7 +20,7 @@ const app = express();
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-// app.use(express.static(`${__dirname}/../build`));
+app.use(express.static(`${__dirname}/../build`));
 //
 //Initialize session for use
 app.use(
