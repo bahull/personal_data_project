@@ -14,7 +14,7 @@ const configureStripe = require("stripe");
 
 require("dotenv").config();
 
-const port = 3001;
+const port = 80;
 
 const app = express();
 
@@ -96,7 +96,7 @@ app.get(
 app.get("/api/me", (req, res, next) => {
   console.log(req.user, "req.user line 97");
   if (!req.user || undefined) {
-    res.redirect("http://localhost:3000/");
+    res.redirect("/");
   } else {
     const dbInstance = app.get("db");
 
