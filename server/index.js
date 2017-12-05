@@ -14,7 +14,7 @@ const configureStripe = require("stripe");
 
 require("dotenv").config();
 
-const port = 80;
+const port = 443;
 
 const app = express();
 
