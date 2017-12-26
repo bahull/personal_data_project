@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
 
-import { Button } from "react-materialize";
+import { Button } from 'react-materialize';
 
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter } from 'react-router-dom';
 
-import "./HistoryCards.css";
+import './HistoryCards.css';
 import {
   degreeDaysFinderUpload,
   sendToNodeUpload
-} from "../../../helpers/uploadHelper";
+} from '../../../helpers/uploadHelper';
 import {
   updateMonthlyDegreeDays,
   updateProjectLocation,
@@ -21,7 +21,7 @@ import {
   updateIndustryType,
   updateFileId,
   updateModalTruthy
-} from "../../../ducks/reducer";
+} from '../../../ducks/reducer';
 
 class HistoryCards extends Component {
   constructor() {
@@ -36,7 +36,7 @@ class HistoryCards extends Component {
   }
 
   setHistory(historicalData) {
-    console.log("Historical data for cards here", historicalData);
+    console.log('Historical data for cards here', historicalData);
     degreeDaysFinderUpload(
       historicalData.exceldata,
       this.props.updateMonthlyDegreeDays
@@ -53,23 +53,15 @@ class HistoryCards extends Component {
 
   componentDidMount() {
     axios
-      .get("/api/getFile")
+      .get('/api/getFile')
       .then(response => {
         this.setState({ history: response.data });
       })
       .catch(console.log());
-
-    // if (this.props.location.state.showModal) {
-    //   this.setState({ modal: true });
-    // } else {
-    //   (" ");
-    // }
-
-    // console.log("this.props.location;: ", this.props.location);
   }
 
   toggleModal() {
-    console.log("GuUadiuwef");
+    console.log('GuUadiuwef');
     this.props.updateModalTruthy(!this.props.modalTruthy);
   }
 
@@ -77,24 +69,10 @@ class HistoryCards extends Component {
     let historyDisplay =
       this.state.history.length > 0 &&
       this.state.history.map((curr, index) => {
-        // if (this.props.location === "/data") {
         return (
           <div className="card" key={index}>
             <div onClick={() => this.setHistory(curr)}>
               <Link to="/data">
-                {/* <Card
-                  className="blue-grey darken-1"
-                  textClassName="white-text"
-                  title={curr.projectlocation}
-                  actions={
-                    <Link to="/data">
-                      <Button className="center-align yellow center-words">
-                        Select
-                      </Button>
-                    </Link>
-                  }
-                > */}
-
                 <h4>{curr.projectlocation}</h4>
 
                 {curr.facility && curr.industry ? (
@@ -123,34 +101,6 @@ class HistoryCards extends Component {
             </div>
           </div>
         );
-        // } else {
-        // return (
-        //   <div className="card open" key={index}>
-        //     <button
-        //       className="modal-close"
-        //       onClick={() => this.setHistory(curr)}
-        //     >
-        //       <Link to="/data">
-        //         <Card
-        //           className="blue-grey darken-1"
-        //           textClassName="white-text"
-        //           title={curr.projectlocation}
-        //           // actions={
-        //           //   <Button className="center-align yellow center-words">
-        //           //     <Link to="/data">Select</Link>
-        //           //   </Button>
-        //           // }
-        //         >
-        //           <p>{curr.facility}</p>
-        //           <p>{curr.industry}</p>
-        //           <p>{curr.street}</p>
-        //           <p>{curr.sqfoot}</p>
-        //         </Card>
-        //       </Link>
-        //     </button>
-        //   </div>
-        // );
-        // }
       });
     return (
       <div>
@@ -164,10 +114,10 @@ class HistoryCards extends Component {
             Saved Profiles
           </Button>
         ) : (
-          ""
+          ''
         )}
         {this.props.modalTruthy && (
-          <div className="modalBackground" onClick={console.log("Hello")}>
+          <div className="modalBackground" onClick={console.log('Hello')}>
             <div className="dashboardModal">
               <div className="historyContainer">{historyDisplay}</div>
               <div onClick={this.toggleModal}>
@@ -191,7 +141,7 @@ class HistoryCards extends Component {
           </div>
         )}
 
-        <div className="smallHistoryDisplay" onClick={console.log("Hello")}>
+        <div className="smallHistoryDisplay" onClick={console.log('Hello')}>
           <div className="dashboardModal">
             <div className="historyContainer">{historyDisplay}</div>
             <div onClick={this.toggleModal}>

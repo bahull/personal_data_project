@@ -4,7 +4,10 @@ import axios from "axios";
 
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+
 import Papa from "papaparse";
+
+import RaisedButton from 'material-ui/RaisedButton'
 
 import HistoryCards from "./HistoryCards/HistoryCards";
 
@@ -176,6 +179,7 @@ class Dashboard extends Component {
   // }
 
   uploader(event) {
+    if(event.target.files[0]){
     event.preventDefault();
 
     let reader = new FileReader();
@@ -202,6 +206,7 @@ class Dashboard extends Component {
 
     // reader.readAsDataURL(file);
     reader.readAsBinaryString(fileUpload);
+  }
   }
 
   render() {
@@ -288,15 +293,15 @@ class Dashboard extends Component {
                     <i className="fa fa-cloud-upload" /> Custom Upload
                   </label>
                   <input id="file-upload" type="file" /> */}
-                    <Button id="file-upload" waves="light" className="blue">
+                    {/* <Button id="file-upload" waves="light" className="blue"> */}
                       <input
                         className="fileInput"
                         type="file"
                         onChange={event => this.uploader(event)}
                       />
-                      Upload
-                      <Icon left>attach_file</Icon>
-                    </Button>
+                      {/* Upload */}
+                      {/* <Icon left>attach_file</Icon> */}
+                    {/* </Button> */}
                     <Link to="/data">
                       <Button
                         className="input-dashboard blue"
@@ -322,13 +327,15 @@ class Dashboard extends Component {
               <Row>
                 <Col s={12}>
                   <Link to="/data">
-                    <Button
+                    {/* <Button
                       className="input-dashboard blue falseAccess"
                       waves="light"
                       id="final-submit"
-                    >
+                    > */}
+                    <RaisedButton primary={true}>
                       See Data
-                    </Button>
+                      </RaisedButton>
+                    {/* </Button> */}
                   </Link>
                 </Col>
               </Row>

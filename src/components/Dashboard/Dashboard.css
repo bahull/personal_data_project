@@ -10,7 +10,7 @@
 }
 
 .fileInput {
-  cursor: inherit;
+  /* cursor: inherit;
   display: block;
   font-size: 999px;
   filter: alpha(opacity=0);
@@ -20,7 +20,10 @@
   position: absolute;
   right: 0;
   text-align: right;
-  top: 0;
+  top: 0; */
+  position: relative;
+  top: 28px;
+  left: 68px;
 }
 #file-upload {
   margin: 20px;

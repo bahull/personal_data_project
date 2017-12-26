@@ -11,8 +11,7 @@ import "./LandingPage.css";
 
 class LandingPage extends Component {
   goLogin() {
-    window.location.href = "/auth";
-    console.log("hit auth");
+    window.location.href = "http://localhost:3001/auth";
   }
   render() {
     return (
@@ -81,12 +80,7 @@ class LandingPage extends Component {
             <div className="app-intro">
               <h3>Raze Energy Sales Solutions</h3>
               <h5>Deliver quicker. Solve better. Close faster.</h5>
-
-              {/* <a href="/login" id="free-trial-button" className="btn yellow">
-                Sign up for a demo
-              </a> */}
               <button
-                // href="/login"
                 id="free-trial-button"
                 className="btn yellow"
                 onClick={this.goLogin}
