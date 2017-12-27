@@ -51,11 +51,15 @@ export const monthlyCost = (newData, updateMonthlyCost) => {
 };
 
 export const degreeDaysUpdater = (hdd, degreeDays) => {
+  if(hdd && degreeDays){
   hdd.map(curr => {
     return degreeDays.push(curr.hdd);
   });
 
   return degreeDays;
+  } else {
+    alert("There was an error loading your information. You are being return to the dashboard. If this problem persists, please contact your raze ambassador")
+  }
 };
 
 export const getMonthlyKw = (newData, updateMonthlyKW, updateAnnualKW) => {

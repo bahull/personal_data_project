@@ -23,7 +23,9 @@
   top: 0; */
   position: relative;
   top: 28px;
-  left: 68px;
+  /* left: 68px; */
+  width: 75px;
+  overflow: hidden
 }
 #file-upload {
   margin: 20px;

@@ -7,6 +7,8 @@ import { Bar, Pie } from "react-chartjs-2";
 
 import { Collapsible, CollapsibleItem, Input } from "react-materialize";
 
+
+
 import DataTable from "./DataTable/DataTable";
 import EnergyTable from "./EnergyTable/EnergyTable";
 import Footer from "./../Footer/Footer";
@@ -147,20 +149,15 @@ class Data extends Component {
     // this.sendToNodeUpload = this.sendToNodeUpload.bind(this);
   }
 
+  
+
   componentDidMount() {
     axios.get("/api/me").then(response => {
-      console.log(response, "api/me response");
       if (response.data.access === "No User") {
         this.props.history.push("/");
       } else {
-        console.log("the post request", this.props.excelId);
         axios.post("/api/get", { file: this.props.excelId }).then(response => {
           if (!response.data) {
-            console.log(
-              "  hit 1 your data is no good  -- -------  ----   -",
-              response
-            );
-
             this.props.updateProjectLocation("Fictional Academy");
 
             this.props.updateSquareFootage(10000);
@@ -549,7 +546,6 @@ class Data extends Component {
 
             this.setState(newState);
           } else if (this.props.access === false) {
-            console.log("You Found Me");
           }
         });
       }
@@ -563,7 +559,6 @@ class Data extends Component {
   };
 
   setHistory(historicalData) {
-    console.log(historicalData);
     degreeDaysFinderUpload(
       historicalData.exceldata,
       this.props.updateMonthlyDegreeDays

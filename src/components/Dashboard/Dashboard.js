@@ -44,13 +44,11 @@ class Dashboard extends Component {
     };
 
     this.uploader = this.uploader.bind(this);
-    // this.sendToNode = this.sendToNode.bind(this);
     this.degreeDaysFinder = this.degreeDaysFinder.bind(this);
   }
 
   componentDidMount() {
     axios.get("/api/me").then(response => {
-      console.log(response.data.access);
       if (response.data === "No User") {
         this.props.history.push("/");
       } else if (response.data[0].access === "true") {
@@ -62,9 +60,7 @@ class Dashboard extends Component {
   }
 
   degreeDaysFinder(file) {
-    console.log("Begin degreeDaysFinder", file);
     let copyOfFile = file;
-    // let trashHolder = copyOfFile.splice(0, 1);
     let startMonth = [];
     startMonth = copyOfFile[0][0].split(/[/-]/g);
 
@@ -77,8 +73,7 @@ class Dashboard extends Component {
       .post("/api/getDegreeDays", { month, year, total })
       .then(response => {
         this.setState({ degreeDayObject: response.data });
-        console.log("degreeDayObject: ", this.state.degreeDayObject);
-
+        
         return axios
           .post("/api/retrieveFile", {
             file,
@@ -92,16 +87,9 @@ class Dashboard extends Component {
             squareFootage: this.props.squareFootage
           })
           .then(response => {
-            console.log(
-              response,
-              "heres the resposneses______-------",
-              response.data
-            );
+          
             this.props.updateFileId(response.data);
-            console.log(
-              "here the degrees days should be defined",
-              this.state.degreeDayObject
-            );
+           
             axios.post("/api/actualDegreeDays", {
               fullDegree: this.state.degreeDayObject,
               spreadsheetId: response.data
@@ -111,72 +99,8 @@ class Dashboard extends Component {
       })
 
       .catch(error => console.log(error));
-
-    // this.props.updateMonthlyDegreeDays(month, year, total);
-    console.log(
-      "degree  days!!!!!!  ",
-      this.props.monthlyDegreeDays,
-      this.state.degreeDayObject
-    );
+   
   }
-
-  // sendToNode(file) {
-  //   console.log("hit send to node", file);
-  //   axios
-  //     .post("/api/retrieveFile", {
-  //       file,
-  //       month: parseInt(this.state.month, 10),
-  //       year: parseInt(this.state.year, 10),
-  //       total: parseInt(this.state.total, 10),
-  //       projectLocation: this.props.projectLocation,
-  //       address: this.props.address,
-  //       facility: this.props.facility,
-  //       industry: this.props.industry,
-  //       squareFootage: this.props.squareFootage
-  //     })
-  //     .then(response => {
-  //       console.log(
-  //         response,
-  //         "heres the resposneses______-------",
-  //         response.data
-  //       );
-  //       this.props.updateFileId(response.data);
-
-  //       axios.post("/api/actualDegreeDays", {
-  //         fullDegree: this.state.degreeDayObject,
-  //         spreadsheetId: response.data
-  //       });
-  //     })
-  //     .catch(console.log);
-  // }
-
-  // degreeDaysFinder(file) {
-  //   console.log("Begin degreeDaysFinder", file);
-  //   let copyOfFile = file;
-
-  //   let startMonth = [];
-  //   startMonth = copyOfFile[0][0].split(/[/-]/g);
-
-  //   let month = parseInt(startMonth[0], 10);
-  //   let year = parseInt(startMonth[2].substr(2, 2), 10);
-  //   let total = copyOfFile.length;
-
-  //   this.setState({ month, year, total });
-  //   axios
-  //     .post("/api/getDegreeDays", { month, year, total })
-  //     .then(response => {
-
-  //       this.setState({ degreeDayObject: response.data });
-  //     })
-
-  //     .catch(error => console.log(error));
-
-  //   console.log(
-  //     "degree  days!!!!!!  ",
-  //     this.props.monthlyDegreeDays,
-  //     this.state.degreeDayObject
-  //   );
-  // }
 
   uploader(event) {
     if(event.target.files[0]){
@@ -191,20 +115,8 @@ class Dashboard extends Component {
       complete: results => {
         let newFile = results.data.slice(1, results.data.length - 1);
         this.degreeDaysFinder(newFile);
-        // this.sendToNode(newFile);
-        // this.setState({ file: newFile });
       }
     });
-
-    // reader.onload = () => {
-    //   console.log(reader.result);
-    //   Papa.parse(reader.result, config, this.stateSetting());
-    // this.degreeDaysFinder();
-    // this.sendToNode();
-    //   });
-    // };
-
-    // reader.readAsDataURL(file);
     reader.readAsBinaryString(fileUpload);
   }
   }
@@ -224,7 +136,7 @@ class Dashboard extends Component {
           {!this.props.access && (
             <h5 className="dashboard-headers largeViewText">
               Input test data below to see a live verison of a Raze Energy User
-              Profile
+              Profile. This simulates a user inputing data for an current clients location. A user would then be able to upload their clients electric bill, enabling them to view data pertaining to the energy use within their clients facility.
             </h5>
           )}
           <h5 className="smallViewText">
@@ -332,7 +244,7 @@ class Dashboard extends Component {
                       waves="light"
                       id="final-submit"
                     > */}
-                    <RaisedButton primary={true}>
+                    <RaisedButton primary={true} style={{position:"relative", left: 20}}>
                       See Data
                       </RaisedButton>
                     {/* </Button> */}

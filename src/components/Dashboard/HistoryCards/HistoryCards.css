@@ -307,6 +307,11 @@
   .accessFalseText {
     display: block;
   }
+
+  .card {
+    height: 32vh
+  }
+
   .card h4 {
     font-size: 3.5vw;
   }
@@ -338,6 +343,10 @@
   #file-upload {
     display: none;
   }
+
+ .fileInput{
+   display: none;
+ }
   #final-submit {
     display: none;
   }
@@ -351,7 +360,7 @@
   .dashboardModal {
     width: 103vw;
     height: 105vh;
-    top: 25vh;
+    top: 37vh;
     margin-top: -2px;
     left: -1%;
     border: 0px;
@@ -397,7 +406,7 @@
   .dashboardModal {
     width: 103vw;
     height: 105vh;
-    top: 30vh;
+    top: 36vh;
     margin-top: -2px;
     left: -1%;
     border: 0px;

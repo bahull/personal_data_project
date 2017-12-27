@@ -136,7 +136,7 @@
   font-weight: 700;
 }
 .tableRowEnergy {
-  height: 97px;
+  height: 81px;
 }
 .centerCollapse {
   display: none;
@@ -164,10 +164,30 @@
 
 @media only screen and (max-width: 1900px) {
   .tableRowEnergy {
-    height: 67px
+    height: 107px
   }
   table tr {
-    height: 47px
+    height: 75px
+  }
+  
+
+}
+@media only screen and (max-width: 1700px) {
+  .tableRowEnergy {
+    height: 107px
+  }
+  table tr {
+    height: 75px
+  }
+  
+
+}
+@media only screen and (max-width: 1600px) {
+  .tableRowEnergy {
+    height: 82px
+  }
+  table tr {
+    height: 68px
   }
   
 
@@ -185,6 +205,10 @@
   .charts {
     margin: auto;
   }
+
+  table tr {
+    height: 48px
+  }
   canvas {
     width: 124% !important;
     right: 11%;
@@ -201,14 +225,26 @@
     margin: auto;
   }
   .tableRowEnergy {
-    height: 102px;
+    height: 68px;
   }
 }
 
-@media only screen and (max-width: 910px) {
+@media only screen and (max-width: 1000px) {
+  .tableRowEnergy {
+    height: 58px;
+  }
+  table tr {
+    height: 41px
+  }
 }
 
 @media only screen and (max-width: 800px) {
+  table tr {
+    height: 41px
+  }
+  .tableRowEnergy {
+    height: 57px;
+  }
 }
 @media only screen and (max-width: 750px) {
   .charts,
@@ -218,6 +254,7 @@
   .profileDisplay {
     display: none;
   }
+
 }
 
 @media only screen and (max-width: 650px) {
@@ -232,10 +269,10 @@
     width: 74vw;
     height: 59vh;
   }
-  table tr {
+  /* table tr {
     height: 78px;
     overflow: hidden;
-  }
+  } */
   table th {
     font-size: 1.16em;
   }
@@ -244,12 +281,44 @@
 /* @media only screen and (max-width: 460px) {
 } */
 
+@media only screen and (max-width: 500px) {
+  table tr {
+    height: 42px;
+  }
+  table th {
+    font-size: 0.98em;
+  }
+}
+
+@media only screen and (max-width: 465px) {
+  table tr {
+    height: 39px;
+  }
+  table th {
+    font-size: 0.95em;
+  }
+}
+
 @media only screen and (max-width: 416px) {
   .boxes {
     height: 56vh;
   }
   .tableRowEnergy {
-    height: 97px;
+    height: 55px;
+}
+table tr {
+  height: 32px;
+}
+table th {
+  font-size: 0.91em;
+}
+}
+@media only screen and (max-width: 400px) {
+table tr {
+  height: 28px;
+}
+table th {
+  font-size: 0.83em;
 }
 }
 @media only screen and (max-width: 375px) {
@@ -257,31 +326,31 @@
     font-size: 0.7em;
   }
   table tr {
-    height: 56px;
+    height: 20px;
   }
   .boxes {
     height: 45vh;
   }
   table th {
-    font-size: 0.98em;
+    font-size: 0.80em;
   }
   .tableRowEnergy {
-    height: 70px;
+    height: 41px;
   }
 }
 
 @media only screen and (max-width: 360px) {
-  .tableRowEnergy {
-    height: 66px;
+  table th {
+    font-size: 0.79em;
   }
 }
 
 @media only screen and (max-width: 320px) {
   .tableRowEnergy {
-    height: 55px;
+    height: 37px;
   }
   table th {
-    font-size: 0.8em;
+    font-size: 0.68em;
   }
   .boxes {
     height: 45vh;
