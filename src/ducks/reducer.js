@@ -1,5 +1,3 @@
-// import axios from "axios";
-
 //CONSTANTS
 const UPDATE_USER_ACCESS = "UPDATE_USER_ACCESS";
 const UPDATE_PROJECT_LOCATION = "UPDATE_PROJECT_LOCATION";
@@ -242,12 +240,7 @@ export default function(state = initialState, action) {
       });
     case UPDATE_MONTHLY_COST:
       return Object.assign({}, state, { monthlyCost: action.payload });
-    // case UPDATE_MONTHLY_DEGREE_DAYS + "_PENDING":
-    //   return Object.assign({}, state, { isLoading: true });
     case UPDATE_MONTHLY_DEGREE_DAYS:
-      // + "_FULFILLED":
-
-      console.log(action.payload);
       return Object.assign({}, state, {
         monthlyDegreeDays: action.payload
       });

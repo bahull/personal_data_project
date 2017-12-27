@@ -11,7 +11,6 @@ import { Collapsible, CollapsibleItem, Input } from "react-materialize";
 
 import DataTable from "./DataTable/DataTable";
 import EnergyTable from "./EnergyTable/EnergyTable";
-import Footer from "./../Footer/Footer";
 
 import {
   updateAddress,
@@ -297,13 +296,6 @@ class Data extends Component {
             this.props.facility === "Commercial" &&
             this.props.access === true
           ) {
-            console.log(
-              " Hit COmmercial Hopefully all is well         ",
-              response.data.exceldata,
-              "Heres the stuff you need",
-              response.data.degreedayarray
-            );
-
             let newArray = [];
             let newData = response.data.exceldata;
             let totalCost = [];
@@ -606,7 +598,6 @@ class Data extends Component {
         <Header />
 
         <div className="sideNavOpen z-depth-5">
-          <a className="waves-effect waves-light" onClick={this.toggleClass} />
 
           <Collapsible
             popout={true}

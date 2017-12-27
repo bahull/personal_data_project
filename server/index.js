@@ -55,7 +55,6 @@ passport.use(
     },
 
     function(accessToken, refreshToken, extraParams, profile, done) {
-      console.log("hit auth strat");
       app
         .get("db")
         .getUserByAuthId(profile.id)
@@ -96,10 +95,8 @@ app.get(
 app.get("/api/me", (req, res, next) => {
   console.log(req.user, "req.user line 97");
   if (!req.user) {
-    console.log("hit !req.user");
     res.status(200).send("No User");
   } else {
-    console.log("hit else user");
     const dbInstance = app.get("db");
 
     dbInstance
@@ -151,7 +148,6 @@ app.post("/api/retrieveFile", (req, res, next) => {
     ])
     .then(response => {
       req.user.excelID = response[0].id;
-      console.log("req.user.excelID: ", req.user.excelID);
       res.status(200).json(response[0].id);
     })
     .catch(error => {
@@ -181,7 +177,6 @@ app.get("/api/getFile", (req, res, next) => {
 
 //Retrieves the uploaded file
 app.post("/api/get", (req, res, next) => {
-  console.log("_____Node sending back_____:", req.user);
   // res.status(200).json(req.user);
   const dbInstance = app.get("db");
 
@@ -192,7 +187,6 @@ app.post("/api/get", (req, res, next) => {
       .uploadedFile([req.body.file])
       .then(response => {
         res.status(200).json(response[0]);
-        console.log("Heres the resposne        ", response);
       })
       .catch(error => {
         res.status(500).json();
@@ -250,7 +244,7 @@ app.post("/api/getDegreeDays", (req, res, next) => {
 });
 
 app.post("/api/actualDegreeDays", (req, res, next) => {
-  console.log("THE FINAL TRUTH++++++", req.body);
+  console.log("THE FINAL TRUTH++++++", req.body.spreadsheetId); 
   const { fullDegree, spreadsheetId } = req.body;
   const dbInstance = app.get("db");
 
@@ -266,21 +260,40 @@ app.post("/api/actualDegreeDays", (req, res, next) => {
     });
 });
 
-app.post("/api/actualDegreeDays", (req, res, next) => {
-  const { spreadsheetId } = req.body;
+app.post("/api/deleteFailedSheet", (req, res, next) => {
+  const { excelId } = req.body;
   const dbInstance = app.get("db");
 
   dbInstance
-    .getDegreeDayFinal([spreadsheetId])
+    .deleteFailedSheet([excelId])
 
     .then(response => {
       res.status(200).json(response);
-      console.log(response);
     })
     .catch(error => {
       res.status(500).json(error);
     });
 });
+
+
+
+
+
+// app.post("/api/actualDegreeDays", (req, res, next) => {
+//   const { spreadsheetId } = req.body;
+//   const dbInstance = app.get("db");
+
+//   dbInstance
+//     .getDegreeDayFinal([spreadsheetId])
+
+//     .then(response => {
+//       res.status(200).json(response);
+//       console.log(response);
+//     })
+//     .catch(error => {
+//       res.status(500).json(error);
+//     });
+// });
 
 // var path = require("path");
 // app.get("*", (req, res) => {

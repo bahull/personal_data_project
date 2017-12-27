@@ -19,7 +19,7 @@ class LandingPage extends Component {
         <Header />
         <div className="landing-body">
           <div className="landing-title">
-            <div ClassName="particlesHider">
+            <div className="particlesHider">
               <Particles
                 className="particlesHider"
                 params={{

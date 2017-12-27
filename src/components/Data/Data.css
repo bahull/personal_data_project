@@ -184,10 +184,10 @@
 }
 @media only screen and (max-width: 1600px) {
   .tableRowEnergy {
-    height: 82px
+    height: 67px
   }
   table tr {
-    height: 68px
+    height: 48px
   }
   
 
@@ -207,7 +207,7 @@
   }
 
   table tr {
-    height: 48px
+    height: 41px
   }
   canvas {
     width: 124% !important;
@@ -225,7 +225,7 @@
     margin: auto;
   }
   .tableRowEnergy {
-    height: 68px;
+    height: 58px;
   }
 }
 

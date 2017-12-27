@@ -22,7 +22,7 @@ import {
   updateFileId
 } from "./../../ducks/reducer";
 
-import { Row, Input, Button, Col, Icon } from "react-materialize";
+import { Row, Input, Button, Col } from "react-materialize";
 
 import Header from "./../Header/Header";
 import Footer from "./../Footer/Footer";
@@ -93,7 +93,12 @@ class Dashboard extends Component {
             axios.post("/api/actualDegreeDays", {
               fullDegree: this.state.degreeDayObject,
               spreadsheetId: response.data
-            });
+            }).then(response => {
+              if (!response.data[0]){
+                alert("There was a problem uploading your data. Please re-enter your infomation and upload your file again. If this problem persists, contact your Raze Ambassador")
+                axios.post('/api/deleteFailedSheet', {excelId: this.props.excelId})
+              }
+            })
           })
           .catch(console.log);
       })
