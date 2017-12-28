@@ -91,7 +91,7 @@ passport.deserializeUser(function(user, done) {
 app.get(
   "/auth",
   passport.authenticate("auth0", {
-    successRedirect: "http://localhost:3000/dashboard"
+    successRedirect: "/dashboard"
   })
 );
 
