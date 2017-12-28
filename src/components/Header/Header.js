@@ -37,7 +37,7 @@ class Header extends Component {
               Features
             </NavItem>
             <NavItem href="#contact">Contact Us</NavItem>
-            <NavItem href="http://localhost:3001/auth">Login/Register</NavItem>
+            <NavItem href="/auth">Login/Register</NavItem>
           </Navbar>
         )}
         {this.props.access === true || this.props.access === false ? (

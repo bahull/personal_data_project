@@ -15,18 +15,16 @@ const configureStripe = require("stripe");
 const users = require("./controllers/users"); 
 const data = require("./controllers/data"); 
 
-// const { domain, clientID, clientSecret } = require("./config").auth0;
-// const { STRIPE_SECRET_KEY, CONNECTION_STRING, secret } = require("./config");
 
 require("dotenv").config();
 
-const port = 3001;
+const port = 80;
 
 
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-// app.use(express.static(`${__dirname}/../build`));
+app.use(express.static(`${__dirname}/../build`));
 //
 //Initialize session for use
 app.use(
@@ -126,10 +124,10 @@ app.post("/api/actualDegreeDays", data.totalDegreeDays);
 app.post("/api/deleteFailedSheet", data.deleteFailedSheet);
 
 
-// var path = require("path");
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(`${__dirname}/../build/index.html`));
-// });
+var path = require("path");
+app.get("*", (req, res) => {
+  res.sendFile(path.join(`${__dirname}/../build/index.html`));
+});
 
 app.listen(port, () => {
   console.log(`listening at port: ${port}`);

@@ -11,7 +11,7 @@ import "./LandingPage.css";
 
 class LandingPage extends Component {
   goLogin() {
-    window.location.href = "http://localhost:3001/auth";
+    window.location.href = "/auth";
   }
   render() {
     return (
