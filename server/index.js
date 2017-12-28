@@ -4,10 +4,16 @@ const cors = require("cors");
 const session = require("express-session");
 const massive = require("massive");
 const passport = require("passport");
+
+const app = express();
+
 const Auth0Strategy = require("passport-auth0");
 const configureStripe = require("stripe");
 
-// const users = require("./controllers/users");
+
+
+const users = require("./controllers/users"); 
+const data = require("./controllers/data"); 
 
 // const { domain, clientID, clientSecret } = require("./config").auth0;
 // const { STRIPE_SECRET_KEY, CONNECTION_STRING, secret } = require("./config");
@@ -16,7 +22,7 @@ require("dotenv").config();
 
 const port = 3001;
 
-const app = express();
+
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
@@ -92,208 +98,33 @@ app.get(
 );
 
 //On component render checks if their is a user object on session, otherwise redirects them to login
-app.get("/api/me", (req, res, next) => {
-  console.log(req.user, "req.user line 97");
-  if (!req.user) {
-    res.status(200).send("No User");
-  } else {
-    const dbInstance = app.get("db");
-
-    dbInstance
-      .getAccess([req.user.authid])
-      .then(response => {
-        res.status(200).json(response);
-      })
-      .catch(error => {
-        res.status(500).json();
-      });
-  }
-});
+app.get("/api/me", users.validUser);
 
 //Retrieves blob and stores it on the user object on session to save
-app.post("/api/retrieveFile", (req, res, next) => {
-  // req.user.newFile = req.body.file;
-  // console.log("req.user.newFile: ", req.user);
-  console.log("you hit me", req.body.file);
-  const dbInstance = app.get("db");
-  const {
-    file,
-    authid,
-    exceldata,
-    projectLocation,
-    address,
-    facility,
-    industry,
-    squareFootage,
-    month,
-    year,
-    total
-  } = req.body;
-
-  dbInstance
-    .postSpreadsheet([
-      req.user.authid,
-      JSON.stringify(file),
-      // req.body.file,
-      // authid,
-      // exceldata,
-      projectLocation,
-      address,
-      facility,
-      industry,
-      squareFootage,
-      month,
-      year,
-      total
-    ])
-    .then(response => {
-      req.user.excelID = response[0].id;
-      res.status(200).json(response[0].id);
-    })
-    .catch(error => {
-      res.status(500).json(error);
-    });
-});
+app.post("/api/retrieveFile", data.storeSpreadsheet);
 
 //Post a saved spreadsheet to user.newfile
-app.post("/api/retrieveSavedFile", (req, res, next) => {
-  req.user.newFile = req.body.file;
+app.post("/api/retrieveSavedFile",data.retrieveSavedFile);
 
-  res.status(200).json(req.user);
-});
-
-app.get("/api/getFile", (req, res, next) => {
-  const dbInstance = app.get("db");
-
-  dbInstance
-    .getSpreadsheets([req.user.authid])
-    .then(response => {
-      res.status(200).json(response);
-    })
-    .catch(error => {
-      res.status(500).json();
-    });
-});
+app.get("/api/getFile", data.getFile);
 
 //Retrieves the uploaded file
-app.post("/api/get", (req, res, next) => {
-  // res.status(200).json(req.user);
-  const dbInstance = app.get("db");
-
-  if (!req.body.file) {
-    res.status(200).json("");
-  } else {
-    dbInstance
-      .uploadedFile([req.body.file])
-      .then(response => {
-        res.status(200).json(response[0]);
-      })
-      .catch(error => {
-        res.status(500).json();
-      });
-  }
-});
+app.post("/api/get", data.uploadedFile);
 
 //Destroys current session on logout
-app.get("/api/logout", (req, res, next) => {
-  req.session.destroy();
-  res.status(200).json("Session Destroyed");
-});
+app.get("/api/logout", users.logout);
 
 // Donate
-app.post("/api/donate", function(req, res) {
-  var token = req.body.source;
-  var amount = req.body.amount;
-  var currency = req.body.currency;
+app.post("/api/donate", data.donate);
 
-  stripe.charges.create(req.body, (stripeErr, stripeRes) => {
-    if (stripeErr) {
-      res.status(500).send({ error: stripeErr });
-    } else {
-      res.redirect(200, "/");
-    }
-  });
-});
+app.get("/api/getPeople", users.getUsers);
 
-app.get("/api/getPeople", (req, res, next) => {
-  const dbInstance = app.get("db");
+app.post("/api/getDegreeDays", data.getDegreeDays);
 
-  dbInstance
-    .getUsers()
-    .then(response => {
-      res.status(200).json(response);
-    })
-    .catch(error => {
-      res.status(500).json(error);
-    });
-});
+app.post("/api/actualDegreeDays", data.totalDegreeDays);
 
-app.post("/api/getDegreeDays", (req, res, next) => {
-  const { month, year, total } = req.body;
-  const dbInstance = app.get("db");
+app.post("/api/deleteFailedSheet", data.deleteFailedSheet);
 
-  dbInstance
-    .getDegreeDays([month, year, total])
-    .then(response => {
-      res.status(200).json(response);
-      // app.post((req, res, next) => {});
-    })
-    .catch(error => {
-      res.status(500).json(error);
-    });
-});
-
-app.post("/api/actualDegreeDays", (req, res, next) => {
-  console.log("THE FINAL TRUTH++++++", req.body.spreadsheetId); 
-  const { fullDegree, spreadsheetId } = req.body;
-  const dbInstance = app.get("db");
-
-  dbInstance
-    .addDegreeFinal([JSON.stringify(fullDegree), spreadsheetId])
-
-    .then(response => {
-      res.status(200).json(response);
-      console.log("degree day response", response);
-    })
-    .catch(error => {
-      res.status(500).json(error);
-    });
-});
-
-app.post("/api/deleteFailedSheet", (req, res, next) => {
-  const { excelId } = req.body;
-  const dbInstance = app.get("db");
-
-  dbInstance
-    .deleteFailedSheet([excelId])
-
-    .then(response => {
-      res.status(200).json(response);
-    })
-    .catch(error => {
-      res.status(500).json(error);
-    });
-});
-
-
-
-
-
-// app.post("/api/actualDegreeDays", (req, res, next) => {
-//   const { spreadsheetId } = req.body;
-//   const dbInstance = app.get("db");
-
-//   dbInstance
-//     .getDegreeDayFinal([spreadsheetId])
-
-//     .then(response => {
-//       res.status(200).json(response);
-//       console.log(response);
-//     })
-//     .catch(error => {
-//       res.status(500).json(error);
-//     });
-// });
 
 // var path = require("path");
 // app.get("*", (req, res) => {

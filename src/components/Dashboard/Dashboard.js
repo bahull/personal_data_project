@@ -141,7 +141,7 @@ class Dashboard extends Component {
           {!this.props.access && (
             <h5 className="dashboard-headers largeViewText">
               Input test data below to see a live verison of a Raze Energy User
-              Profile. This simulates a user inputing data for an current clients location. A user would then be able to upload their clients electric bill, enabling them to view data pertaining to the energy use within their clients facility.
+              Profile. This simulates a user inputing data for a current client's location. A user would then be able to upload their clients electric bill, enabling them to view data pertaining to the energy use within their client's facility.
             </h5>
           )}
           <h5 className="smallViewText">
@@ -249,7 +249,7 @@ class Dashboard extends Component {
                       waves="light"
                       id="final-submit"
                     > */}
-                    <RaisedButton primary={true} style={{position:"relative", left: 20}}>
+                    <RaisedButton primary={true} style={{position:"relative", left: 20, color: "white"}}>
                       See Data
                       </RaisedButton>
                     {/* </Button> */}

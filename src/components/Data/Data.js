@@ -168,7 +168,9 @@ class Data extends Component {
               16000,
               26000,
               20000,
-              2000
+              2000,
+              14000,
+              20000
             ]);
 
             this.props.updateMonthlyCost([
@@ -638,15 +640,18 @@ class Data extends Component {
             </CollapsibleItem>
             <CollapsibleItem header="Profiles">
               {/* <HistoryCards location={this.props.match.path} /> */}
+              {this.props.access &&
               <Link to={"/dashboard"}>
                 <div
                   onClick={() => {
                     this.props.updateModalTruthy(!this.props.modalTruthy);
                   }}
                 >
+              
                   <p className="modal-open">Saved Profiles</p>
                 </div>
               </Link>
+              }
 
               <Link
                 to={{
