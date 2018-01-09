@@ -18,7 +18,7 @@ const data = require("./controllers/data");
 
 require("dotenv").config();
 
-const port = 80;
+const port = 3001;
 
 
 
